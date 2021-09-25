@@ -6,7 +6,6 @@
 2. Design for happiness
 3. Performance tips 
 4. Testing principles
-5. Readings
 
 Note: 
 As I was writing this, I realized that it was actually difficult for me to separate my thoughts into the `design`, `performance`, and `testing`. I noticed that a lot of designs aimed for maintainability also makes your application faster. How cool is that?
@@ -99,7 +98,7 @@ Suppose you fetch a list of two numbers `{a: number, b: number}[]`. The two numb
 of a right triangle. The length of the three sides, the perimeter, and the area of each triangle should be displayed
 
 <details>
-  <summary> ❌ ❌ Bad Solution ❌ ❌ </summary>
+  <summary> ❌ Bad Solution </summary>
 
 ```tsx    
 const TriangleInfo = () => {
@@ -134,7 +133,7 @@ const TriangleInfo = () => {
 </details> 
 
 <details>
-  <summary>✅ ✅ Better Solution ✅ ✅ </summary>
+  <summary>✅ Better Solution ✅ </summary>
 
  ```tsx
  const TriangleInfo = () => {
@@ -160,11 +159,13 @@ There is a button to either sort by x or y. There is an input field
 to filter points that farther than a specific distance from the origin `(0, 0)` 
 
 <details>
-  <summary> ❌ ❌ Bad Solution ❌ ❌ </summary>
+  <summary> ❌ Bad Solution </summary>
   
-```TODO
+```
+  TODO
 ```
 
+</details>
 
 ## Prefer fewer dependencies
 
@@ -199,3 +200,5 @@ const decrement = useCallback(() => setCount(count => count - 1), [])
 2. Stop testing implementation details
 3. If your tests don't make you confident that you didn't break anything, then it didn't do its (on and only) job 
 4. You don't need 100% code coverage, about 70% is okay
+
+  
