@@ -1,25 +1,25 @@
 🚧 🚧 🚧 This document is a work in progress  🚧 🚧 🚧
 
-# Table of contents
+# 💪 Table of contents
 0. Introduction
 1. The Bare Minimum
 2. Design for happiness
 3. Performance tips 
 4. Testing principles
-5. Low-hanging fruit
+5. Spotting a low-hanging fruit
 
 Note: 
 As I was writing this, I realized that it was actually difficult for me to separate my thoughts into the `design`, `performance`, and `testing`. I noticed that a lot of designs aimed for maintainability also makes your application faster. How cool is that?
 
-# 0. Introduction 
+# 💪 0. Introduction 
 `react-philosophies` is:
 - things I think about before I write `React` code.
 - at the back of my mind whenever I review someone else's code or my own
 - just guidelines and NOT rigid rules
 - a living document and will evolve overtime as I my experience grows
--  mostly techniques are seems like variations of basic refactoring methods, SOLID principles, and extreme programming ideas, just applied to React specifically.
+- mostly techniques are seems like variations of basic refactoring methods, SOLID principles, and extreme programming ideas, just applied to React specifically.
 
-A lot of these things may feel like very basic and common sense but I've worked with many large complex applications that seem to... well, not care.
+A lot of these things may feel like very basic and common sense but I've worked with many large complex applications that seem to... well... not care.
 
 `react-philosophies` is inspired by various places I've stumbled upon at different points of my coding journey.
 
@@ -39,7 +39,7 @@ Most notably:
 
 If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out.
 
-# 1. The Bare Minimum
+# 💪 1. The Bare Minimum
 
 ## This might sound crazy but a lot of times, the computer is smarter than you
 1. Use ESLint including `rule-of-hooks` and `exhaustive-deps`
@@ -53,11 +53,11 @@ If there's something that you think should be part of my reading list, or if you
 
 ## Code is just a necessary evil
 
-> The best code is no code at all Every new line of code you willingly bring into the world is code that has to be debugged, code that has to be read and understood, code that has to be supported." - Jeff Atwood
+> "The best code is no code at all Every new line of code you willingly bring into the world is code that has to be debugged, code that has to be read and understood, code that has to be supported." - Jeff Atwood
 
 > "One of my most productive days was throwing away 1000 lines of code." -  Eric S. Raymond
 
-> "If I Had More Time, I Would Have Written a Shorter Letter" - Attributed to Blaise Pascal, Mark Twain, among others..
+> "If I had more time, I would have written a shorter letter" - Attributed to Blaise Pascal, Mark Twain, among others..
 
 See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/write-less-code), [Washing Code: Code is evil - [Artem Sapegin]](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
 
@@ -69,7 +69,7 @@ See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/wr
 6. Avoid premature generalization
 7. If your solution of an simple feature requires an expensive setup, consider other options
 
-# 2. Design for happiness
+# 💪 2. Design for happiness
 > “Any fool can write code that a computer can understand. Good programmers write code that humans can understand.” - Martin Fowler
 > “Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read” ― Robert C. Martin
 
@@ -243,7 +243,7 @@ const Points = () => {
 >  You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang, on software reusability.
 
 One thing that can help you with this is to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects.
-        Also, passing primitives is also a good idea because you may want to use `React.memo` in the future if you need to for optimization.
+Also, passing primitives is also a good idea because you may want to use `React.memo` in the future if you need to for optimization.
 
 ### Example
 A `UserCard` component that displays a `Summary`, and `SeeMore` components. Add a button to toggle between showing and hiding the age and bio on of the user.
@@ -341,32 +341,34 @@ const UserCard = () => {
         
 </details>
 
-# 3. Performance tips
+# 💪 3. Performance tips
+       
 > Premature optimization is the root of all evil
 
 ### TLDR
-1. Measure first with the React profiler
-3. Splitting code to bundles
-4. `useMemo` for expensive calculations
+1. If you think it’s slow, prove it with a benchmark.  “In the face of ambiguity, refuse the temptation to guess.”
+3. Split code to bundles
+4. `useMemo` mostly just for expensive calculations
 5. `React.memo` for reducing re-renders
-6.  Make sure your `useCallback` and `useMemo` is doing what you think it's doing (preventing rerendering)
+6.  Make sure your `React.memo`, `useCallback` and `useMemo` is doing what you think it's doing (preventing rerendering)
 7. Window large lists (with React virtual or similar)
 8. Put `Context` as low as possible in your component tree. `Context` does not have to be global to your whole app.
 9. `Context` should be logically separated
 10. You can optimize `context` by separating the `state` and the `dispatch` function
 11. Stop punching yourself everytime you blink (fixing slow rerenders before fixing rerenders)
-
+       
 # 4. Testing principles
 
 ### TLDR
+>  Write tests. Not too many. Mostly integration. - Guillermo Rauch‏ (creator of Socket.io)
 
-1. “In the face of ambiguity, refuse the temptation to guess.”, If you think it’s slow, prove it with a benchmark     
-2. Your tests should resemble the way your software is used
-3. Stop testing implementation details
-4. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job 
-5. For the front-end, You don't need 100% code coverage, about 70% is okay
-        
-# Low-hanging Fruit
+1. Your tests should always resemble the way your software is used
+2. Stop testing implementation details
+3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job 
+4. For the front-end, You don't need 100% code coverage, about 70% is okay
+5. You should very rarely have to change tests when you refactor code.
+       
+# 💪 5. Spotting a low-hanging Fruit
 Ask yourself do you really need it as a dependency?
 ```tsx
 ❌ BAD
@@ -388,7 +390,6 @@ const MyComponent = () => {
  const MyComponent = () => {
       /* I will use componentNeedsToCallThisFunctions and I_AM_A_CONSTANT */
   }
-
 
 ```
         
