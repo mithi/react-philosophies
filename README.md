@@ -90,8 +90,6 @@ See also:
 
 
 ## Deriving states to avoid state management complexity
-I've asked this interview question many times and I've seen people with more than 6 years 
-experience in React still making this mistake. 
   
 #### Example 1
 Suppose you fetch a list of two numbers `{a: number, b: number}[]`. The two numbers represent the two shorter sides 
@@ -133,7 +131,7 @@ const TriangleInfo = () => {
 </details> 
 
 <details>
-  <summary>✅ Better Solution ✅ </summary>
+  <summary> ✅ Better Solution </summary>
 
  ```tsx
  const TriangleInfo = () => {
@@ -153,16 +151,79 @@ const TriangleInfo = () => {
 </details> 
 
 
-### Example 2
-Suppose you are assigned to make a component which fetches a list of points
-There is a button to either sort by x or y. There is an input field
+#### Example 2
+Suppose you are assigned to make a component which fetches a list of unique points
+There is a button to either sort by x or y and a button
 to filter points that farther than a specific distance from the origin `(0, 0)` 
 
 <details>
   <summary> ❌ Bad Solution </summary>
   
+```tsx
+type SortBy = 'x' | 'y'
+const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x' 
+const Points = () => {
+  const [points, setPoints] = useState<{x: number, y: number}[]>([])
+  const [filteredPoints, setFilteredPoints] = useState<{x: number, y: number}[]>([])
+  const [sortedPoints, setSortedPoints] = useState<{x: number, y: number}[]>([])
+  const [maxDistance, setMaxDistance] = useState<number>(Infinity)
+  const [sortBy, setSortBy] = useState<SortBy>('x')
+  
+  useEffect(() => {
+    fetchPoints().then(r => setPoints(r))
+  }, [])
+  
+  useEffect(() => {
+    setSortedPoints(sortPoints(points, sortBy))
+  }, [sortBy, points])
+
+  useEffect(() => {
+    setFilteredPoints(sortedPoints.filter(p => getDistance(p.x, p.y) < maxDistance))
+  }, [sortedPoints, maxDistance])
+
+  const otherSortBy = toggle(sortBy)
+  
+  return (
+    <>
+      <button onClick={() => { setSortBy(otherSortBy)}}>Sort by: {otherSortBy} <button>
+      <button onClick={() => { setMaxDistance(maxDistance + 5)}}>Add 5 to max distance<button>
+      Showing only points that are less than {maxDistance} units away from origin `(0, 0)`
+      <ol>{filteredPoints.map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>}
+    </>
+
+  )
+}
 ```
-  TODO
+</details>
+
+<details>
+  <summary> ✅ Better Solution </summary>
+
+```tsx
+type SortBy = 'x' | 'y'
+const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x' 
+const Points = () => {
+  const [points, setPoints] = useState<{x: number, y: number}[]>([])
+  const [maxDistance, setMaxDistance] = useState<number>(Infinity)
+  const [sortBy, setSortBy] = useState<SortBy>('x')
+  
+  useEffect(() => {
+    fetchPoints().then(r => setPoints(r))
+  }, [])
+  
+  const otherSortBy = toggle(sortBy)
+  const filteredPoints = points.filter(p => getDistance(p.x, p.y) < maxDistance)
+  return (
+    <>
+      <button onClick={() => { setSortBy(otherSortBy)}}>Sort by: {otherSortBy} <button>
+      <button onClick={() => { setMaxDistance(maxDistance + 5)}}>Add 5 to max distance<button>
+      Showing only points that are less than {maxDistance} units away from origin `(0, 0)`        
+      <ol>{sortPoints(filteredPoints, sortBy).map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>}
+    </>
+
+  )
+}
+
 ```
 
 </details>
