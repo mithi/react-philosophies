@@ -16,9 +16,9 @@ As I was writing this, I realized that it was actually difficult for me to separ
 - at the back of my mind whenever I review someone else's code or my own
 - just guidelines and NOT rigid rules
 - a living document and will evolve overtime as my experience grows
-- mostly techniques are variations of basic refactoring methods, SOLID principles, and extreme programming ideas just applied to React specifically.
+- mostly techniques which are variations of basic refactoring methods, SOLID principles, and extreme programming ideas just applied to React specifically.
 
-A lot of these things may feel like very basic and common-sense but I've worked with many large complex applications that seem to... well... not care. The examples I've presented here are based on code I have actually seen in production. 
+A lot of these things may feel like very basic and common-sense. However, I've worked with many large complex applications written by people who seem to... well... not care. The examples I've presented here are based on code I have actually seen in production. 
 
 `react-philosophies` is inspired by various places I've stumbled upon at different points of my coding journey.
 
@@ -42,14 +42,16 @@ If there's something that you think should be part of my reading list, or if you
 
 ## 1.1 Recognize when the computer is smarter than you
 1. Use ESLint including `rule-of-hooks` and `exhaustive-deps`
-2. Do NOT ignore exhaustive-deps warnings / errors for `useMemo`, `useCallback` and `useEffect`
-3. Remember to add keys whenever you use `map` to display components
-4. Remember to NOT use hooks inside conditionals, always put them at the top
-5. Do NOT ignore the warning ["Can't perform state update on unmounted component."](https://stackoverflow.com/questions/56442582/react-hooks-cant-perform-a-react-state-update-on-an-unmounted-component)
-6. If you see a warning or error in the console, Do not ignore it.
-7. Use [Prettier](https://prettier.io/) to automatically format your code
-8. Use [Code Climate](https://codeclimate.com/quality/) (or similar) to detect code smells
-9. Make sure you're tree-shaking to eliminate dead code
+2. Typescript and NextJS will make your life SO MUCH EASIER
+3. Do NOT ignore exhaustive-deps warnings / errors for `useMemo`, `useCallback` and `useEffect`
+4. Remember to add keys whenever you use `map` to display components
+5. Remember to NOT use hooks inside conditionals, always put them at the top
+6. Do NOT ignore the warning ["Can't perform state update on unmounted component."](https://stackoverflow.com/questions/56442582/react-hooks-cant-perform-a-react-state-update-on-an-unmounted-component)
+7. If you see a warning or error in the console, do not ignore it.
+8. Use [Prettier](https://prettier.io/) to automatically format your code
+9. Use [Code Climate](https://codeclimate.com/quality/) (or similar) to detect code smells
+10. Make sure you're tree-shaking to eliminate dead code
+11. Add several [error boundaries](https://reactjs.org/docs/error-boundaries.html)
 
 ## 1.2 Code is just a necessary evil
 
@@ -64,7 +66,7 @@ See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/wr
 ### TLDR
 1. Think first before adding another dependency
 2. Eliminate code with techniques not unique to `React`
-3. You're not gonna need it (probably)
+3. You aren't gonna need it (probably)
 
 ### 1.1.1 Think first before adding another dependency
 
@@ -77,12 +79,10 @@ are you actually using the features that makes a particular library great?
 
 3. Do you need fetching libraries like `Axios`? Axios is a great library because of to keep your code clean. It also has some features that are not easily replicable with the native fetch api. But if your application is not making use of most of Axios best features and only using a handful of functions, then consider just making a wrapper on top of fetch. Especially, if the only reason is that it has a better looking API.
 
-4. Do you really need `Lodash/Underscore`? See: [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
-
-5. Do you need really `MomentJs`? See: [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
+4. Lodash/underscore? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
+5. MomentJS? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
 
 6. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
-
 
 ### 1.1.2 Eliminate code with techniques not unique to `React`.
 
@@ -91,7 +91,7 @@ Always remember, `React` is just `Javascript` and `Javascript` is just code
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exiting early if you can. 
 2. Replace most traditional loops with higher order functions (ie `reduce`, `map`, `filter`), among other techniques. See also: [you-dont-need/You-Dont-Need-Loops](https://github.com/you-dont-need/You-Dont-Need-Loops)
 
-### 1.1.3 You Aren't gonna need it (probably)
+### 1.1.3 You aren't gonna need it (probably)
 
 See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt)
 
@@ -115,9 +115,9 @@ Fix code smells. Most of them can be checked easily by [Code Climate](https://co
 </details>
 
 
-## 1.4 Just because it works doesn't mean it is right
+## 1.4 Just because it works, doesn't mean it is right
 
-You're `useCallback` that depends on `setState` and `state`, might not actually have dependencies
+If you have `useCallback` that depends on `setState` and `state`, it might not actually have dependencies
 
 <details>
     <summary>🙈 Example</summary>
@@ -165,12 +165,12 @@ const MyComponent = () => {
 1. 💖 Derive states to avoid state management complexity 
 2. 💖 Pass the banana, not the gorilla and the entire jungle, (prefer passing primitives as props)
 3. 💖 Keep things small and simple. Separate concerns with the single responsibility principle
-4. Duplication is far cheaper than the wrong abstraction
+4. Duplication is far cheaper than the wrong abstraction (avoid premature generalization)
 5. Avoid prop drilling by using composition
 6. Breakdown large `useEffect`s to smaller ones
 7. Extract logic to hooks and helper functions
 8. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo` and `useEffect`
-9. Consider using `useReducer`, when some elements of your state relies on other values of your state
+9. Consider using `useReducer`, when values of your state relies on other values of your state
 10. Do not put too many dependencies in `useCallback`, `useMemo` and `useEffect`
 11. `Context` is not the solution for every state sharing problem
 12. It maybe an good idea to have `logical` and `presentational` components, if your component gets too large
@@ -275,8 +275,8 @@ const Points = () => {
   
   return (
     <>
-      <button onClick={() => { setSortBy(otherSortBy)}}>Sort by: {otherSortBy} <button>
-      <button onClick={() => { setMaxDistance(maxDistance + 5)}}>Increase max distance<button>
+      <button onClick={() => setSortBy(otherSortBy)}>Sort by: {otherSortBy}<button>
+      <button onClick={() => setMaxDistance(maxDistance + 5)}>Increase max distance<button>
       Showing only points that are less than {maxDistance} units away from origin `(0, 0)`
       Currently sorted by: {sortBy} in increasing order
       <ol>{filteredPoints.map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>}
@@ -297,7 +297,6 @@ const Points = () => {
 type SortBy = 'x' | 'y'
 const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x'
 
-const pointsInfoReducer = (state: )
 const Points = () => {
   const [points, setPoints] = useState<{x: number, y: number}[]>([])
   const [maxDistance, setMaxDistance] = useState<number>(Infinity)
@@ -310,8 +309,8 @@ const Points = () => {
   const otherSortBy = toggle(sortBy)
   return (
     <>
-      <button onClick={() => { setSortBy(otherSortBy)}}>Sort by: {otherSortBy} <button>
-      <button onClick={() => { setMaxDistance(maxDistance + 10)}}>Increase max distance<button>
+      <button onClick={() => setSortBy(otherSortBy)}>Sort by: {otherSortBy} <button>
+      <button onClick={() => setMaxDistance(maxDistance + 10)}>Increase max distance<button>
       Showing only points that are less than {maxDistance} units away from origin `(0, 0)`
       Currently sorted by: {sortBy} in increasing order
       <ol>{
@@ -340,7 +339,7 @@ A `UserCard` component that displays a `Summary`, and `SeeMore` components. Add 
 The `Summary` component that displays the display name (e.g. `Mr Vincenzo Cassano`) and a picture. Clicking the name display takes you to the user's personal site.
 (The `Summary` component may have other functionalities like changing the font, size of the image, and background color randomly upon clicking)
 
-The `UserCard` calls the hook `useUser` that return's an object with the type below.
+The `UserCard` calls the hook `useUser` that returns an object with the type below.
         
 ```ts
 type User = {
@@ -359,8 +358,8 @@ type User = {
   
 ```tsx
 
-const Summary = ({user}: {user: User}) => {
-  /*** includes functionality for switching image size, font, and background color randomly  upon clicking ***/
+const Summary = ({ user } : {user: User}) => {
+  /*** include  functionality for switching image size, font, and background color randomly  upon clicking ***/
   return (
     <>
       <img src={user.imgUrl} />
@@ -369,11 +368,11 @@ const Summary = ({user}: {user: User}) => {
   )
 }
 
-const SeeMore = ({user}: {user: User}) => {
+const SeeMore = ({ user }: {user: User}) => {
   const [seeMore, setSeeMore] = useState<boolean>(false)
   return (
     <>
-      <button onClick={() => { setSeeMore(!seeMore)} }>See more</button>
+      <button onClick={() => setSeeMore(!seeMore)}>See more</button>
       {seeMore && <>AGE: {user.age} | BIO: {user.bio}</>}
     </>
   )
@@ -395,21 +394,21 @@ const UserCard = () => {
   
 ```tsx
 
-const Summary = ({ imgUrl, webUrl, displayName } : {imgUrl: string, webUrl: string, displayName: string}) => {
-   /*** includes functionality for switching image size, font, and background color randomly  upon clicking ***/
+const Summary = ({ imgUrl, webUrl, displayName }: {imgUrl: string, webUrl: string, displayName: string}) => {
+   /*** include functionality for switching image size, font, and background color randomly upon clicking ***/
   return (
     <>
       <img src={imgUrl} />
-       <a href={webUrl}>{displayName}</a>
+      <a href={webUrl}>{displayName}</a>
     </>
   )
 }
 
-const SeeMore = ({ componentToShow } : {componentToShow: ReactNode }) => {
+const SeeMore = ({ componentToShow }: {componentToShow: ReactNode }) => {
   const [seeMore, setSeeMore] = useState<boolean>(false)
   return (
     <>
-      <button onClick={() => { setSeeMore(!seeMore)} }>See more</button>
+      <button onClick={() => setSeeMore(!seeMore)}>See more</button>
       {seeMore && <>{componentToShow }</>}
     </>
   )
@@ -420,12 +419,11 @@ const UserCard = () => {
   const { title, firstName, lastName, webUrl, imgUrl, age, bio} = useUser()
   return (
     <>
-      <Summary displayName={`${title}. ${firstName} ${lastName}`} {...{imgUrl, webUrl}}/>
-      <SeeMore componentToShow={<>AGE: {user.age} | BIO: {user.bio}</>} />
+      <Summary displayName={`${title}. ${firstName} ${lastName}`} {...{imgUrl, webUrl}} />
+      <SeeMore componentToShow={<>AGE: {age} | BIO: {ubio}</>} />
     </>
   )     
-}
-        
+}     
 ```
         
 </details>
@@ -460,7 +458,7 @@ const ShopCategoryTile = ({
   label,
   items
   componentInsideModal,
-} : ShopCategoryTileProps ) => {
+}: ShopCategoryTileProps ) => {
   const [openDialog, setOpenDialog] = useState(false)
   const [hover, setHover] = useState(false)
   const disabled = !items || items.length  === 0   
@@ -496,7 +494,7 @@ const ShopCategoryTile = ({
 
 ```tsx
 // separate to two components DisabledShopCategoryTile and ShopCategoryTile
-const DisabledShopCategoryTile = ({ icon, label }: { icon: ReactNode; label: string }) => {
+const DisabledShopCategoryTile = ({ icon, label }: { icon: ReactNode, label: string }) => {
   return (
     <Tooltip title="Not available">
       <StyledButton disabled={true} > 
@@ -518,7 +516,7 @@ const ShopCategoryTile = ({
   label,
   isBooked,
   componentInsideModal,
-} : ShopCategoryTileProps ) => {
+}: ShopCategoryTileProps ) => {
   const [openDialog, setOpenDialog] = useState(false)
   const [hover, setHover] = useState(false)
       
@@ -620,7 +618,7 @@ const ShopCategoryTile = ({ item, offers }: { item: ItemMap, offers?: Offer}) =>
 
 See also: [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [Kent C Dodds: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: Expensive Setup](), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization), [Expensive Set Up Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)
         
-Avoid premature generalization. If your solution of an simple feature requires a huge overhead, consider other options.
+Avoid premature generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
         
 # 🧘 3. Performance tips
        
@@ -628,9 +626,9 @@ Avoid premature generalization. If your solution of an simple feature requires a
 
 ### TLDR
 1. If you think it’s slow, prove it with a benchmark. “In the face of ambiguity, refuse the temptation to guess.”
-3. Split code to bundles
-4. `useMemo` mostly just for expensive calculations
-5. `React.memo` for reducing re-renders
+3. Use lazy loading
+4. Use `useMemo` mostly just for expensive calculations
+5. When using `React.memo` for reducing re-renders, it's better to pass only primitive props
 6.  Make sure your `React.memo`, `useCallback` and `useMemo` is doing what you think it's doing (preventing rerendering)
 7. Window large lists (with React virtual or similar)
 8. Put `Context` as low as possible in your component tree. `Context` does not have to be global to your whole app.
@@ -648,8 +646,3 @@ Avoid premature generalization. If your solution of an simple feature requires a
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job 
 4. For the front-end, you don't need 100% code coverage, about 70% is okay
 5. You should very rarely have to change tests when you refactor code.
- 
-        
-        
-
-  
