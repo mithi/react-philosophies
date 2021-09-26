@@ -8,7 +8,7 @@
 4. [Testing principles](#-4-testing-principles)
 
 Note: 
-As I was writing this, I realized that it was actually difficult for me to separate my thoughts into the `design`, `performance`, and `testing`. I noticed that a lot of designs aimed for maintainability also makes your application faster. How cool is that?
+As I was writing this, I realized that it was actually difficult for me to separate my thoughts into the `design`, `performance`, and `testing`. I noticed that a lot of designs aimed for maintainability also makes your application faster. So apologies in advance if the discussion appears to be cluttered at times. 
 
 # 🧘 0. Introduction 
 `react-philosophies` is:
@@ -16,9 +16,9 @@ As I was writing this, I realized that it was actually difficult for me to separ
 - at the back of my mind whenever I review someone else's code or my own
 - just guidelines and NOT rigid rules
 - a living document and will evolve overtime as my experience grows
-- mostly techniques which are variations of basic refactoring methods, SOLID principles, and extreme programming ideas just applied to React specifically.
+- mostly techniques which are variations of basic refactoring methods, SOLID principles, and extreme programming ideas... just applied to React specifically.
 
-A lot of these things may feel like very basic and common-sense. However, I've worked with many large complex applications written by people who seem to... well... not care. The examples I've presented here are based on code I have actually seen in production. 
+A lot of these things may feel like very basic and common-sense. However, I've worked with many large complex applications written by people who seem to... well... not care. The examples I present here are based on code I have actually seen in production. 
 
 `react-philosophies` is inspired by various places I've stumbled upon at different points of my coding journey.
 
@@ -36,26 +36,26 @@ Most notably:
 - [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode)
 - [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code)
 
-If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve this document where big or small is always welcome and appreciated.
+If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve this document whether big or small is always welcome and appreciated. Comments, suggestions, violent reactions? I'd love to hear them!
 
 # 🧘 1. The Bare Minimum
 
 ## 1.1 Recognize when the computer is smarter than you
-1. Use ESLint including `rule-of-hooks` and `exhaustive-deps`
+1. Use ESLint! Please `rule-of-hooks` and `exhaustive-deps`!
 2. Typescript and NextJS will make your life SO MUCH EASIER
 3. Do NOT ignore exhaustive-deps warnings / errors for `useMemo`, `useCallback` and `useEffect`
 4. Remember to add keys whenever you use `map` to display components
 5. Remember to NOT use hooks inside conditionals, always put them at the top
 6. Do NOT ignore the warning ["Can't perform state update on unmounted component."](https://stackoverflow.com/questions/56442582/react-hooks-cant-perform-a-react-state-update-on-an-unmounted-component)
 7. If you see a warning or error in the console, do not ignore it.
-8. Use [Prettier](https://prettier.io/) to automatically format your code
+8. Use a code formatter like [Prettier](https://prettier.io/)
 9. Use [Code Climate](https://codeclimate.com/quality/) (or similar) to detect code smells
 10. Make sure you're tree-shaking to eliminate dead code
 11. Add several [error boundaries](https://reactjs.org/docs/error-boundaries.html)
 
 ## 1.2 Code is just a necessary evil
 
-> "The best code is no code at all Every new line of code you willingly bring into the world is code that has to be debugged, code that has to be read and understood, code that has to be supported." - Jeff Atwood
+> "The best code is no code at all. Every new line of code you willingly bring into the world is code that has to be debugged, code that has to be read and understood, code that has to be supported." - Jeff Atwood
 
 > "One of my most productive days was throwing away 1000 lines of code." -  Eric S. Raymond
 
@@ -66,18 +66,17 @@ See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/wr
 ### TLDR
 1. Think first before adding another dependency
 2. Eliminate code with techniques not unique to `React`
-3. You aren't gonna need it (probably)
+3. Beware of the YAGNI virus
 
 ### 1.1.1 Think first before adding another dependency
 
-Needless to say, the more you add dependencies the more code you ship to the browser, this makes your app slow. Ask yourself, 
-are you actually using the features that makes a particular library great? 
+Needless to say, the more you add dependencies,the more code you ship to the browser. Ask yourself, are you actually using the features that makes a particular library great? 
 
 1. Do you need `Redux`? React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react). 
 
-2. Do you really need `Apollo client`? Apollo client has many features, especially when it comes to micromanaging and doing manual normalization. However, it significantly increases your bundle size as well. Consider using [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr)
+2. Do you really need `Apollo client`? Apollo client has many awesome features, especially when it comes to micromanaging manual normalization. However, it significantly increases your bundle size as well. Consider using [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr)
 
-3. Do you need fetching libraries like `Axios`? Axios is a great library because of to keep your code clean. It also has some features that are not easily replicable with the native fetch api. But if your application is not making use of most of Axios best features and only using a handful of functions, then consider just making a wrapper on top of fetch. Especially, if the only reason is that it has a better looking API.
+3. Do you need fetching libraries like `Axios`? Axios is a great library with features that are not easily replicable with the native fetch api. If the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Check if your application where or not making use of Axios's best features.
 
 4. Lodash/underscore? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
 5. MomentJS? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
@@ -88,12 +87,17 @@ are you actually using the features that makes a particular library great?
 
 Always remember, `React` is just `Javascript` and `Javascript` is just code
 
-1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exiting early if you can. 
+1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can. 
 2. Replace most traditional loops with higher order functions (ie `reduce`, `map`, `filter`), among other techniques. See also: [you-dont-need/You-Dont-Need-Loops](https://github.com/you-dont-need/You-Dont-Need-Loops)
 
-### 1.1.3 You aren't gonna need it (probably)
+### 1.1.3 Beware of the YAGNI virus
 
-See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt)
+> “What could happen with my software in the future? Oh yeah, maybe this and that. Let’s implement all these things since we are working on this part anyway. That way it’s future-proof.”
+
+You Aren't Gonna Need It! Always implement things when you actually need them, never when you just foresee that you may need them.
+
+See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI original](http://c2.com/xp/YouArentGonnaNeedIt.html)
+
 
 ## 1.3 `React` is just `code`
 
@@ -117,7 +121,7 @@ Fix code smells. Most of them can be checked easily by [Code Climate](https://co
 
 ## 1.4 Just because it works, doesn't mean it is right
 
-If you have `useCallback` that depends on `setState` and `state`, it might not actually have dependencies
+If you have `useCallback` that depends on `setState` and `state`, it might not actually have dependencies,
 
 <details>
     <summary>🙈 Example</summary>
@@ -133,7 +137,7 @@ const decrement = useCallback(() => setCount(count => count - 1), [])
 </details>
 
 
-If your `useMemo` and `useCallback` doesn't have a dependency, you might be doing it wrong. 
+If your `useMemo` and `useCallback` doesn't have a dependency, you might be using it wrong. 
 
 <details>
     <summary>🙈 Example</summary>
@@ -159,32 +163,33 @@ const MyComponent = () => {
 # 🧘 2. Design for happiness
 > “Any fool can write code that a computer can understand. Good programmers write code that humans can understand.” - Martin Fowler
 
-> “Indeed, the ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read” ― Robert C. Martin
+> “The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read” ― Robert C. Martin
 
 ### TLDR
 1. 💖 Derive states to avoid state management complexity 
 2. 💖 Pass the banana, not the gorilla and the entire jungle, (prefer passing primitives as props)
 3. 💖 Keep things small and simple. Separate concerns with the single responsibility principle
-4. Duplication is far cheaper than the wrong abstraction (avoid premature generalization)
+4. Duplication is far cheaper than the wrong abstraction (avoid premature / inappropriate generalization)
 5. Avoid prop drilling by using composition
-6. Breakdown large `useEffect`s to smaller ones
+6. Breakdown large `useEffect`s to smaller ones, if you can
 7. Extract logic to hooks and helper functions
 8. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo` and `useEffect`
-9. Consider using `useReducer`, when values of your state relies on other values of your state
+9. Consider using `useReducer`, if some values of your state rely on other values of your state
 10. Do not put too many dependencies in `useCallback`, `useMemo` and `useEffect`
 11. `Context` is not the solution for every state sharing problem
-12. It maybe an good idea to have `logical` and `presentational` components, if your component gets too large
+12. It may be an good idea to have `logical` and `presentational` components, if your component gets too large
 13. Put your state as close as possible to where it's being used (Colocating state)
-14. Use `css variables` for theming (`light` and `dark` mode) instead of `context`
+14. Consider using `css variables` for theming (`light` and `dark` mode) instead of `context`
 
 ## 2.1 Derive states to avoid state management complexity
-When you have redundant states, some states may fall out of sync if we forget to update it given a complex sequence of interactions.
-Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code. (Remember: Code is Evil!)
+When you have redundant states, some states may fall out of sync; you may forget to update it given a complex sequence of interactions.
+Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code.
 See also: [Kent C Dodd's Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe Exercises and Solution](https://epic-react-exercises.vercel.app/react/hooks/1)
  
 ### 🙈 Example 1
-Suppose you fetch a list of two numbers `{a: number, b: number}[]`. The two numbers represent the two shorter sides 
-of a right triangle. The length of the three sides, the perimeter, and the area of each triangle should be displayed
+You must display properties of a list of triangles; the length of the three sides, the perimeter, and the area of each triangle should be displayed on the screen.
+You should first fetch a list of two numbers `{a: number, b: number}[]`. The two numbers represent the two shorter sides 
+of a right triangle. 
 
 <details>
   <summary> ❌ Not-so-good Solution </summary>
@@ -242,9 +247,11 @@ const TriangleInfo = () => {
 </details> 
   
 ### 🙈 Example 2
-Suppose you are assigned to make a component which fetches a list of unique points
-There is a button to either sort by x or y and a button to change the max distance (increase + 10)
-. We filter points that farther than a specific distance from the origin `(0, 0)` 
+Suppose you are assigned to design a component which:
+1. fetches a list of unique points from an api
+2. Includes a button to either sort by x or y (ascending order). 
+3. Includes a button to change the `maxDistance` (increase + 10) to be used for filtering.
+4. Only display the points that farther than a specific distance (`maxDistance`) from the origin `(0, 0)` 
   
 <details>
   <summary> ❌ Not-so-good Solution  </summary>
@@ -292,7 +299,7 @@ const Points = () => {
 
 ```tsx
   
-# NOTE: You might also want to consider using useReducer here
+// NOTE: You might also want to consider using useReducer here
 
 type SortBy = 'x' | 'y'
 const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x'
@@ -327,17 +334,17 @@ const Points = () => {
 </details>
 
 ## 2.2 If you need a banana, pass the banana, not the gorilla and the entire jungle 
->  You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang, on software reusability.
+>  You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang
 
-One thing that can help you with this is to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects. Also, passing primitives is also a good idea because you may want to use `React.memo` in the future if you need to for optimization.
+Try to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects most of the time to avoid falling into this trap. Passing primitives is also a good idea because if you want to use `React.memo` for optimization.
 
 A component should just know enough to do its job and NOTHING MORE. As much as possible, components should be able to collaborate with others without knowing what they are and what they do.
 
 ### 🙈 Example
-A `UserCard` component that displays a `Summary`, and `SeeMore` components. Add a button to toggle between showing and hiding the age and bio on of the user.
+Create a `UserCard` component that displays a `Summary` and `SeeMore` components. The `SeeMore` component includes presenting the age and bio of the user. 
+There must be button to toggle between showing and hiding the age and bio on of the user.
 
-The `Summary` component that displays the display name (e.g. `Mr Vincenzo Cassano`) and a picture. Clicking the name display takes you to the user's personal site.
-(The `Summary` component may have other functionalities like changing the font, size of the image, and background color randomly upon clicking)
+The `Summary` component that displays the profile picture of the user and also his /her `title`, `firstName` and `lastName` (e.g. `Mr Vincenzo Cassano`) and a picture. Clicking this `displayName` should take you to the user's personal site. The `Summary` component may also have other functionalities like randomly  changing the font, size of the image, and background color whenever this component is clicked (The "random styling" feature).
 
 The `UserCard` calls the hook `useUser` that returns an object with the type below.
         
@@ -359,7 +366,7 @@ type User = {
 ```tsx
 
 const Summary = ({ user } : {user: User}) => {
-  /*** include  functionality for switching image size, font, and background color randomly  upon clicking ***/
+  /*** include the "random styling" feature  ***/
   return (
     <>
       <img src={user.imgUrl} />
@@ -395,7 +402,7 @@ const UserCard = () => {
 ```tsx
 
 const Summary = ({ imgUrl, webUrl, displayName }: {imgUrl: string, webUrl: string, displayName: string}) => {
-   /*** include functionality for switching image size, font, and background color randomly upon clicking ***/
+  /*** include the "random styling" feature ***/
   return (
     <>
       <img src={imgUrl} />
@@ -430,16 +437,25 @@ const UserCard = () => {
 
 ## 2.3 Separate concerns with the single responsibility principle
 
-The following is based on my old article [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665), but applied to React components. 
+(The paragraph below is based on my old article [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665), but applied to React components)
  
 **What is the single responsibility principle?**
-A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. This matters because react applications that are easy to change consist of components that are easy to reuse. A component with various responsibilities are difficult to reuse. If you want to reuse some but not all of its behavior. It's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
+A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. This matters because React applications that are easy to maintain consist of components that are easy to reuse. A component with various responsibilities are difficult to reuse. If you want to reuse some but not all of a component's behavior, it's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
 
 **How to know if your component has a single responsibility?**
 > Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. 
 
 ### 🙈 Example
-The requirement is to have special kinds of buttons you can click to shop for items of a specific category. For example, I can select bags, chairs, and food. Each button opens a modal you can use to select items. If the user selected items of a specific category then that category is booked. If it is booked, there will the button will be green with a checkmark, else it would be red. You can still add or delete items even if that category is booked. If the user is hovering the button it should also display `WavingHand` component. The buttons can also be disabled when those items are not available. If hovered, a tooltip shows "not available". Each button has a label and an icon.
+The requirement is to have special kinds of buttons you can click to shop for items of a specific category. 
+For example, I can select bags, chairs, and food. 
+Each button opens a modal you can use to select and "save" items.
+If there currently exists "saved" selected items in a specific category then then that category said to be "booked".
+If it is booked, the button will be green with a checkmark, else it would be red
+You should be able to edit your booking (add or delete items) even if that category is booked. 
+If the user is hovering the button it should also display `WavingHand` component.
+The buttons can also be disabled when no items for a specific category is available. 
+If hovered, a tooltip shows "not available".
+Each button has a label and an icon.
 
 <details>
     <summary>❌ Not-so-good solution</summary>
@@ -618,7 +634,7 @@ const ShopCategoryTile = ({ item, offers }: { item: ItemMap, offers?: Offer}) =>
 
 See also: [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [Kent C Dodds: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: Expensive Setup](), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization), [Expensive Set Up Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)
         
-Avoid premature generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
+Avoid premature / inappropriate generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
         
 # 🧘 3. Performance tips
        
