@@ -1,7 +1,4 @@
 🚧 🚧 🚧 This document is a work in progress  🚧 🚧 🚧
-<details>
-    <summary>See examples </summary>
-</details>
 
 # 🧘 Table of contents
 0. [Introduction](#-0-introduction)
@@ -66,7 +63,7 @@ See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/wr
 
 ### TLDR
 1. Think first before adding another dependency
-2. Eliminate code with techniques not unique to `React`.
+2. Eliminate code with techniques not unique to `React`
 3. You're not gonna need it (probably)
 
 ### 1.1.1 Think first before adding another dependency
@@ -94,14 +91,13 @@ Always remember, `React` is just `Javascript` and `Javascript` is just code
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exiting early if you can. 
 2. Replace most traditional loops with higher order functions (ie `reduce`, `map`, `filter`), among other techniques. See also: [you-dont-need/You-Dont-Need-Loops](https://github.com/you-dont-need/You-Dont-Need-Loops)
 
-### 1.1.3 You're not gonna need it (probably)
+### 1.1.3 You Aren't gonna need it (probably)
 
-You're probably NOT gonna need it. Avoid premature generalization. If your solution of an simple feature requires an expensive setup, consider other options.
-
+See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt)
 
 ## 1.3 `React` is just `code`
 
-Fix code smells that can be checked easily by [Code Climate](https://codeclimate.com/quality/)
+Fix code smells. Most of them can be checked easily by [Code Climate](https://codeclimate.com/quality/)
 
 <details>
  <summary> 🙈 Examples of code smells </summary>
@@ -169,7 +165,7 @@ const MyComponent = () => {
 1. 💖 Derive states to avoid state management complexity 
 2. 💖 Pass the banana, not the gorilla and the entire jungle, (prefer passing primitives as props)
 3. 💖 Keep things small and simple. Separate concerns with the single responsibility principle
-4. 💖 Duplication is far cheaper than the wrong abstraction
+4. Duplication is far cheaper than the wrong abstraction
 5. Avoid prop drilling by using composition
 6. Breakdown large `useEffect`s to smaller ones
 7. Extract logic to hooks and helper functions
@@ -186,7 +182,7 @@ When you have redundant states, some states may fall out of sync if we forget to
 Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code. (Remember: Code is Evil!)
 See also: [Kent C Dodd's Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe Exercises and Solution](https://epic-react-exercises.vercel.app/react/hooks/1)
  
-### Example 1
+### 🙈 Example 1
 Suppose you fetch a list of two numbers `{a: number, b: number}[]`. The two numbers represent the two shorter sides 
 of a right triangle. The length of the three sides, the perimeter, and the area of each triangle should be displayed
 
@@ -245,7 +241,7 @@ const TriangleInfo = () => {
  ```  
 </details> 
   
-### Example 2
+### 🙈 Example 2
 Suppose you are assigned to make a component which fetches a list of unique points
 There is a button to either sort by x or y and a button to change the max distance (increase + 10)
 . We filter points that farther than a specific distance from the origin `(0, 0)` 
@@ -338,7 +334,7 @@ One thing that can help you with this is to pass primitives (`boolean`, `string`
 
 A component should just know enough to do its job and NOTHING MORE. As much as possible, components should be able to collaborate with others without knowing what they are and what they do.
 
-### Example
+### 🙈 Example
 A `UserCard` component that displays a `Summary`, and `SeeMore` components. Add a button to toggle between showing and hiding the age and bio on of the user.
 
 The `Summary` component that displays the display name (e.g. `Mr Vincenzo Cassano`) and a picture. Clicking the name display takes you to the user's personal site.
@@ -439,14 +435,12 @@ const UserCard = () => {
 The following is based on my old article [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665), but applied to React components. 
  
 **What is the single responsibility principle?**
-> A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. This matters because react applications that are easy to change consist of components that are easy to reuse. A component with various responsibilities are difficult to reuse. If you want to reuse some but not all of its behavior. It's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
+A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. This matters because react applications that are easy to change consist of components that are easy to reuse. A component with various responsibilities are difficult to reuse. If you want to reuse some but not all of its behavior. It's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
 
 **How to know if your component has a single responsibility?**
-> Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that you fail this test. 
+> Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. 
 
-Try to make components easy to use and hard to misuse. 
-
-### Example
+### 🙈 Example
 The requirement is to have special kinds of buttons you can click to shop for items of a specific category. For example, I can select bags, chairs, and food. Each button opens a modal you can use to select items. If the user selected items of a specific category then that category is booked. If it is booked, there will the button will be green with a checkmark, else it would be red. You can still add or delete items even if that category is booked. If the user is hovering the button it should also display `WavingHand` component. The buttons can also be disabled when those items are not available. If hovered, a tooltip shows "not available". Each button has a label and an icon.
 
 <details>
@@ -554,7 +548,7 @@ const ShopCategoryTile = ({
 Note: This is a simplified version of a component that I've actually seen in production
 
 <details>
-    <summary>✅ ❌ Not-so-good solution</summary>
+    <summary>❌ Not-so-good solution</summary>
 
 ```tsx
 const ShopCategoryTile = ({ item, offers }: { item: ItemMap, offers?: Offer}) => {
@@ -624,12 +618,16 @@ const ShopCategoryTile = ({ item, offers }: { item: ItemMap, offers?: Offer}) =>
 
 ## 2.4 Duplication is far cheaper than the wrong abstraction
 
+See also: [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [Kent C Dodds: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: Expensive Setup](), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization), [Expensive Set Up Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)
+        
+Avoid premature generalization. If your solution of an simple feature requires a huge overhead, consider other options.
+        
 # 🧘 3. Performance tips
        
-> Premature optimization is the root of all evil
+> Premature optimization is the root of all evil - Tony Hoare (popularized by Donald Knuth) 
 
 ### TLDR
-1. If you think it’s slow, prove it with a benchmark.  “In the face of ambiguity, refuse the temptation to guess.”
+1. If you think it’s slow, prove it with a benchmark. “In the face of ambiguity, refuse the temptation to guess.”
 3. Split code to bundles
 4. `useMemo` mostly just for expensive calculations
 5. `React.memo` for reducing re-renders
