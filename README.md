@@ -21,7 +21,7 @@ As I was writing this, I realized that it was actually difficult for me to separ
 - a living document and will evolve overtime as my experience grows
 - mostly techniques are variations of basic refactoring methods, SOLID principles, and extreme programming ideas just applied to React specifically.
 
-A lot of these things may feel like very basic and common-sense but I've worked with many large complex applications that seem to... well... not care.
+A lot of these things may feel like very basic and common-sense but I've worked with many large complex applications that seem to... well... not care. The examples I've presented here are based on code I have actually seen in production. 
 
 `react-philosophies` is inspired by various places I've stumbled upon at different points of my coding journey.
 
@@ -117,6 +117,7 @@ Fix code smells that can be checked easily by [Code Climate](https://codeclimate
 - ❌ Duplicate code which is not identical but shares the same structure (e.g. variable names may differ)
 
 </details>
+
 
 ## 1.4 Just because it works doesn't mean it is right
 
@@ -246,8 +247,8 @@ const TriangleInfo = () => {
   
 ### Example 2
 Suppose you are assigned to make a component which fetches a list of unique points
-There is a button to either sort by x or y and a button
-to filter points that farther than a specific distance from the origin `(0, 0)` 
+There is a button to either sort by x or y and a button to change the max distance (increase + 10)
+. We filter points that farther than a specific distance from the origin `(0, 0)` 
   
 <details>
   <summary> ❌ Not-so-good Solution  </summary>
@@ -333,8 +334,9 @@ const Points = () => {
 ## 2.2 If you need a banana, pass the banana, not the gorilla and the entire jungle 
 >  You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang, on software reusability.
 
-One thing that can help you with this is to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects.
-Also, passing primitives is also a good idea because you may want to use `React.memo` in the future if you need to for optimization.
+One thing that can help you with this is to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects. Also, passing primitives is also a good idea because you may want to use `React.memo` in the future if you need to for optimization.
+
+A component should just know enough to do its job and NOTHING MORE. As much as possible, components should be able to collaborate with others without knowing what they are and what they do.
 
 ### Example
 A `UserCard` component that displays a `Summary`, and `SeeMore` components. Add a button to toggle between showing and hiding the age and bio on of the user.
@@ -407,12 +409,12 @@ const Summary = ({ imgUrl, webUrl, displayName } : {imgUrl: string, webUrl: stri
   )
 }
 
-const SeeMore = ({ age, bio } : {age: number, bio: string}) => {
+const SeeMore = ({ componentToShow } : {componentToShow: ReactNode }) => {
   const [seeMore, setSeeMore] = useState<boolean>(false)
   return (
     <>
       <button onClick={() => { setSeeMore(!seeMore)} }>See more</button>
-      {seeMore && <>AGE: {age} | BIO: {bio}</>}
+      {seeMore && <>{componentToShow }</>}
     </>
   )
 }
@@ -423,7 +425,7 @@ const UserCard = () => {
   return (
     <>
       <Summary displayName={`${title}. ${firstName} ${lastName}`} {...{imgUrl, webUrl}}/>
-      <SeeMore {...{age, bio}} />
+      <SeeMore componentToShow={<>AGE: {user.age} | BIO: {user.bio}</>} />
     </>
   )     
 }
@@ -432,7 +434,194 @@ const UserCard = () => {
         
 </details>
 
-## 2.3 Separate concerns with the single responsibility principle.
+## 2.3 Separate concerns with the single responsibility principle
+
+The following is based on my old article [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665), but applied to React components. 
+ 
+**What is the single responsibility principle?**
+> A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. This matters because react applications that are easy to change consist of components that are easy to reuse. A component with various responsibilities are difficult to reuse. If you want to reuse some but not all of its behavior. It's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
+
+**How to know if your component has a single responsibility?**
+> Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that you fail this test. 
+
+Try to make components easy to use and hard to misuse. 
+
+### Example
+The requirement is to have special kinds of buttons you can click to shop for items of a specific category. For example, I can select bags, chairs, and food. Each button opens a modal you can use to select items. If the user selected items of a specific category then that category is booked. If it is booked, there will the button will be green with a checkmark, else it would be red. You can still add or delete items even if that category is booked. If the user is hovering the button it should also display `WavingHand` component. The buttons can also be disabled when those items are not available. If hovered, a tooltip shows "not available". Each button has a label and an icon.
+
+<details>
+    <summary>❌ Not-so-good solution</summary>
+
+```tsx
+type ShopCategoryTileProps = {
+  isBooked: boolean
+  icon: ReactNode
+  label: string
+  componentInsideModal?: ReactNode
+  items?: {name: string, quantity: number}[]
+}
+
+const ShopCategoryTile = ({
+  icon,
+  label,
+  items
+  componentInsideModal,
+} : ShopCategoryTileProps ) => {
+  const [openDialog, setOpenDialog] = useState(false)
+  const [hover, setHover] = useState(false)
+  const disabled = !items || items.length  === 0   
+  return (
+    <>
+      <Tooltip title="Not available" show={disabled }>
+        <StyledButton
+          disabled={disabled}
+          onClick={() => disabled ? null : setOpenDialog(true) }
+          onMouseEnter={() => disabled ? null : setHover(true)}
+          onMouseLeave={() => disabled ? null : setHover(false)}
+        >
+          {icon}
+          <StyledLabel>{label}<StyledLabel/>
+          {!disabled && isBooked && <FaCheckCircle/>}
+          {!disabled && hover && <WavingHand />}
+        </StyledButton>
+      </Tooltip>
+      {componentInsideModal && 
+        <Dialog open={openDialog} onClick={() => setOpenDialog(false)}>
+          {componentInsideModal}
+        </Dialog>
+      }
+    </>
+  )
+} 
+```
+
+</details>
+          
+<details>
+    <summary>✅ Better solution</summary>
+
+```tsx
+// separate to two components DisabledShopCategoryTile and ShopCategoryTile
+const DisabledShopCategoryTile = ({ icon, label }: { icon: ReactNode; label: string }) => {
+  return (
+    <Tooltip title="Not available">
+      <StyledButton disabled={true} > 
+          {icon} <StyledLabel>{label}<StyledLabel/>
+      </Button>
+    </Tooltip>
+  )
+}
+
+type ShopCategoryTileProps = {
+  isBooked: boolean
+  icon: ReactNode
+  label: string
+  componentInsideModal: ReactNode
+}
+
+const ShopCategoryTile = ({
+  icon,
+  label,
+  isBooked,
+  componentInsideModal,
+} : ShopCategoryTileProps ) => {
+  const [openDialog, setOpenDialog] = useState(false)
+  const [hover, setHover] = useState(false)
+      
+  return (
+    <>
+      <StyledButton
+        disabled={false}
+        onClick={() => setOpenDialog(true) }
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+      >
+        {icon}
+        <StyledLabel>{label}<StyledLabel/>
+        {isBooked && <FaCheckCircle/>}
+        {hover && <WavingHand />}
+      </StyledButton>
+      <Dialog open={openDialog} onClick={() => setOpenDialog(false)}>
+        {componentInsideModal}
+      </Dialog>
+    </>
+  )
+}
+```
+
+</details>
+
+Note: This is a simplified version of a component that I've actually seen in production
+
+<details>
+    <summary>✅ ❌ Not-so-good solution</summary>
+
+```tsx
+const ShopCategoryTile = ({ item, offers }: { item: ItemMap, offers?: Offer}) => {
+  const dispatch = useDispatch()
+  const location = useLocation()
+  const history = useHistory()
+  const { items } = useContext(OrderingFormContext)
+  const [openDialog, setOpenDialog] = useState(false)
+  const [hover, setHover] = useState(false)
+  const isBooked =
+    !item.disabled &&
+    !!items?.some((a: Item) => a.itemGroup === item.group)
+  const isDisabled = item.disabled || !offers
+  const RenderComponent = item.component
+  useEffect(() => {
+    if (openDialog && !location.pathname.includes('item')) {
+      setOpenDialog(false)
+    }
+  }, [location.pathname])
+  const handleClose = useCallback(() => {
+    setOpenDialog(false)
+    history.goBack()
+  }, [])
+  return (
+    <GridStyled xs={6} sm={3} md={2} item booked={isBooked} disabled={isDisabled}>
+      <Tooltip
+        title="Not available"
+        placement="top"
+        disableFocusListener={!isDisabled}
+        disableHoverListener={!isDisabled}
+        disableTouchListener={!isDisabled}
+      >
+        <PaperStyled disabled={isDisabled} elevation={isDisabled ? 0 : hover ? 6 : 2}>
+          <Wrapper
+            onClick={() => {
+              if (isDisabled) {
+                return
+              }
+              dispatch(push(ORDER__PATH))
+              setOpenDialog(true)
+            }}
+            disabled={isDisabled}
+            onMouseEnter={() => !isDisabled && setHover(true)}
+            onMouseLeave={() => !isDisabled && setHover(false)}
+          >
+            {item.icon}
+            <Typography variant="button">{item.label}</Typography>
+            <CheckIconWrapper>{isBooked && <FaCheckCircle size="26" />}</CheckIconWrapper>
+          </Wrapper>
+        </PaperStyled>
+      </Tooltip>
+      <Dialog
+        fullScreen
+        open={openDialog}
+        onClose={handleClose}
+      >
+        {RenderComponent && (
+          <RenderComponent item={item} offer={offers} onClose={handleClose} />
+        )}
+      </Dialog>
+    </GridStyled>
+  )
+}
+```
+    
+</details>    
+
 ## 2.4 Duplication is far cheaper than the wrong abstraction
 
 # 🧘 3. Performance tips
