@@ -1,4 +1,4 @@
-[![Epic React Exercises](https://img.shields.io/badge/Epic%20-React%20Exercises-orange.svg?logo=react&color=0abde3)](https://epic-react-exercises.vercel.app/) [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) ![PRs welcome!](https://img.shields.io/badge/%20📝%20Contributions-welcome-orange.svg?style=flat) ![Forever a work in progress!](https://img.shields.io/badge/%20🚧%20Forever%20🚧%20%20-under%20construction-yellow.svg) 
+[![Epic React Exercises](https://img.shields.io/badge/Epic%20-React%20Exercises-orange.svg?logo=react&color=0abde3)](https://epic-react-exercises.vercel.app/) [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) [![PRs welcome!](https://img.shields.io/badge/%20📝%20Contributions-welcome-orange.svg?style=flat)]() ![Forever a work in progress!](https://img.shields.io/badge/%20🚧%20Forever%20🚧%20%20-under%20construction-yellow.svg) 
 
 # 🧘 Table of contents
 0. [Introduction](#-0-introduction)
@@ -59,7 +59,7 @@ If there's something that you think should be part of my reading list, or if you
 
 </details>
 
-
+**☕ If this document helped you in some way, consider [☕☕☕ buying me a few cups of coffee ☕☕☕](https://ko-fi.com/minimithi) to motivate me to write more about React! ☕**
 
 # 🧘 1. The Bare Minimum
 
@@ -75,7 +75,7 @@ If there's something that you think should be part of my reading list, or if you
 9.  [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
 10. I highly recommend [Code Climate](https://codeclimate.com/quality/)  (or similar) for open-source repositories or if you can afford it. Detecting and fixing code smells reduces technical debt making your application more maintainable
 11. "tree-shaking" is your friend! 
-12. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html). This will create a better user experience for your users. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you need to
+12. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. This will create a better user experience for your users. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you need to
 
 ## 1.2 Code is just a necessary evil
 
@@ -92,7 +92,7 @@ See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/wr
 ### TLDR
 1. Think first before adding another dependency
 2. Eliminate code with techniques not unique to `React`
-3. Beware of the YAGNI virus
+3. Don't be clever. YAGNI!
 
 ### 1.1.1 Think first before adding another dependency
 
@@ -118,7 +118,7 @@ Always remember, `React` is just `Javascript` and `Javascript` is just code
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can. 
 2. If there is no discernable performance difference, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
 
-### 1.1.3 Beware of the YAGNI virus
+### 1.1.3 Don't be clever. YAGNI!
 
 > "What could happen with my software in the future? Oh yeah, maybe this and that. Let’s implement all these things since we are working on this part anyway. That way it’s future-proof."
 
@@ -199,20 +199,25 @@ const MyComponent = () => {
 4. Duplication is far cheaper than the wrong abstraction (avoid premature / inappropriate generalization)
 5. Avoid prop drilling by using composition ([KCD: Prop Drilling](https://kentcdodds.com/blog/prop-drilling))
 6. Breakdown your giant `useEffect` ([KCD: Myths about useEffect](https://epicreact.dev/myths-about-useeffect))
-7. Extract logic to hooks and helper functions
-8. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo` and `useEffect`
-9. Consider using `useReducer`, if some values of your state rely on other values of your state
-10. Do not put too many dependencies in `useCallback`, `useMemo` and `useEffect`
-11. `Context` is not the solution for every state sharing problem
-12. It might be an good idea have `logical` and `presentational` components
+7. It might be a good idea to have `logical` and `presentational` components
+8. Extract logic to hooks and helper functions
+9. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo` and `useEffect`
+10. Do not put too many dependencies in `useCallback`, `useMemo` and `useEffect` 
+11. Consider using `useReducer`, if some values of your state rely on other values of your state 
+12. `Context` is not the solution for every state sharing problem 
 
 ## 💖 2. Avoid state management complexity by removing redundant states
 When you have redundant states, some states may fall out of sync; you may forget to update it given a complex sequence of interactions.
 Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code.
-See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe Exercises and Solution](https://epic-react-exercises.vercel.app/react/hooks/1)
+See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe Exercise and Solution](https://epic-react-exercises.vercel.app/react/hooks/1)
  
 ### 🙈 Example 1
-You are tasked to display properties each right triangle (from a list): the length of the three sides, the perimeter, and the area of each triangle should be displayed on the screen. This list of two numbers `{a: number, b: number}[]` is fetched from an API. The two numbers represent the two shorter sides of a right triangle. 
+You are tasked to display properties each right triangle (from a list)
+- the lengths of each of the three sides
+-  the perimeter
+-  the area
+
+A list of two numbers `{a: number, b: number}[]` should be fetched from an API. The two numbers represent the two shorter sides of a right triangle. 
 
 <details>
   <summary> ❌ Not-so-good Solution </summary>
@@ -368,7 +373,7 @@ When we do this, the components will be loosely coupled. Loose coupling means th
 ### 🙈 Example
 Create a `UserCard` component that displays two components: `Summary` and `SeeMore`. The `SeeMore` component includes presenting the `age` and `bio` of the `user`. There must be button to toggle between showing and hiding the `age` and `bio` of the `user`.
 
-The `Summary` component that displays the profile picture of the user and also his/her `title`, `firstName` and `lastName` (e.g. `Mr Vincenzo Cassano`) and a picture. Clicking this `displayName` should take you to the user's personal site. The `Summary` component may also have other functionalities like randomly  changing the font, size of the image, and background color whenever this component is clicked (We can call this the "random styling" feature).
+The `Summary` component that displays the profile picture of the user and also his `title`, `firstName` and `lastName` (e.g. `Mr Vincenzo Cassano`) and a picture. Clicking his name should take you to the user's personal site. The `Summary` component may also have other functionalities like randomly  changing the font, size of the image, and background color whenever this component is clicked (We can call this the "random styling" feature).
 
 The `UserCard` calls the hook `useUser` that returns an object with the type below.
         
