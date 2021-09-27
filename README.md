@@ -444,10 +444,10 @@ The requirement is to have special kinds of buttons you can click to shop for it
 For example, I can select bags, chairs, and food. 
 Each button opens a modal you can use to select and "save" items.
 If there currently exists "saved" selected items in a specific category then then that category said to be "booked".
-If it is booked, the button will be green with a checkmark, else it would be red
+If it is booked, the button will have a checkmark.
 You should be able to edit your booking (add or delete items) even if that category is booked. 
 If the user is hovering the button it should also display `WavingHand` component.
-The buttons can also be disabled when no items for a specific category is available. 
+The buttons can also be disabled when no items for a specific category is available, it will be color gray. 
 If hovered, a tooltip shows "not available".
 Each button has a label and an icon.
 
