@@ -46,10 +46,10 @@ If there's something that you think should be part of my reading list, or if you
 3. Do NOT ignore exhaustive-deps warnings / errors for `useMemo`, `useCallback` and `useEffect`
 4. Remember to add keys whenever you use `map` to display components
 5. Remember to NOT use hooks inside conditionals, always put them at the top
-6. Do NOT ignore the warning ["Can't perform state update on unmounted component."](https://stackoverflow.com/questions/56442582/react-hooks-cant-perform-a-react-state-update-on-an-unmounted-component)
-7. If you see a warning or error in the console, do not ignore it.
+6. Understand the warning "Can't perform state update on unmounted component." [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
+7. If you see a warning or error in the console, it's there for a reason.
 8. Use a code formatter like [Prettier](https://prettier.io/)
-9. Use [Code Climate](https://codeclimate.com/quality/) (or similar) to detect code smells
+9. For open-source repositories or if you can afford it, [Code Climate](https://codeclimate.com/quality/) (or similar) to detect code smells
 10. Make sure you're tree-shaking to eliminate dead code
 11. Add several [error boundaries](https://reactjs.org/docs/error-boundaries.html)
 
@@ -88,7 +88,7 @@ Needless to say, the more you add dependencies,the more code you ship to the bro
 Always remember, `React` is just `Javascript` and `Javascript` is just code
 
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can. 
-2. Replace most traditional loops with higher order functions (ie `reduce`, `map`, `filter`), among other techniques. See also: [you-dont-need/You-Dont-Need-Loops](https://github.com/you-dont-need/You-Dont-Need-Loops)
+2. If there is no discernable performance difference, replace most traditional loops with higher order functions (ie `map`, `filter`, `find`, `findIndex`, `some`), among other techniques.
 
 ### 1.1.3 Beware of the YAGNI virus
 
@@ -120,22 +120,17 @@ Fix code smells. Most of them can be checked easily by [Code Climate](https://co
 
 
 ## 1.4 Just because it works, doesn't mean it is right
+As you may very well know, you don't need to put `setState` from (`useState`) and `dispatch` (from `useReducer`) in your dependency array for `useEffect` and `useCallback`. ESLint will NOT complain because `React` guarantees their stability. 
 
-If you have `useCallback` that depends on `setState` and `state`, it might not actually have dependencies,
-
-<details>
-    <summary>🙈 Example</summary>
+Also remember that you may not need to put your `state` as a dependency because you pass a callback function instead. See example below:
  
 ```tsx
-❌ BAD
+❌ Not so good
 const decrement = useCallback(() => setCount(count - 1), [count]) 
 
 ✅ BETTER
 const decrement = useCallback(() => setCount(count => count - 1), [])      
 ```
-
-</details>
-
 
 If your `useMemo` and `useCallback` doesn't have a dependency, you might be using it wrong. 
 
@@ -336,13 +331,12 @@ const Points = () => {
 ## 2.2 If you need a banana, pass the banana, not the gorilla and the entire jungle 
 >  You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang
 
-Try to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects most of the time to avoid falling into this trap. Passing primitives is also a good idea because if you want to use `React.memo` for optimization.
-
-A component should just know enough to do its job and NOTHING MORE. As much as possible, components should be able to collaborate with others without knowing what they are and what they do.
+Try to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects most of the time to avoid falling into this trap. (Passing primitives is also a good idea because if you want to use `React.memo` for optimization.)
+      
+A component should just know enough to do its job and nothing more. As much as possible, components should be able to collaborate with others without knowing what they are and what they do. The idea behind this is that when we do this, the components will be loosely coupled. Loose coupling means that the degree of dependency between two components is low, which will make it easier to change, replace, or remove components without affecting other components. See also [stackoverflow:2832017](https://stackoverflow.com/questions/2832017/what-is-the-difference-between-loose-coupling-and-tight-coupling-in-the-object-o)
 
 ### 🙈 Example
-Create a `UserCard` component that displays a `Summary` and `SeeMore` components. The `SeeMore` component includes presenting the age and bio of the user. 
-There must be button to toggle between showing and hiding the age and bio on of the user.
+Create a `UserCard` component that displays a `Summary` and `SeeMore` components. The `SeeMore` component includes presenting the age and bio of the user. There must be button to toggle between showing and hiding the age and bio on of the user.
 
 The `Summary` component that displays the profile picture of the user and also his /her `title`, `firstName` and `lastName` (e.g. `Mr Vincenzo Cassano`) and a picture. Clicking this `displayName` should take you to the user's personal site. The `Summary` component may also have other functionalities like randomly  changing the font, size of the image, and background color whenever this component is clicked (The "random styling" feature).
 
@@ -443,7 +437,7 @@ const UserCard = () => {
 A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. This matters because React applications that are easy to maintain consist of components that are easy to reuse. A component with various responsibilities are difficult to reuse. If you want to reuse some but not all of a component's behavior, it's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
 
 **How to know if your component has a single responsibility?**
-> Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. 
+Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. Also check the props, states, hooks this component consumes as well as variables and methods declared inside the component (it shouldn't have too many). Ask your self if these props, states, hooks, variables and methods actually work together to fulfill the component's purpose. If some of them don't, then consider moving those somewhere else or breaking down your big component to smaller ones. 
 
 ### 🙈 Example
 The requirement is to have special kinds of buttons you can click to shop for items of a specific category. 
@@ -655,7 +649,7 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 # 🧘 4. Testing principles
 
 ### TLDR
->  Write tests. Not too many. Mostly integration. - Guillermo Rauch (creator of Socket.io)
+>  Write tests. Not too many. Mostly integration. - Guillermo Rauch (creator of Socket.io, NextJS)
 
 1. Your tests should always resemble the way your software is used
 2. Stop testing implementation details
