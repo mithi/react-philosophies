@@ -23,7 +23,7 @@ As I was writing this, I realized that it was actually difficult for me to separ
 - a living document and will evolve overtime as my experience grows
 - mostly techniques which are variations of basic refactoring methods, SOLID principles, and extreme programming ideas... just applied to React specifically.
 
-A lot of these things may feel like very basic and common-sense. However, I've worked with many large complex applications written by people who seem to... well... not care. The examples I present here are based on code I have actually seen in production. 
+A lot of these things may feel like very basic and common-sense. But surprisingly, I've worked with many large complex applications started by people who seem to... well... not care. The examples I present here are based on code I have actually seen in production. 
 
 `react-philosophies` is inspired by various places I've stumbled upon at different points of my coding journey.
 
@@ -90,12 +90,12 @@ Needless to say, the more you add dependencies,the more code you ship to the bro
 
 1. Do you really need `Redux`? React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react). 
 
-2. Do you really need `Apollo client`? Apollo client has many awesome features, especially when it comes to micromanaging manual normalization. However, it significantly increases your bundle size as well. Consider using a smaller library such as [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr) (or none at all), if your application is only using features that is not unique to Apollo client.
+2. Do you really need `Apollo client`? Apollo client has many awesome features, especially when it comes to micromanaging manual normalization. However, it significantly increases your bundle size as well. Consider using a smaller library such as [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr) (or none at all), if your application uses the features that are not unique to Apollo client.
 
-3. Do you need fetching libraries like `Axios`? Axios is a great library with features that are not easily replicable with the native fetch api. But if the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Check if your application where or not making use of Axios's best features.
+3. `Axios`? Axios is a great library with features that are not easily replicable with the native fetch api. But if the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Check if your application where or not making use of Axios's best features.
 
-4. Lodash/underscore? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
-5. MomentJS? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
+4. `Lodash/underscore`? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
+5. `MomentJS`? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
 
 6. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
 
@@ -104,7 +104,7 @@ Needless to say, the more you add dependencies,the more code you ship to the bro
 Always remember, `React` is just `Javascript` and `Javascript` is just code
 
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can. 
-2. If there is no discernable performance difference, replace most traditional loops with higher order functions (ie `map`, `filter`, `find`, `findIndex`, `some`), among other techniques.
+2. If there is no discernable performance difference, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
 
 ### 1.1.3 Beware of the YAGNI virus
 
@@ -183,13 +183,13 @@ const MyComponent = () => {
 3. 💖 Keep things small and simple. Separate concerns with the single responsibility principle
 4. Duplication is far cheaper than the wrong abstraction (avoid premature / inappropriate generalization)
 5. Avoid prop drilling by using composition
-6. Breakdown large `useEffect`s to smaller ones, if you can
+6. Breakdown large `useEffect`s to smaller ones
 7. Extract logic to hooks and helper functions
 8. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo` and `useEffect`
 9. Consider using `useReducer`, if some values of your state rely on other values of your state
 10. Do not put too many dependencies in `useCallback`, `useMemo` and `useEffect`
 11. `Context` is not the solution for every state sharing problem
-12. It may be an good idea to have `logical` and `presentational` components, if your component gets too large
+12. It may be an good idea have `logical` and `presentational` components
 13. Put your state as close as possible to where it's being used (Colocating state)
 14. Consider using `css variables` for theming (`light` and `dark` mode) instead of `context`
 
@@ -199,8 +199,7 @@ Aside from avoiding `synchronization bugs`, you'd notice that it's also easier t
 See also: [Kent C Dodd's Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe Exercises and Solution](https://epic-react-exercises.vercel.app/react/hooks/1)
  
 ### 🙈 Example 1
-You are tasked to display properties of a list of triangles; the length of the three sides, the perimeter, and the area of each triangle should be displayed on the screen.
-This list of two numbers `{a: number, b: number}[]` is fetched from an API and the two numbers represent the two shorter sides of a right triangle. 
+You are tasked to display properties of a list of triangles; the length of the three sides, the perimeter, and the area of each triangle should be displayed on the screen. This list of two numbers `{a: number, b: number}[]` is fetched from an API and the two numbers represent the two shorter sides of a right triangle. 
 
 <details>
   <summary> ❌ Not-so-good Solution </summary>
@@ -261,8 +260,8 @@ const TriangleInfo = () => {
 Suppose you are assigned to design a component which:
 1. fetches a list of unique points from an api
 2. Includes a button to either sort by x or y (ascending order). 
-3. Includes a button to change the `maxDistance` (increase + 10) to be used for filtering.
-4. Only display the points that farther than a specific distance (`maxDistance`) from the origin `(0, 0)` 
+3. Includes a button to change the `maxDistance` (increase + 10) used for filtering displayed points.
+4. Only display the points that is NOT farther than  the current `maxDistance` from the origin `(0, 0)` 
   
 <details>
   <summary> ❌ Not-so-good Solution  </summary>
@@ -433,7 +432,7 @@ const SeeMore = ({ componentToShow }: {componentToShow: ReactNode }) => {
 
 
 const UserCard = () => {
-  const { title, firstName, lastName, webUrl, imgUrl, age, bio} = useUser()
+  const { title, firstName, lastName, webUrl, imgUrl, age, bio } = useUser()
   return (
     <>
       <Summary displayName={`${title}. ${firstName} ${lastName}`} {...{imgUrl, webUrl}} />
@@ -458,7 +457,7 @@ A component with various responsibilities is difficult to reuse. If you want to 
 
 > Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. 
  
-Check the props, states, hooks of this component as well as variables and methods declared inside the component (TThey shouldn't be too many). Ask yourself: Do these things actually work together to fulfill the component's purpose? If some of them don't, consider moving those somewhere else or breaking down your big component to smaller ones. 
+Inspect the component's states, the props and hooks it consumes, as well as variables and methods declared inside the component (They shouldn't be too many). Ask yourself: Do these things actually work together to fulfill the component's purpose? If some of them don't, consider moving those somewhere else or breaking down your big component to smaller ones. 
 
 ### 🙈 Example
 The requirement is to display special kinds of buttons you can click to shop for items of a specific category. For example, the user can select bags, chairs, and food.
@@ -470,9 +469,9 @@ The requirement is to display special kinds of buttons you can click to shop for
 - If the user is hovering the button it should also display `WavingHand` component.
 - The buttons should also be disabled when no items for a specific category is available. 
 - When a user hovers a disabled button, a tooltip shows "not available".
-- If the category has no items available, the button's background color should be gray.
-- If the category is booked, the button's background color should be green.
-- If the category has available items and is not booked, the button's background color should be red
+- If the category has no items available, the button's background should be gray.
+- If the category is booked, the button's background should be green.
+- If the category has available items and is not booked, the button's background should be red
 
 <details>
     <summary>❌ Not-so-good solution</summary>
@@ -499,7 +498,7 @@ const ShopCategoryTile = ({
     <>
       <Tooltip title="Not available" show={disabled }>
         <StyledButton
-          className={isDisabled ? "grey" : isBooked ? "green" : "red" }
+          className={disabled ? "grey" : isBooked ? "green" : "red" }
           disabled={disabled}
           onClick={() => disabled ? null : setOpenDialog(true) }
           onMouseEnter={() => disabled ? null : setHover(true)}
@@ -512,7 +511,7 @@ const ShopCategoryTile = ({
         </StyledButton>
       </Tooltip>
       {componentInsideModal && 
-        <Dialog open={openDialog} onClick={() => setOpenDialog(false)}>
+        <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
           {componentInsideModal}
         </Dialog>
       }
@@ -568,7 +567,7 @@ const ShopCategoryTile = ({
         {isBooked && <FaCheckCircle/>}
         {hover && <WavingHand />}
       </StyledButton>
-      <Dialog open={openDialog} onClick={() => setOpenDialog(false)}>
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
         {componentInsideModal}
       </Dialog>
     </>
