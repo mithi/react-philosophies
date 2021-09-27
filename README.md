@@ -1,6 +1,5 @@
 [![Epic React Exercises](https://img.shields.io/badge/Epic%20-React%20Exercises-orange.svg?logo=react&color=0abde3)](https://epic-react-exercises.vercel.app/) [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) [![PRs welcome!](https://img.shields.io/badge/%20📝%20Contributions-welcome-orange.svg?style=flat)]() ![Forever a work in progress!](https://img.shields.io/badge/%20🚧%20Forever%20🚧%20%20-under%20construction-yellow.svg) 
 
-# 🧘 Table of contents
 0. [Introduction](#-0-introduction)
 1. [The Bare Minimum](#-1-the-bare-minimum)
 2. [Design for happiness](#-2-design-for-happiness)
@@ -691,8 +690,10 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 10. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
 11. Put your state as close as possible to where it's being used
 12. Consider using [`react-hook-forms`](https://react-hook-form.com/)
-        
-See also: 
+
+<details>
+    <summary>Selected KCD articles about performance</summary>
+
 - [KCD: State Colocation will make your React app faster](https://kentcdodds.com/blog/state-colocation-will-make-your-react-app-faster)
 - [KCD: When to `useMemo` and `useCallback`](https://kentcdodds.com/blog/usememo-and-usecallback)
 - [KCD: Fix the slow render before you fix the re-render](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render)
@@ -700,6 +701,8 @@ See also:
 - [KCD: How to optimize your context value](https://kentcdodds.com/blog/how-to-optimize-your-context-value)
 - [KCD: How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively)
 - [KCD: One React Mistake that is slowing you down](https://epicreact.dev/one-react-mistake-thats-slowing-you-down)
+
+</details>
         
 # 🧘 4. Testing principles
 
@@ -714,7 +717,9 @@ See also:
 5. You should very rarely have to change tests when you refactor code
 6. Consider using Jest, React testing library, Cypress, and [Mock service worker](https://github.com/mswjs/msw)
 
-See also: 
+<details>
+    <summary>Selected KCD articles about testing</summary>
+
 - [KCD: Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)
 - [KCD: Stop mocking fetch](https://kentcdodds.com/blog/stop-mocking-fetch)
 - [KCD: Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
@@ -727,3 +732,5 @@ See also:
 - [KCD: Demystifying Testing](https://kentcdodds.com/blog/demystifying-testing)
 - [KCD: UI Testing Myths](https://kentcdodds.com/blog/ui-testing-myths)
 - [KCD: Effective Snapshot Testing](https://kentcdodds.com/blog/effective-snapshot-testing)
+
+</details>
