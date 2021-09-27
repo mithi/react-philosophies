@@ -1,4 +1,4 @@
-🚧 🚧 🚧 This document is a work in progress  🚧 🚧 🚧
+[![Epic React Exercises](https://img.shields.io/badge/Epic%20-React%20Exercises-orange.svg?logo=react&color=0abde3)](https://github.com/mithi/epic-react-exercises) [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) ![PRs welcome!](https://img.shields.io/badge/%20📝%20PRs-welcome-orange.svg?style=flat) ![Forever a work in progress!](https://img.shields.io/badge/%20🚧%20Forever%20🚧%20%20-under%20construction-yellow.svg) 
 
 # 🧘 Table of contents
 0. [Introduction](#-0-introduction)
@@ -7,8 +7,13 @@
 3. [Performance tips](#-3-performance-tips)
 4. [Testing principles](#-4-testing-principles)
 
+<details>
+    <summary>A short note on the way this document is organized</summary>
+
 Note: 
 As I was writing this, I realized that it was actually difficult for me to separate my thoughts into the `design`, `performance`, and `testing`. I noticed that a lot of designs aimed for maintainability also makes your application faster. So apologies in advance if the discussion appears to be cluttered at times. 
+
+</details>
 
 # 🧘 0. Introduction 
 `react-philosophies` is:
@@ -36,22 +41,31 @@ Most notably:
 - [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode)
 - [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code)
 
-If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve this document whether big or small is always welcome and appreciated. Comments, suggestions, violent reactions? I'd love to hear them!
+<details>
+    <summary>Comments, suggestions, violent reactions? I'd love to hear them!</summary>
+
+Note: 
+If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve this document whether big or small is always welcome and appreciated. 
+
+</details>
+
+
 
 # 🧘 1. The Bare Minimum
 
 ## 1.1 Recognize when the computer is smarter than you
-1. Use ESLint! Please `rule-of-hooks` and `exhaustive-deps`!
-2. Typescript and NextJS will make your life SO MUCH EASIER
-3. Do NOT ignore exhaustive-deps warnings / errors for `useMemo`, `useCallback` and `useEffect`
-4. Remember to add keys whenever you use `map` to display components
-5. Remember to NOT use hooks inside conditionals, always put them at the top
-6. Understand the warning "Can't perform state update on unmounted component." [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
-7. If you see a warning or error in the console, it's there for a reason.
-8. Use a code formatter like [Prettier](https://prettier.io/)
-9. For open-source repositories or if you can afford it, [Code Climate](https://codeclimate.com/quality/) (or similar) to detect code smells
-10. Make sure you're tree-shaking to eliminate dead code
-11. Add several [error boundaries](https://reactjs.org/docs/error-boundaries.html)
+1. Statically analyze your code with `ESLint`. Enable the `rule-of-hooks` and `exhaustive-deps rules` to catch react-specific errors.
+2. Typescript awill make your life so much easier
+3. Using the NextJS framework improves not only youre developer experience but performance as well.
+4. Fix `exhaustive-deps` warnings / errors for `useMemo`, `useCallback` and `useEffect`.
+5. Remember to add keys whenever you use `map` to display components
+6. Remember to NOT use hooks inside conditionals, always put them at the top
+7. Understand the warning "Can't perform state update on unmounted component." [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
+8. If you see a warning or error in the console, it's there for a reason.
+9. Prettier formats your code for you, giving you consistent formatting every time. [Prettier](https://prettier.io/)
+10. I highly recommend [Code Climate](https://codeclimate.com/quality/)  (or similar) for open-source repositories or if you can afford it. Detecting and fixing code smells reduces technical debt making your application more maintainable
+11. Make sure you're tree-shaking to eliminate dead code
+12. Preventing the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html). This will create a better user experience for your users. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you need to.
 
 ## 1.2 Code is just a necessary evil
 
@@ -61,7 +75,7 @@ If there's something that you think should be part of my reading list, or if you
 
 > "If I had more time, I would have written a shorter letter" - Blaise Pascal, Mark Twain, among others..
 
-See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/write-less-code), [Washing Code: Code is evil - [Artem Sapegin]](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
+See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/write-less-code), [Washing Code: Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
 
 ### TLDR
 1. Think first before adding another dependency
@@ -101,10 +115,10 @@ See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2
 
 ## 1.3 `React` is just `code`
 
-Fix code smells. Most of them can be checked easily by [Code Climate](https://codeclimate.com/quality/)
+Detect code smells and do something about them need be.
 
 <details>
- <summary> 🙈 Examples of code smells </summary>
+ <summary> 🙈 Examples of easy-to-catch code smells</summary>
 
 - ❌ Methods or functions defined with a high number of arguments
 - ❌ Boolean logic that may be hard to understand
@@ -120,7 +134,8 @@ Fix code smells. Most of them can be checked easily by [Code Climate](https://co
 
 
 ## 1.4 Just because it works, doesn't mean it is right
-As you may very well know, you don't need to put `setState` from (`useState`) and `dispatch` (from `useReducer`) in your dependency array for `useEffect` and `useCallback`. ESLint will NOT complain because `React` guarantees their stability. 
+
+You don't need to put `setState` from (`useState`) and `dispatch` (from `useReducer`) in your dependency array for `useEffect` and `useCallback`. ESLint will NOT complain because `React` guarantees their stability. 
 
 Also remember that you may not need to put your `state` as a dependency because you pass a callback function instead. See example below:
  
@@ -176,15 +191,14 @@ const MyComponent = () => {
 13. Put your state as close as possible to where it's being used (Colocating state)
 14. Consider using `css variables` for theming (`light` and `dark` mode) instead of `context`
 
-## 2.1 Derive states to avoid state management complexity
+## 💖 2.1 Derive states to avoid state management complexity
 When you have redundant states, some states may fall out of sync; you may forget to update it given a complex sequence of interactions.
 Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code.
 See also: [Kent C Dodd's Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe Exercises and Solution](https://epic-react-exercises.vercel.app/react/hooks/1)
  
 ### 🙈 Example 1
-You must display properties of a list of triangles; the length of the three sides, the perimeter, and the area of each triangle should be displayed on the screen.
-You should first fetch a list of two numbers `{a: number, b: number}[]`. The two numbers represent the two shorter sides 
-of a right triangle. 
+You are tasked to display properties of a list of triangles; the length of the three sides, the perimeter, and the area of each triangle should be displayed on the screen.
+This list of two numbers `{a: number, b: number}[]` is fetched from an API and the two numbers represent the two shorter sides of a right triangle. 
 
 <details>
   <summary> ❌ Not-so-good Solution </summary>
@@ -328,12 +342,12 @@ const Points = () => {
 ```
 </details>
 
-## 2.2 If you need a banana, pass the banana, not the gorilla and the entire jungle 
+## 💖 2.2 If you need a banana, pass the banana, not the gorilla and the entire jungle 
 >  You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang
 
 Try to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects most of the time to avoid falling into this trap. (Passing primitives is also a good idea because if you want to use `React.memo` for optimization.)
       
-A component should just know enough to do its job and nothing more. As much as possible, components should be able to collaborate with others without knowing what they are and what they do. The idea behind this is that when we do this, the components will be loosely coupled. Loose coupling means that the degree of dependency between two components is low, which will make it easier to change, replace, or remove components without affecting other components. See also [stackoverflow:2832017](https://stackoverflow.com/questions/2832017/what-is-the-difference-between-loose-coupling-and-tight-coupling-in-the-object-o)
+A component should just know enough to do its job and nothing more. As much as possible, components should be able to collaborate with others without knowing what they are and what they do. When we do this, the components will be loosely coupled. Loose coupling means that the degree of dependency between two components is low, which will make it easier to change, replace, or remove components without affecting other components. See also [stackoverflow:2832017](https://stackoverflow.com/questions/2832017/what-is-the-difference-between-loose-coupling-and-tight-coupling-in-the-object-o)
 
 ### 🙈 Example
 Create a `UserCard` component that displays a `Summary` and `SeeMore` components. The `SeeMore` component includes presenting the age and bio of the user. There must be button to toggle between showing and hiding the age and bio on of the user.
@@ -395,7 +409,7 @@ const UserCard = () => {
   
 ```tsx
 
-const Summary = ({ imgUrl, webUrl, displayName }: {imgUrl: string, webUrl: string, displayName: string}) => {
+const Summary = ({ imgUrl, webUrl, displayName }: { imgUrl: string, webUrl: string, displayName: string }) => {
   /*** include the "random styling" feature ***/
   return (
     <>
@@ -410,7 +424,7 @@ const SeeMore = ({ componentToShow }: {componentToShow: ReactNode }) => {
   return (
     <>
       <button onClick={() => setSeeMore(!seeMore)}>See more</button>
-      {seeMore && <>{componentToShow }</>}
+      {seeMore && <>{componentToShow}</>}
     </>
   )
 }
@@ -429,27 +443,34 @@ const UserCard = () => {
         
 </details>
 
-## 2.3 Separate concerns with the single responsibility principle
+## 💖 2.3 Separate concerns with the single responsibility principle
 
 (The paragraph below is based on my old article [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665), but applied to React components)
  
 **What is the single responsibility principle?**
-A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. This matters because React applications that are easy to maintain consist of components that are easy to reuse. A component with various responsibilities are difficult to reuse. If you want to reuse some but not all of a component's behavior, it's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
+> A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. 
+ 
+A component with various responsibilities is difficult to reuse. If you want to reuse some but not all of a its behavior, it's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
 
 **How to know if your component has a single responsibility?**
-Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. Also check the props, states, hooks this component consumes as well as variables and methods declared inside the component (it shouldn't have too many). Ask your self if these props, states, hooks, variables and methods actually work together to fulfill the component's purpose. If some of them don't, then consider moving those somewhere else or breaking down your big component to smaller ones. 
+Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. 
+ 
+Check the props, states, hooks of this component as well as variables and methods declared inside the component (TThey shouldn't be too many). Ask yourself: Do these things actually work together to fulfill the component's purpose? If some of them don't, consider moving those somewhere else or breaking down your big component to smaller ones. 
 
 ### 🙈 Example
-The requirement is to have special kinds of buttons you can click to shop for items of a specific category. 
-For example, I can select bags, chairs, and food. 
-Each button opens a modal you can use to select and "save" items.
-If there currently exists "saved" selected items in a specific category then then that category said to be "booked".
-If it is booked, the button will have a checkmark.
-You should be able to edit your booking (add or delete items) even if that category is booked. 
-If the user is hovering the button it should also display `WavingHand` component.
-The buttons can also be disabled when no items for a specific category is available, it will be color gray. 
-If hovered, a tooltip shows "not available".
-Each button has a label and an icon.
+The requirement is to display special kinds of buttons you can click to shop for items of a specific category. 
+- Each button has a label and an icon.
+ - For example, I can select bags, chairs, and food. 
+- Each button opens a modal you can use to select and "save" items.
+- If there currently exists "saved" selected items in a specific category then that category said to be "booked".
+- If it is booked, the button will have a checkmark.
+- You should be able to edit your booking (add or delete items) even if that category is booked. 
+- If the user is hovering the button it should also display `WavingHand` component.
+- The buttons can also be disabled when no items for a specific category is available. 
+- If hovered, a tooltip shows "not available".
+- If category has no items available, the button's background color should be gray.
+- If the category is booked, the button's background color should be green.
+- If the category has available items and is not booked, the button's background color should be red
 
 <details>
     <summary>❌ Not-so-good solution</summary>
@@ -476,6 +497,7 @@ const ShopCategoryTile = ({
     <>
       <Tooltip title="Not available" show={disabled }>
         <StyledButton
+          className={isDisabled ? "grey" : isBooked ? "green" : "red" }
           disabled={disabled}
           onClick={() => disabled ? null : setOpenDialog(true) }
           onMouseEnter={() => disabled ? null : setHover(true)}
@@ -507,7 +529,7 @@ const ShopCategoryTile = ({
 const DisabledShopCategoryTile = ({ icon, label }: { icon: ReactNode, label: string }) => {
   return (
     <Tooltip title="Not available">
-      <StyledButton disabled={true} > 
+      <StyledButton disabled={true} className="grey"> 
           {icon} <StyledLabel>{label}<StyledLabel/>
       </Button>
     </Tooltip>
@@ -534,6 +556,7 @@ const ShopCategoryTile = ({
     <>
       <StyledButton
         disabled={false}
+        className={isBooked ? "green" : "red"}
         onClick={() => setOpenDialog(true) }
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -624,7 +647,7 @@ const ShopCategoryTile = ({ item, offers }: { item: ItemMap, offers?: Offer}) =>
     
 </details>    
 
-## 2.4 Duplication is far cheaper than the wrong abstraction
+## 💖 2.4 Duplication is far cheaper than the wrong abstraction
 
 See also: [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [Kent C Dodds: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: Expensive Setup](), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization), [Expensive Set Up Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)
         
@@ -648,8 +671,9 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
        
 # 🧘 4. Testing principles
 
-### TLDR
 >  Write tests. Not too many. Mostly integration. - Guillermo Rauch (creator of Socket.io, NextJS)
+
+### TLDR
 
 1. Your tests should always resemble the way your software is used
 2. Stop testing implementation details
