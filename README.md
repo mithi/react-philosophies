@@ -1,4 +1,4 @@
-[![Epic React Exercises](https://img.shields.io/badge/Epic%20-React%20Exercises-orange.svg?logo=react&color=0abde3)](https://github.com/mithi/epic-react-exercises) [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) ![PRs welcome!](https://img.shields.io/badge/%20📝%20PRs-welcome-orange.svg?style=flat) ![Forever a work in progress!](https://img.shields.io/badge/%20🚧%20Forever%20🚧%20%20-under%20construction-yellow.svg) 
+[![Epic React Exercises](https://img.shields.io/badge/Epic%20-React%20Exercises-orange.svg?logo=react&color=0abde3)](https://epic-react-exercises.vercel.app/) [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) ![PRs welcome!](https://img.shields.io/badge/%20📝%20Contributions-welcome-orange.svg?style=flat) ![Forever a work in progress!](https://img.shields.io/badge/%20🚧%20Forever%20🚧%20%20-under%20construction-yellow.svg) 
 
 # 🧘 Table of contents
 0. [Introduction](#-0-introduction)
@@ -73,6 +73,8 @@ If there's something that you think should be part of my reading list, or if you
 
 > "One of my most productive days was throwing away 1000 lines of code." -  Eric S. Raymond
 
+> “I hate code and I want as little of it as possible in our product” - Jack Diederich
+
 > "If I had more time, I would have written a shorter letter" - Blaise Pascal, Mark Twain, among others..
 
 See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/write-less-code), [Washing Code: Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
@@ -88,9 +90,9 @@ Needless to say, the more you add dependencies,the more code you ship to the bro
 
 1. Do you need `Redux`? React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react). 
 
-2. Do you really need `Apollo client`? Apollo client has many awesome features, especially when it comes to micromanaging manual normalization. However, it significantly increases your bundle size as well. Consider using [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr)
+2. Do you really need `Apollo client`? Apollo client has many awesome features, especially when it comes to micromanaging manual normalization. However, it significantly increases your bundle size as well. Consider using a smaller library such as [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr) (or none at all), if your application is only using features that is not unique to Apollo client.
 
-3. Do you need fetching libraries like `Axios`? Axios is a great library with features that are not easily replicable with the native fetch api. If the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Check if your application where or not making use of Axios's best features.
+3. Do you need fetching libraries like `Axios`? Axios is a great library with features that are not easily replicable with the native fetch api. But if the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Check if your application where or not making use of Axios's best features.
 
 4. Lodash/underscore? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
 5. MomentJS? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
@@ -110,12 +112,12 @@ Always remember, `React` is just `Javascript` and `Javascript` is just code
 
 You Aren't Gonna Need It! Always implement things when you actually need them, never when you just foresee that you may need them.
 
-See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI original](http://c2.com/xp/YouArentGonnaNeedIt.html)
+See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI original](http://c2.com/xp/YouArentGonnaNeedIt.html), [Jack Diederich: Stop Writing Classes](https://www.youtube.com/watch?v=o9pEzgHorH0)
 
 
 ## 1.3 `React` is just `code`
 
-Detect code smells and do something about them need be.
+Detect code smells and do something about them if you need to.
 
 <details>
  <summary> 🙈 Examples of easy-to-catch code smells</summary>
@@ -144,10 +146,10 @@ Also remember that you may not need to put your `state` as a dependency because 
 const decrement = useCallback(() => setCount(count - 1), [count]) 
 
 ✅ BETTER
-const decrement = useCallback(() => setCount(count => count - 1), [])      
+const decrement = useCallback(() => setCount(count => (count - 1)), [])      
 ```
 
-If your `useMemo` and `useCallback` doesn't have a dependency, you might be using it wrong. 
+If your `useMemo` or `useCallback` doesn't have a dependency, you might be using it wrong. 
 
 <details>
     <summary>🙈 Example</summary>
@@ -157,14 +159,14 @@ If your `useMemo` and `useCallback` doesn't have a dependency, you might be usin
 const MyComponent = () => {
   const componentNeedsToCallThisFunction = useCallback(x: string => `Hello ${x}! I am actually doing more than this`,[])
   const iAmAConstant = useMemo(() => { return {x: 5, y: 2} }, [])
-  /* I will use componentNeedsToCallThisFunction and iAmAConstant here */
+  /* I will use componentNeedsToCallThisFunction and iAmAConstant */
 }
         
 ✅ BETTER 
  const I_AM_A_CONSTANT =  { x: 5, y: 2 }
  const componentNeedsToCallThisFunction = (x: string => `Hello ${x}! I am actually doing more than this`)
  const MyComponent = () => {
-      /* I will use componentNeedsToCallThisFunctions and I_AM_A_CONSTANT */
+      /* I will use componentNeedsToCallThisFunction and I_AM_A_CONSTANT */
   }
 
  ```
@@ -177,7 +179,7 @@ const MyComponent = () => {
 
 ### TLDR
 1. 💖 Derive states to avoid state management complexity 
-2. 💖 Pass the banana, not the gorilla and the entire jungle, (prefer passing primitives as props)
+2. 💖 Pass the banana, not the gorilla holding the banana and the entire jungle, (prefer passing primitives as props)
 3. 💖 Keep things small and simple. Separate concerns with the single responsibility principle
 4. Duplication is far cheaper than the wrong abstraction (avoid premature / inappropriate generalization)
 5. Avoid prop drilling by using composition
@@ -342,7 +344,7 @@ const Points = () => {
 ```
 </details>
 
-## 💖 2.2 If you need a banana, pass the banana, not the gorilla and the entire jungle 
+## 💖 2.2 If you need a banana, pass the banana, not the gorilla holding the banana and the entire jungle
 >  You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang
 
 Try to pass primitives (`boolean`, `string`, `number` etc), instead of passing objects most of the time to avoid falling into this trap. (Passing primitives is also a good idea because if you want to use `React.memo` for optimization.)
@@ -365,7 +367,7 @@ type User = {
   webUrl: string
   age: number
   bio: string
-  /****** 20 or more fields containing more information about the user ******/
+  /****** 100 or more fields containing more information about the user ******/
 }
 ```
 <details>
@@ -435,7 +437,7 @@ const UserCard = () => {
   return (
     <>
       <Summary displayName={`${title}. ${firstName} ${lastName}`} {...{imgUrl, webUrl}} />
-      <SeeMore componentToShow={<>AGE: {age} | BIO: {ubio}</>} />
+      <SeeMore componentToShow={<>AGE: {age} | BIO: {bio}</>} />
     </>
   )     
 }     
@@ -671,7 +673,7 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
        
 # 🧘 4. Testing principles
 
->  Write tests. Not too many. Mostly integration. - Guillermo Rauch (creator of Socket.io, NextJS)
+>  Write tests. Not too many. Mostly integration. - Guillermo Rauch, creator of Socket.io (and other awesome things)
 
 ### TLDR
 
@@ -679,4 +681,4 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 2. Stop testing implementation details
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job 
 4. For the front-end, you don't need 100% code coverage, about 70% is okay
-5. You should very rarely have to change tests when you refactor code.
+5. You should very rarely have to change tests when you refactor code
