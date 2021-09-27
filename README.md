@@ -62,7 +62,7 @@ If there's something that you think should be part of my reading list, or if you
 6. Remember to NOT use hooks inside conditionals, always put them at the top
 7. Understand the warning "Can't perform state update on unmounted component." [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
 8. If you see a warning or error in the console, it's there for a reason.
-9. Prettier formats your code for you, giving you consistent formatting every time. [Prettier](https://prettier.io/)
+9.  [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
 10. I highly recommend [Code Climate](https://codeclimate.com/quality/)  (or similar) for open-source repositories or if you can afford it. Detecting and fixing code smells reduces technical debt making your application more maintainable
 11. Make sure you're tree-shaking to eliminate dead code
 12. Preventing the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html). This will create a better user experience for your users. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you need to.
@@ -88,7 +88,7 @@ See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/wr
 
 Needless to say, the more you add dependencies,the more code you ship to the browser. Ask yourself, are you actually using the features that makes a particular library great? 
 
-1. Do you need `Redux`? React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react). 
+1. Do you really need `Redux`? React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react). 
 
 2. Do you really need `Apollo client`? Apollo client has many awesome features, especially when it comes to micromanaging manual normalization. However, it significantly increases your bundle size as well. Consider using a smaller library such as [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr) (or none at all), if your application is only using features that is not unique to Apollo client.
 
@@ -447,7 +447,7 @@ const UserCard = () => {
 
 ## 💖 2.3 Separate concerns with the single responsibility principle
 
-(The paragraph below is based on my old article [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665), but applied to React components)
+(The paragraphs below is based on my old article [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665))
  
 **What is the single responsibility principle?**
 > A component should have one and only one job. It should do the smallest possible useful thing. It only has responsibilities that fulfil its purpose. 
@@ -455,22 +455,22 @@ const UserCard = () => {
 A component with various responsibilities is difficult to reuse. If you want to reuse some but not all of a its behavior, it's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
 
 **How to know if your component has a single responsibility?**
-Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. 
+
+> Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component failed this test. 
  
 Check the props, states, hooks of this component as well as variables and methods declared inside the component (TThey shouldn't be too many). Ask yourself: Do these things actually work together to fulfill the component's purpose? If some of them don't, consider moving those somewhere else or breaking down your big component to smaller ones. 
 
 ### 🙈 Example
-The requirement is to display special kinds of buttons you can click to shop for items of a specific category. 
+The requirement is to display special kinds of buttons you can click to shop for items of a specific category. For example, the user can select bags, chairs, and food.
 - Each button has a label and an icon.
- - For example, I can select bags, chairs, and food. 
 - Each button opens a modal you can use to select and "save" items.
-- If there currently exists "saved" selected items in a specific category then that category said to be "booked".
+- If the user has "saved" selected items in a specific category, that category said to be "booked".
 - If it is booked, the button will have a checkmark.
 - You should be able to edit your booking (add or delete items) even if that category is booked. 
 - If the user is hovering the button it should also display `WavingHand` component.
-- The buttons can also be disabled when no items for a specific category is available. 
-- If hovered, a tooltip shows "not available".
-- If category has no items available, the button's background color should be gray.
+- The buttons should also be disabled when no items for a specific category is available. 
+- When a user hovers a disabled button, a tooltip shows "not available".
+- If the category has no items available, the button's background color should be gray.
 - If the category is booked, the button's background color should be green.
 - If the category has available items and is not booked, the button's background color should be red
 
