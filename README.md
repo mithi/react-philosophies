@@ -20,9 +20,9 @@ As I was writing this, I realized that it was actually difficult for me to separ
 - at the back of my mind whenever I review someone else's code or my own
 - just guidelines and NOT rigid rules
 - a living document and will evolve overtime as my experience grows
-- mostly techniques which are variations of basic refactoring methods, SOLID principles, and extreme programming ideas... just applied to React specifically.
+- mostly techniques which are variations of basic refactoring methods, SOLID principles, and extreme programming ideas... just applied to React specifically 🙂
 
-A lot of these things may feel like very basic and common-sense. But surprisingly, I've worked with large complex applications started by people who seem to... well... not care. The examples I present here are based on code I have actually seen in production. 
+A lot of these things may feel like very basic and common-sense. But surprisingly, I've worked with large complex applications where these things are not taken into consideration. The examples I present here are based on code I have actually seen in production. 
 
 `react-philosophies` is inspired by various places I've stumbled upon at different points of my coding journey.
 
@@ -63,18 +63,18 @@ If there's something that you think should be part of my reading list, or if you
 # 🧘 1. The Bare Minimum
 
 ## 1.1 Recognize when the computer is smarter than you
-1. Statically analyze your code with `ESLint`. Enable the `rule-of-hooks` and `exhaustive-deps rules` to catch react-specific errors.
-2. Typescript will make your life so much easier
-3. Using the NextJS framework improves not only youre developer experience but performance as well
-4. Fix `exhaustive-deps` warnings / errors for `useMemo`, `useCallback` and `useEffect`
-5. Remember to add keys whenever you use `map` to display components
+1. Statically analyze your code with [`ESLint`](https://eslint.org/). Enable the [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks)` and `exhaustive-deps rules` to catch react-specific errors.
+2. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier
+3. [`NextJS`](https://nextjs.org/) is an awesome framework
+4. [Be honest about your dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies) Fix `exhaustive-deps` warnings / errors for `useMemo`, `useCallback` and `useEffect`. You can also use what "Yago coined as The Latest ref pattern"(https://epicreact.dev/the-latest-ref-pattern-in-react)
+5. [Always add keys](https://epicreact.dev/why-react-needs-a-key-prop) whenever you use `map` to display components
 6. Remember to NOT use hooks inside conditionals, always put them at the top
 7. Understand the warning "Can't perform state update on unmounted component" [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
 8. If you see a warning or error in the console, it's there for a reason
 9.  [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
-10. I highly recommend [Code Climate](https://codeclimate.com/quality/)  (or similar) for open-source repositories or if you can afford it. Detecting and fixing code smells reduces technical debt making your application more maintainable
-11. "tree-shaking" is your friend! 
-12. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. This will create a better user experience for your users. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you need to
+10. I highly recommend [Code Climate](https://codeclimate.com/quality/)  (or similar) for open-source repositories or if you can afford it. Automatically detecting code smells really helps a lot to motivate you to reduces technical debts of your application
+11. `tree-shaking` is your friend! 
+12. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you need to
 
 ## 1.2 Code is just a necessary evil
 
@@ -101,18 +101,18 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 2. Do you really need `Apollo client`? Apollo client has many awesome features, like manual normalization. However, it will significantly increase your bundle size. If your application only makes use of features that are not unique to Apollo client , consider using a smaller library such as [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr) (or none at all).
 
-3. `Axios`? Axios is a great library with features that are not easily replicable with the native fetch api. But if the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Determine whether or not your application is actually using Axios's best features.
+3. `Axios`? Axios is a great library with features that are not easily replicable with native `fetch`. But if the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Determine whether or not your application is actually using Axios's best features.
 
 4. `Lodash/underscore`? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
 5. `MomentJS`? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
 
-6. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
+6. You might not need `Context` for theming (`light` and `dark` mode), consider using [`css variables`](https://epicreact.dev/css-variables) instead.
 
-7. You might not need `Context` for theming (`light` and `dark` mode), consider using `css variables` instead.
+7. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
 
 ### 1.1.2 Eliminate code with techniques not unique to `React`.
 
-Always remember, `React` is just `Javascript` and `Javascript` is just code
+`React` is just `Javascript` and `Javascript` is just code
 
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can. 
 2. If there is no discernable performance difference, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
@@ -148,14 +148,14 @@ Detect code smells and do something about them if you need to.
 
 ## 1.4 Just because it works, doesn't mean it is right
 
-You don't need to put `setState` (from `useState`) and `dispatch` (from `useReducer`) in your dependency array hooks like `useEffect` and `useCallback`. ESLint will NOT complain because `React` guarantees their stability. 
-
 **TIP: Remember that you may not need to put your `state` as a dependency because you can pass a callback function instead.**
+You don't need to put `setState` (from `useState`) and `dispatch` (from `useReducer`) in your dependency array hooks like `useEffect` and `useCallback`. ESLint will NOT complain because React guarantees their stability. 
 
 Example:
  
 ```tsx
 ❌ Not-so-good
+const decrement = useCallback(() => setCount(count - 1), [setCount, count]) 
 const decrement = useCallback(() => setCount(count - 1), [count]) 
 
 ✅ BETTER
@@ -197,9 +197,9 @@ const MyComponent = () => {
 3. 💖 Keep things small and simple. (The single responsibility principle and separation of concerns)
 4. Duplication is far cheaper than the wrong abstraction (avoid premature / inappropriate generalization)
 5. Avoid prop drilling by using composition ([KCD: Prop Drilling](https://kentcdodds.com/blog/prop-drilling))
-6. Breakdown your giant `useEffect` ([KCD: Myths about useEffect](https://epicreact.dev/myths-about-useeffect))
-7. It might be a good idea to have `logical` and `presentational` components
-8. Extract logic to hooks and helper functions
+6. Split giant `useEffect`s to smaller independent ones ([KCD: Myths about useEffect](https://epicreact.dev/myths-about-useeffect))
+7. Extract logic to hooks and helper functions
+8. It might be a good idea to have `logical` and `presentational` components
 9. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo` and `useEffect`
 10. Do not put too many dependencies in `useCallback`, `useMemo` and `useEffect` 
 11. Consider using `useReducer`, if some values of your state rely on other values of your state 
@@ -683,12 +683,12 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 3. Use `useMemo` mostly just for expensive calculations
 4. For `React.memo`, `useMemo`, `useCallback` for reducing re-renders, it's better to pass mostly primitive props, if not all
 5.  Make sure your `React.memo`, `useCallback` and `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
-6. Window large lists (with React virtual or similar)
+6. Window large lists (with [tannerlinsley/react-virtual](https://github.com/tannerlinsley/react-virtual) or similar)
 7. Put `Context` as low as possible in your component tree. `Context` does not have to be global to your whole app
 8. `Context` should be logically separated, do not add to many values in one context provider
 9. You can optimize `context` by separating the `state` and the `dispatch` function
 10. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
-11. Put your state as close as possible to where it's being used
+11. Putting your state as close as possible to where it's being used will make you app faster
 12. Consider using [`react-hook-forms`](https://react-hook-form.com/)
 
 <details>
