@@ -63,12 +63,12 @@ If there's something that you think should be part of my reading list, or if you
 # 🧘 1. The Bare Minimum
 
 ## 1.1 Recognize when the computer is smarter than you
-1. Statically analyze your code with [`ESLint`](https://eslint.org/). Enable the [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks)` and `exhaustive-deps rules` to catch react-specific errors.
+1. Statically analyze your code with [`ESLint`](https://eslint.org/). Enable the [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) and `exhaustive-deps` rule to catch react-specific errors.
 2. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier
 3. [`NextJS`](https://nextjs.org/) is an awesome framework
-4. [Be honest about your dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies) Fix `exhaustive-deps` warnings / errors for `useMemo`, `useCallback` and `useEffect`. You can also use what "Yago coined as The Latest ref pattern"(https://epicreact.dev/the-latest-ref-pattern-in-react)
+4. [Be honest about your dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies). Fix `exhaustive-deps` warnings / errors for `useMemo`, `useCallback` and `useEffect`. You can also use ["The Latest ref pattern" (Yago)](https://epicreact.dev/the-latest-ref-pattern-in-react)
 5. [Always add keys](https://epicreact.dev/why-react-needs-a-key-prop) whenever you use `map` to display components
-6. Remember to NOT use hooks inside conditionals, always put them at the top
+6. [Only Call Hooks at the Top Level](https://reactjs.org/docs/hooks-rules.html). Don’t call Hooks inside loops, conditions, or nested functions
 7. Understand the warning "Can't perform state update on unmounted component" [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
 8. If you see a warning or error in the console, it's there for a reason
 9.  [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
@@ -93,31 +93,26 @@ See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/wr
 2. Eliminate code with techniques not unique to `React`
 3. Don't be clever. YAGNI!
 
-### 1.1.1 Think first before adding another dependency
+### 1.2.1 Think first before adding another dependency
 
 Needless to say, the more you add dependencies, the more code you ship to the browser. Ask yourself, are you actually using the features that makes a particular library great? 
 
-1. Do you really need `Redux`? React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react). 
-
-2. Do you really need `Apollo client`? Apollo client has many awesome features, like manual normalization. However, it will significantly increase your bundle size. If your application only makes use of features that are not unique to Apollo client , consider using a smaller library such as [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr) (or none at all).
-
-3. `Axios`? Axios is a great library with features that are not easily replicable with native `fetch`. But if the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Determine whether or not your application is actually using Axios's best features.
-
-4. `Lodash/underscore`? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
-5. `MomentJS`? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
-
+1. Do you really need [`Redux`](https://redux.js.org/)? It's possible. But keep in mind that React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react). 
+2. Do you really need [`Apollo client`](https://www.apollographql.com/docs/react/) ? Apollo client has many awesome features, like manual normalization. However, it will significantly increase your bundle size. If your application only makes use of features that are not unique to Apollo client , consider using a smaller library such as [react-query](https://react-query.tanstack.com/comparison) or [SWR](https://github.com/vercel/swr) (or none at all).
+3. [`Axios`](https://github.com/axios/axios)? Axios is a great library with features that are not easily replicable with native `fetch`. But if the only reason for using Axios is that it has a better looking API, then consider just making a wrapper on top of fetch. Determine whether or not your application is actually using Axios's best features.
+4. [`Lodash`](https://lodash.com/)/[`underscoreJS`](https://underscorejs.org/)? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore) 
+5. [`MomentJS`](https://momentjs.com/)? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
 6. You might not need `Context` for theming (`light` and `dark` mode), consider using [`css variables`](https://epicreact.dev/css-variables) instead.
-
 7. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
 
-### 1.1.2 Eliminate code with techniques not unique to `React`.
+### 1.2.2 Eliminate code with techniques not unique to `React`.
 
 `React` is just `Javascript` and `Javascript` is just code
 
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can. 
 2. If there is no discernable performance difference, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
 
-### 1.1.3 Don't be clever. YAGNI!
+### 1.2.3 Don't be clever. YAGNI!
 
 > "What could happen with my software in the future? Oh yeah, maybe this and that. Let’s implement all these things since we are working on this part anyway. That way it’s future-proof."
 
@@ -151,7 +146,7 @@ Detect code smells and do something about them if you need to.
 **TIP: Remember that you may not need to put your `state` as a dependency because you can pass a callback function instead.**
 You don't need to put `setState` (from `useState`) and `dispatch` (from `useReducer`) in your dependency array hooks like `useEffect` and `useCallback`. ESLint will NOT complain because React guarantees their stability. 
 
-Example:
+🙈 Example:
  
 ```tsx
 ❌ Not-so-good
@@ -179,7 +174,7 @@ const MyComponent = () => {
  const I_AM_A_CONSTANT =  { x: 5, y: 2 }
  const functionToCall = (x: string => `Hello ${x}! I am actually doing more than this`)
  const MyComponent = () => {
-      /* I will use functionToCallunction and I_AM_A_CONSTANT */
+      /* I will use functionToCall and I_AM_A_CONSTANT */
   }
 
  ```
@@ -208,7 +203,7 @@ const MyComponent = () => {
 ## 💖 2. Avoid state management complexity by removing redundant states
 When you have redundant states, some states may fall out of sync; you may forget to update it given a complex sequence of interactions.
 Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code.
-See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe Exercise and Solution](https://epic-react-exercises.vercel.app/react/hooks/1)
+See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe](https://epic-react-exercises.vercel.app/react/hooks/1)
  
 ### 🙈 Example 1
 You are tasked to display properties each right triangle (from a list)
@@ -715,7 +710,7 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job 
 4. For the front-end, you don't need 100% code coverage, about 70% is okay
 5. You should very rarely have to change tests when you refactor code
-6. Consider using Jest, React testing library, Cypress, and [Mock service worker](https://github.com/mswjs/msw)
+6. Consider using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
 
 <details>
     <summary>Selected KCD articles about testing</summary>
