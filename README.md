@@ -31,7 +31,7 @@ Most notably:
 - [Tim Peters: Zen of Python (Pep 20)](https://www.python.org/dev/peps/pep-0020/)
 - [Dev Cheney: Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
 - [Sandi Metz](https://sandimetz.com/)
-- [Kent C Dodds](kentcdodds.com)
+- [Kent C Dodds](https://kentcdodds.com)
 - [Martin Fowler](https://martinfowler.com)
 - [Dan Abramov](https://overreacted.io/)
 - [Bob Martin](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) (Not saying I agree with his political views)
