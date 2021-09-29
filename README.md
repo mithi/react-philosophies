@@ -368,7 +368,7 @@ To avoid falling into this trap, it's a good idea to pass mostly primitives (`bo
       
 > A component should just know enough to do its job and nothing more. As much as possible, components should be able to collaborate with others without knowing what they are and what they do.
           
-When we do this, the components will be loosely coupled. Loose coupling means that the degree of dependency between two components is low. Having loosely couple components makes it easier to change, replace, or remove components without affecting other components. See also: [stackoverflow:2832017](https://stackoverflow.com/questions/2832017/what-is-the-difference-between-loose-coupling-and-tight-coupling-in-the-object-o)
+When we do this, the components will be loosely coupled. Loose coupling means that the degree of dependency between two components is low. Loose coupling makes it easier to change, replace, or remove components without affecting other components. See also: [stackoverflow:2832017](https://stackoverflow.com/questions/2832017/what-is-the-difference-between-loose-coupling-and-tight-coupling-in-the-object-o)
 
 ### 🙈 Example
 Create a `UserCard` component that displays two components: `Summary` and `SeeMore`. The `SeeMore` component includes presenting the `age` and `bio` of the `user`. Include a button to toggle between showing and hiding the `age` and `bio` of the `user`.
@@ -669,7 +669,7 @@ const ShopCategoryTile = ({ item, offers }: { item: ItemMap, offers?: Offer}) =>
 
 ## 💖 2.4 Duplication is far cheaper than the wrong abstraction
 
-See also: [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [Kent C Dodds: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: Expensive Setup](), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization), [Expensive Set Up Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)
+See also: [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: Expensive Setup](), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization), [Expensive Set Up Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)
         
 Avoid premature / inappropriate generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
         
@@ -689,7 +689,7 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 9. You can optimize `context` by separating the `state` and the `dispatch` function
 10. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
 11. Putting your state as close as possible to where it's being used will make you app faster
-12. If you're going to use a package for your forms I recommend [`react-hook-forms`](https://react-hook-form.com/) which is a great balance of good performance and good developer experience.
+12. If you're going to use a package for your forms I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
 
 <details>
     <summary>Selected KCD articles about performance</summary>
@@ -715,7 +715,7 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job 
 4. For the front-end, you don't need 100% code coverage, about 70% is okay
 5. You should very rarely have to change tests when you refactor code
-6. Consider using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
+6. I like using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
 
 <details>
     <summary>Selected KCD articles about testing</summary>
