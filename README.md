@@ -6,11 +6,11 @@ If this document helped you in some way, consider [buying me a few cups of coffe
 
 ## Table of Contents
 
-0. [Introduction](#0-introduction)
-1. [The Bare Minimum](#1-the-bare-minimum)
-2. [Design for happiness](#2-design-for-happiness)
-3. [Performance tips](#3-performance-tips)
-4. [Testing principles](#4-testing-principles)
+0. [Introduction](#-0-introduction)
+1. [The Bare Minimum](#-1-the-bare-minimum)
+2. [Design for happiness](#-2-design-for-happiness)
+3. [Performance tips](#-3-performance-tips)
+4. [Testing principles](#-4-testing-principles)
 
 <details>
     <summary>The way this document is organized</summary>
