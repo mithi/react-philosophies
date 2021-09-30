@@ -1,12 +1,16 @@
+# react-philosophies
+
 [![Epic React Exercises](https://img.shields.io/badge/Epic%20-React%20Exercises-orange.svg?logo=react&color=0abde3)](https://github.com/mithi/epic-react-exercises) [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) [![PRs welcome!](https://img.shields.io/badge/%20📝%20Contributions-welcome-orange.svg?style=flat)](https://github.com/mithi/react-philosophies/issues) ![Forever a work in progress!](https://img.shields.io/badge/%20🚧%20Forever%20🚧%20%20-under%20construction-yellow.svg) 
 
 If this document helped you in some way, consider [buying me a few cups of coffee ☕☕☕](https://ko-fi.com/minimithi). This motivates me to create more `React` "stuff"! 🙂 
 
-0. [Introduction](#-0-introduction)
-1. [The Bare Minimum](#-1-the-bare-minimum)
-2. [Design for happiness](#-2-design-for-happiness)
-3. [Performance tips](#-3-performance-tips)
-4. [Testing principles](#-4-testing-principles)
+## Table of Contents
+
+0. [Introduction](#introduction)
+1. [The Bare Minimum](#the-bare-minimum)
+2. [Design for happiness](#design-for-happiness)
+3. [Performance tips](#performance-tips)
+4. [Testing principles](#testing-principles)
 
 <details>
     <summary>The way this document is organized</summary>
@@ -22,24 +26,29 @@ While writing, I realized that it was actually difficult for me to separate my t
 Special thanks to the `r/reactjs` community for giving [very valuable suggestions](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) that helped significantly improve the quality of this document.
 
 **🚜 Pull Requests**
+
 -  [@fengzilong](https://github.com/fengzilong)
 - [@ankitwww](https://github.com/ankitwww)
 
 **☕ Coffee!**
+
 - Myles Banner
 
 **📚 Readings recommended to me**
+
 - [Out of the Tar Pit, Ben Moseley and Peter Marks (2006)](http://curtclifton.net/papers/MoseleyMarks06a.pdf), recommended by [Reddit user: icjoseph](https://www.reddit.com/u/icjoseph)
 
 ----
 
 **💡 Comments, suggestions, violent reactions? I'd love to hear them!💡**
+
 If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve `react-philosophies` whether big or small are always welcome and appreciated. 
 
 </details>
 
 
-# 🧘 0. Introduction 
+## 🧘 Introduction 
+
 `react-philosophies` is:
 - things I think about before I write `React` code.
 - at the back of my mind whenever I review someone else's code or my own
@@ -66,9 +75,10 @@ Most notably:
 - [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code)
 
 
-# 🧘 1. The Bare Minimum
+## 🧘 The Bare Minimum
 
-## 1.1 Recognize when the computer is smarter than you
+### Recognize when the computer is smarter than you
+
 1. Statically analyze your code with [`ESLint`](https://eslint.org/). Enable the [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) and `exhaustive-deps` rule to catch `React`-specific errors.
 2. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier.
 3. [`NextJS`](https://nextjs.org/) is an awesome framework.
@@ -83,7 +93,7 @@ Most notably:
 12. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to.
 13. [`"use strict"`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode). It's 20201.
 
-## 1.2 Code is just a necessary evil
+### Code is just a necessary evil
 
 > "The best code is no code at all. Every new line of code you willingly bring into the world is code that has to be debugged, code that has to be read and understood, code that has to be supported." - Jeff Atwood
 
@@ -95,12 +105,13 @@ Most notably:
 
 See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/write-less-code), [Washing Code: Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
 
-### TLDR
+**TL;DR**
+
 1. Think first before adding another dependency
 2. Eliminate code with techniques not unique to `React`
 3. Don't be clever. YAGNI!
 
-### 1.2.1 Think first before adding another dependency
+#### Think first before adding another dependency
 
 Needless to say, the more you add dependencies, the more code you ship to the browser. Ask yourself, are you actually using the features which make a particular library great? 
 
@@ -112,14 +123,14 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 6. You might not need `Context` for theming (`light` and `dark` mode), consider using [`css variables`](https://epicreact.dev/css-variables) instead.
 7. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
 
-### 1.2.2 Eliminate code with techniques not unique to `React`.
+#### Eliminate code with techniques not unique to `React`
 
 `React` is just `Javascript` and `Javascript` is just code
 
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can. 
 2. If there is no discernable performance difference, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
 
-### 1.2.3 Don't be clever. YAGNI!
+#### Don't be clever. YAGNI!
 
 > "What could happen with my software in the future? Oh yeah, maybe this and that. Let’s implement all these things since we are working on this part anyway. That way it’s future-proof."
 
@@ -128,7 +139,7 @@ You Aren't Gonna Need It! Always implement things when you actually need them, n
 See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI original](http://c2.com/xp/YouArentGonnaNeedIt.html), [Jack Diederich: Stop Writing Classes](https://www.youtube.com/watch?v=o9pEzgHorH0)
 
 
-## 1.3 `React` is just `code`
+### `React` is just `code`
 
 Detect code smells and do something about them if you need to.
 
@@ -148,7 +159,7 @@ Detect code smells and do something about them if you need to.
 </details>
 
 
-## 1.4 Just because it works, doesn't mean it is right
+### Just because it works, doesn't mean it is right
 
 **TIP: Remember that you may not need to put your `state` as a dependency because you can pass a callback function instead.**
 You don't need to put `setState` (from `useState`) and `dispatch` (from `useReducer`) in your dependency array for hooks like `useEffect` and `useCallback`. ESLint will NOT complain because React guarantees their stability. 
@@ -187,13 +198,14 @@ const I_AM_A_CONSTANT =  { x: 5, y: 2 }
  ```
 </details>
 
-# 🧘 2. Design for happiness
+## 🧘 Design for happiness
 
 > "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler
 
 > "The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read." ― Robert C. Martin
 
-### TLDR
+**TL;DR**
+
 1. 💖 Avoid state management complexity by removing redundant states 
 2. 💖 Pass the banana, not the gorilla holding the banana and the entire jungle (prefer passing primitives as props)
 3. 💖 Keep your components small and simple- the single responsibility principle!
@@ -206,12 +218,14 @@ const I_AM_A_CONSTANT =  { x: 5, y: 2 }
 10. Do not put too many dependencies in `useCallback`, `useMemo`, and `useEffect` 
 11. For simplicity, instead of having many `useStates`, consider using `useReducer` if some values of your state rely on other values of your state and previous state
 
-## 💖 2.1 Avoid state management complexity by removing redundant states
+### 💖 Avoid state management complexity by removing redundant states
+
 When you have redundant states, some states may fall out of sync; you may forget to update them given a complex sequence of interactions.
 Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code.
 See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe](https://epic-react-exercises.vercel.app/react/hooks/1)
  
-### 🙈 Example 1
+##### 🙈 Example 1
+
 You are tasked to display properties of each right triangle from a list
 - the lengths of each of the three sides
 -  the perimeter
@@ -274,7 +288,8 @@ const TriangleInfo = () => {
  ```  
 </details> 
   
-### 🙈 Example 2
+##### 🙈 Example 2
+
 Suppose you are assigned to design a component which:
 1. Fetches a list of unique points from an API
 2. Includes a button to either sort by `x` or `y` (ascending order)
@@ -361,7 +376,8 @@ const Points = () => {
 ```
 </details>
 
-## 💖 2.2 Pass the banana, not the gorilla holding the banana and the entire jungle
+### 💖 Pass the banana, not the gorilla holding the banana and the entire jungle
+
 >  You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang
 
 To avoid falling into this trap, it's a good idea to pass mostly primitives (`boolean`, `string`, `number`, etc) types as props. (Passing primitives is also a good idea if you want to use `React.memo` for optimization)
@@ -370,7 +386,8 @@ To avoid falling into this trap, it's a good idea to pass mostly primitives (`bo
           
 When we do this, the components will be loosely coupled. Loose coupling means that the degree of dependency between two components is low. Loose coupling makes it easier to change, replace, or remove components without affecting other components. See also: [stackoverflow:2832017](https://stackoverflow.com/questions/2832017/what-is-the-difference-between-loose-coupling-and-tight-coupling-in-the-object-o)
 
-### 🙈 Example
+##### 🙈 Example
+
 Create a `UserCard` component that displays two components: `Summary` and `SeeMore`. The `SeeMore` component includes presenting the `age` and `bio` of the `user`. Include a button to toggle between showing and hiding the `age` and `bio` of the `user`.
 
 The `Summary` component displays the profile picture of the user and also his `title`, `firstName` and `lastName` (e.g. `Mr. Vincenzo Cassano`). Clicking the user's name should take you to the user's personal site. The `Summary` component may also have other functionalities. (Say for example, randomly  changing the font, size of the image, and background color whenever this component is clicked.. for brevity let's call this "the random styling feature")
@@ -464,11 +481,12 @@ const UserCard = () => {
         
 </details>
 
-## 💖 2.3 Keep your components small and simple
+### 💖 Keep your components small and simple
 
 (The paragraphs below is based on my 2015 article: [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665))
  
 **What is the single responsibility principle?**
+
 > A component should have one and **only one** job. It should do the smallest possible useful thing. It only has responsibilities that fulfill its purpose. 
  
 A component with various responsibilities is difficult to reuse. If you want to reuse some but not all of a its behavior, it's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
@@ -479,7 +497,8 @@ A component with various responsibilities is difficult to reuse. If you want to 
  
 Inspect the component's states, the props and hooks it consumes, as well as variables and methods declared inside the component (They shouldn't be too many). Ask yourself: Do these things actually work together to fulfill the component's purpose? If some of them don't, consider moving those somewhere else or breaking down your big component to smaller ones. 
 
-### 🙈 Example
+##### 🙈 Example
+
 The requirement is to display special kinds of buttons you can click to shop for items of a specific category. For example, the user can select bags, chairs, and food.
 - Each button opens a modal you can use to select and "save" items
 - If the user has "saved" selected items in a specific category, that category said to be "booked"
@@ -667,17 +686,18 @@ const ShopCategoryTile = ({ item, offers }: { item: ItemMap, offers?: Offer}) =>
     
 </details>    
 
-## 💖 2.4 Duplication is far cheaper than the wrong abstraction
+### 💖 Duplication is far cheaper than the wrong abstraction
 
 See also: [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: Expensive Setup](), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization), [Expensive Set Up Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)
         
 Avoid premature / inappropriate generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
         
-# 🧘 3. Performance tips
+## 🧘 Performance tips
        
 > Premature optimization is the root of all evil - Tony Hoare (popularized by Donald Knuth) 
 
-### TLDR
+**TL;DR**
+
 1. **If you think it’s slow, prove it with a benchmark.** "In the face of ambiguity, refuse the temptation to guess."
 2. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
 3. Use `useMemo` mostly just for expensive calculations
@@ -704,11 +724,11 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 - [KCD: One simple trick to optimize React re-renders](https://kentcdodds.com/blog/optimize-react-re-renders)
 </details>
         
-# 🧘 4. Testing principles
+## 🧘 Testing principles
 
 >  Write tests. Not too many. Mostly integration. - Guillermo Rauch, creator of Socket.io (and other awesome things)
 
-### TLDR
+**TL;DR**
 
 1. Your tests should always resemble the way your software is used
 2. Stop testing implementation details
