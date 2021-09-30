@@ -81,7 +81,7 @@ Most notably:
 10. I highly recommend [Code Climate](https://codeclimate.com/quality/)  (or similar) for open-source repositories or if you can afford it. I find that automatically detecting code smells truly motivates me to reduce technical debts of the application I'm working on!
 11. [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/) is your friend! 
 12. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to.
-13. [`"use strict"`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode). It's 20201.
+13. [`"use strict"`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode). It's 2021. Enable "strict" mode.
 
 ## 1.2 Code is just a necessary evil
 
