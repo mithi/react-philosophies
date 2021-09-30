@@ -34,7 +34,7 @@ Special thanks to the `r/reactjs` community for giving [very valuable suggestion
 ----
 
 **💡 Comments, suggestions, violent reactions? I'd love to hear them!💡**
-If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve `react-philosophies` whether big or small is always welcome and appreciated. 
+If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve `react-philosophies` whether big or small are always welcome and appreciated. 
 
 </details>
 
@@ -44,7 +44,7 @@ If there's something that you think should be part of my reading list, or if you
 - things I think about before I write `React` code.
 - at the back of my mind whenever I review someone else's code or my own
 - just guidelines and NOT rigid rules
-- a living document and will evolve overtime as my experience grows
+- a living document and will evolve over time as my experience grows
 - mostly techniques which are variations of basic [refactoring](https://en.wikipedia.org/wiki/Code_refactoring) methods, [SOLID](https://en.wikipedia.org/wiki/SOLID) principles, and [extreme programming](https://en.wikipedia.org/wiki/Extreme_programming) ideas... just applied to `React` specifically 🙂
 
 A lot of these things may feel like very basic and common-sense. But surprisingly, I've worked with large complex applications where these things are not taken into consideration. The examples I present here are based on code I have actually seen in production. 
@@ -688,7 +688,7 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 8. `Context` should be logically separated, do not add to many values in one context provider
 9. You can optimize `context` by separating the `state` and the `dispatch` function
 10. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
-11. Putting your state as close as possible to where it's being used will make you app faster
+11. Putting your state as close as possible to where it's being used will make your app faster
 12. If you're going to use a package for your forms I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
 
 <details>
