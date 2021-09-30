@@ -2,7 +2,7 @@
 
 [![Epic React Exercises](https://img.shields.io/badge/Epic%20-React%20Exercises-orange.svg?logo=react&color=0abde3)](https://github.com/mithi/epic-react-exercises) [![buy me coffee](https://img.shields.io/badge/Buy%20me%20-coffee!-orange.svg?logo=buy-me-a-coffee&color=795548)](https://ko-fi.com/minimithi) [![PRs welcome!](https://img.shields.io/badge/%20📝%20Contributions-welcome-orange.svg?style=flat)](https://github.com/mithi/react-philosophies/issues) ![Forever a work in progress!](https://img.shields.io/badge/%20🚧%20Forever%20🚧%20%20-under%20construction-yellow.svg)
 
-If this document helped you in some way, consider [buying me a few cups of coffee ☕☕☕](https://ko-fi.com/minimithi). This motivates me to create more `React` "stuff"! 🙂
+If `react-philosophies` helped you in some way, consider [buying me a few cups of coffee ☕☕☕](https://ko-fi.com/minimithi). This motivates me to create more `React` "stuff"! 🙂
 
 ## Table of Contents
 
@@ -20,30 +20,34 @@ While writing, I realized that it was actually difficult for me to separate my t
 </details>
 
 <details>
-    <summary>Thanks to all these wonderful people for the PRs 🚜, coffee ☕, recommended readings 📚, and sharing of ideas 💡: (expand) </summary>
+    <summary>Thanks to all the PRs 🚜, coffee ☕, recommended readings 📚, and sharing of ideas 💡 (View contributors) </summary>
 
 ---
+    
+**💡 Comments, suggestions, violent reactions? I'd love to hear them!💡**
 
+If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve `react-philosophies` whether big or small are always welcome and appreciated.
+
+---
+    
 Special thanks to the `r/reactjs` community for giving [very valuable suggestions](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) that helped significantly improve the quality of this document.
+
+**☕ Coffee!**
+
+- Myles Banner
+- [@ankitwww](https://github.com/ankitwww)
 
 **🚜 Pull Requests**
 
 - [@fengzilong](https://github.com/fengzilong)
 - [@ankitwww](https://github.com/ankitwww)
-
-**☕ Coffee!**
-
-- Myles Banner
+- [@dzakki](https://github.com/dzakki)
 
 **📚 Readings recommended to me**
 
-- [Out of the Tar Pit, Ben Moseley and Peter Marks (2006)](http://curtclifton.net/papers/MoseleyMarks06a.pdf), recommended by [Reddit user: icjoseph](https://www.reddit.com/u/icjoseph)
-
----
-
-**💡 Comments, suggestions, violent reactions? I'd love to hear them!💡**
-
-If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve `react-philosophies` whether big or small are always welcome and appreciated.
+- [Ben Moseley and Peter Marks: Out of the Tar Pit (2006)](http://curtclifton.net/papers/MoseleyMarks06a.pdf), recommended by [icjoseph](https://www.reddit.com/u/icjoseph)
+- [`goldbergyoni/nodebestpractices`](https://github.com/goldbergyoni/nodebestpractices), recommended by [rstacruz](https://github.com/rstacruz)
+- [Dan Abramov: Writing Resilient Components](https://overreacted.io/writing-resilient-components/), recommended by [Mon Quindoza](https://ph.linkedin.com/in/monquindoza)
 
 </details>
 
@@ -88,10 +92,10 @@ Most notably:
 7. Understand the warning "Can't perform state update on unmounted component". [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
 8. There is a reason why errors and warnings are displayed in the console.
 9. [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
-10. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically detecting code smells truly motivates me to reduce technical debts of the application I'm working on!
+10. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically-detected code smells truly motivates me to reduce the technical debts of the application I'm working on!
 11. [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/) is your friend!
 12. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to.
-13. [`"use strict"`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode). It's 2021. Enable "strict" mode.
+13. Enable ["strict"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) mode. It's 2021. 
 
 ### 1.2 Code is just a necessary evil
 
@@ -117,10 +121,10 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 1. Do you really need [`Redux`](https://redux.js.org/)? It's possible. But keep in mind that React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react).
 2. Do you really need [`Apollo client`](https://www.apollographql.com/docs/react/) ? Apollo client has many awesome features, like manual normalization. However, it will significantly increase your bundle size. If your application only makes use of features that are not unique to Apollo client , consider using a smaller library such as [`react-query`](https://react-query.tanstack.com/comparison) or [`SWR`](https://github.com/vercel/swr) (or none at all).
-3. [`Axios`](https://github.com/axios/axios)? Axios is a great library with features that are not easily replicable with native `fetch`. But if the only reason for using Axios is that it has a better looking API, then consider just using a wrapper on top of fetch(such as [`redaxios`](https://github.com/developit/redaxios)). Determine whether or not your application is actually using Axios's best features.
+3. [`Axios`](https://github.com/axios/axios)? Axios is a great library with features that are not easily replicable with native `fetch`. But if the only reason for using Axios is that it has a better looking API, then consider just using a wrapper on top of fetch (such as [`redaxios`](https://github.com/developit/redaxios) or your own). Determine whether or not your application is actually using Axios's best features.
 4. [`Lodash`](https://lodash.com/)/[`underscoreJS`](https://underscorejs.org/)? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
 5. [`MomentJS`](https://momentjs.com/)? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
-6. You might not need `Context` for theming (`light` and `dark` mode), consider using [`css variables`](https://epicreact.dev/css-variables) instead.
+6. You might not need `Context` for theming (`light`/`dark` mode), consider using [`css variables`](https://epicreact.dev/css-variables) instead.
 7. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
 
 #### 1.2.2 Eliminate code with techniques not unique to `React`
@@ -134,13 +138,15 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 > "What could happen with my software in the future? Oh yeah, maybe this and that. Let’s implement all these things since we are working on this part anyway. That way it’s future-proof."
 
-You Aren't Gonna Need It! Always implement things when you actually need them, never when you just foresee that you may need them.
+**Y**ou **A**ren't **G**onna **N**eed **I**t! Always implement things when you actually need them, never when you just foresee that you may need them.
 
-See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI original](http://c2.com/xp/YouArentGonnaNeedIt.html), [Jack Diederich: Stop Writing Classes](https://www.youtube.com/watch?v=o9pEzgHorH0)
+See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI (original)](http://c2.com/xp/YouArentGonnaNeedIt.html), [Jack Diederich: Stop Writing Classes](https://www.youtube.com/watch?v=o9pEzgHorH0)
 
-### 1.3 `React` is just `code`
+### 1.3 Detect code smells and do something about them if you need to
 
-Detect code smells and do something about them if you need to.
+> A window gets broken at an apartment building, but no one fixes it. It's left broken. Then something else gets broken. Maybe it's an accident, maybe not, but it isn't fixed either. Graffiti starts to appear. More and more damage accumulates. Very quickly you get an exponential ramp. The whole building decays. Tenants move out. Crime moves in. And you've lost the game. It's all over. You don't want to let technical debt get out of hand. You want to stop the small problems before they grow into big problems. - [Don't Live with Broken Windows: A Conversation with Andy Hunt and Dave Thomas, Part I](https://www.artima.com/articles/dont-live-with-broken-windows)
+
+If you recognize that something is wrong, fix it right there and there. But if it's not that easy to fix or you don't have time to fix it at that moment, add a comment `FIXME` or `TODO` and add a short explanation of the problem you've identified. Make sure everybody knows it is broken. It shows other people that you care and that they should also do the same when they encounter those kinds of things.
 
 <details>
  <summary> 🙈 Examples of easy-to-catch code smells</summary>
@@ -211,10 +217,10 @@ const I_AM_A_CONSTANT =  { x: 5, y: 2 }
 5. Avoid prop drilling by using composition ([KCD: Prop Drilling](https://kentcdodds.com/blog/prop-drilling)). `Context` is not the solution for every state sharing problem
 6. Split giant `useEffect`s to smaller independent ones ([KCD: Myths about useEffect](https://epicreact.dev/myths-about-useeffect))
 7. Extract logic to hooks and helper functions
-8. To break a large component, it might be a good idea to have `logical` and `presentational` components (but not always)
+8. To break a large component, it might be a good idea to have `logical` and `presentational` components (but not necessarily, use your best judgement)
 9. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo`, and `useEffect`
 10. Do not put too many dependencies in `useCallback`, `useMemo`, and `useEffect`
-11. For simplicity, instead of having many `useStates`, consider using `useReducer` if some values of your state rely on other values of your state and previous state
+11. For simplicity, instead of having many `useState`s, consider using `useReducer` if some values of your state rely on other values of your state and previous state
 
 ### 💖 2.1 Avoid state management complexity by removing redundant states
 
@@ -222,12 +228,15 @@ When you have redundant states, some states may fall out of sync; you may forget
 Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code.
 See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe](https://epic-react-exercises.vercel.app/react/hooks/1)
 
+Note: For the following two examples, assume that the number of items to be fetched in always less than 100 (meaning you don't need to worry about optimization). 
+If you're working with really large numbers of items, you can memoize the some computations with `useMemo`.
+
 ##### 🙈 Example 1
 
 You are tasked to display properties of each right triangle from a list
 - the lengths of each of the three sides
--  the perimeter
--  the area
+- the perimeter
+- the area
 
 A list of two numbers `{a: number, b: number}[]` should be fetched from an API. The two numbers represent the two shorter sides of a right triangle.
 
@@ -250,8 +259,8 @@ const TriangleInfo = () => {
  }, [])
 
  useEffect(() => {
-     setHypotenuses(triangleInfo.map(t => computeHypotenuse(t.a, t.b))
-     setArea(triangleInfo.map(t => computeArea(t.a, t.b))
+   setHypotenuses(triangleInfo.map(t => computeHypotenuse(t.a, t.b))
+   setArea(triangleInfo.map(t => computeArea(t.a, t.b))
  }, [triangleInfo])
 
  useEffect(() => {
@@ -322,23 +331,21 @@ const Points = () => {
     setSortedPoints(sortPoints(points, sortBy))
   }, [sortBy, points])
 
-useEffect(() => {
-setFilteredPoints(sortedPoints.filter(p => getDistance(p.x, p.y) < maxDistance))
-}, [sortedPoints, maxDistance])
+  useEffect(() => {
+    setFilteredPoints(sortedPoints.filter(p => getDistance(p.x, p.y) < maxDistance))
+  }, [sortedPoints, maxDistance])
 
-const otherSortBy = toggle(sortBy)
+  const otherSortBy = toggle(sortBy)
 
-return (
-<>
-<button onClick={() => setSortBy(otherSortBy)}>Sort by: {otherSortBy}<button>
-<button onClick={() => setMaxDistance(maxDistance + 5)}>Increase max distance<button>
-Showing only points that are less than {maxDistance} units away from origin (0, 0)
-Currently sorted by: '{sortBy}' (ascending)
-
-<ol>{filteredPoints.map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>}
-</>
-
-)
+  return (
+    <>
+      <button onClick={() => setSortBy(otherSortBy)}>Sort by: {otherSortBy}<button>
+      <button onClick={() => setMaxDistance(maxDistance + 5)}>Increase max distance<button>
+      Showing only points that are less than {maxDistance} units away from origin (0, 0)
+      Currently sorted by: '{sortBy}' (ascending)
+      <ol>{filteredPoints.map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>}
+    </>
+  )
 }
 
 ````
@@ -349,11 +356,10 @@ Currently sorted by: '{sortBy}' (ascending)
 
 ```tsx
 
-// NOTE: You can also use useReducer instead
-
+// NOTE:
+// You can also use useReducer instead
 type SortBy = 'x' | 'y'
 const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x'
-
 const Points = () => {
   const [points, setPoints] = useState<{x: number, y: number}[]>([])
   const [maxDistance, setMaxDistance] = useState<number>(Infinity)
@@ -362,6 +368,7 @@ const Points = () => {
   useEffect(() => {
     fetchPoints().then(r => setPoints(r))
   }, [])
+  
 
   const otherSortBy = toggle(sortBy)
   return (
@@ -376,7 +383,6 @@ const Points = () => {
           sortBy
         ).map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>
       }
-
     </>
   )
 }
@@ -421,28 +427,28 @@ type User = {
 ```tsx
 
 const Summary = ({ user } : { user: User }) => {
-/**_ include "the random styling feature" _**/
-return (
-<>
-<img src={user.imgUrl} />
-<a href={user.webUrl}>{user.title}. {user.firstName} {user.lastName}</a>
-</>
-)
+  /*** include "the random styling feature" ***/
+  return (
+    <>
+      <img src={user.imgUrl} />
+      <a href={user.webUrl}>{user.title}. {user.firstName} {user.lastName}</a>
+    </>
+  )
 }
 
 const SeeMore = ({ user }: { user: User }) => {
-const [seeMore, setSeeMore] = useState<boolean>(false)
-return (
-<>
-<button onClick={() => setSeeMore(!seeMore)}>See more</button>
-{seeMore && <>AGE: {user.age} | BIO: {user.bio}</>}
-</>
-)
+  const [seeMore, setSeeMore] = useState<boolean>(false)
+  return (
+    <>
+      <button onClick={() => setSeeMore(!seeMore)}>See more</button>
+      {seeMore && <>AGE: {user.age} | BIO: {user.bio}</>}
+    </>
+  )
 }
 
 const UserCard = () => {
-const user = useUser()
-return <><Summary user={user} /><SeeMore user={user} /></>
+  const user = useUser()
+  return <><Summary user={user} /><SeeMore user={user} /></>
 }
 
 ````
@@ -578,7 +584,7 @@ const DisabledShopCategoryTile = ({ icon, label }: { icon: ReactNode, label: str
   return (
     <Tooltip title="Not available">
       <StyledButton disabled={true} className="grey">
-          {icon} <StyledLabel>{label}<StyledLabel/>
+        {icon} <StyledLabel>{label}<StyledLabel/>
       </Button>
     </Tooltip>
   )
@@ -647,6 +653,7 @@ const ShopCategoryTile = ({
     !item.disabled && !!items?.some((a: Item) => a.itemGroup === item.group);
   const isDisabled = item.disabled || !offers;
   const RenderComponent = item.component;
+
   useEffect(() => {
     if (openDialog && !location.pathname.includes("item")) {
       setOpenDialog(false);
@@ -656,6 +663,7 @@ const ShopCategoryTile = ({
     setOpenDialog(false);
     history.goBack();
   }, []);
+
   return (
     <GridStyled
       xs={6}
@@ -710,10 +718,12 @@ const ShopCategoryTile = ({
 
 ### 💖 2.4 Duplication is far cheaper than the wrong abstraction
 
-See also: [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction), [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: Expensive Setup](), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization), [Expensive Set Up Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)
-
 Avoid premature / inappropriate generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
+Sandi Metz's article on this is a must read! [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction).
 
+See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: The Expensive Setup Smell](https://wiki.c2.com/?ExpensiveSetUpSmell), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization)
+
+        
 ## 🧘 3. Performance tips
 
 > Premature optimization is the root of all evil - Tony Hoare (popularized by Donald Knuth)
@@ -725,13 +735,14 @@ Avoid premature / inappropriate generalization. If your implementation for a sim
 3. Use `useMemo` mostly just for expensive calculations
 4. For `React.memo`, `useMemo`, `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
 5. Make sure your `React.memo`, `useCallback` and `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
-6. Window large lists (with [tannerlinsley/react-virtual](https://github.com/tannerlinsley/react-virtual) or similar)
+6. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
 7. Put `Context` as low as possible in your component tree. `Context` does not have to be global to your whole app
 8. `Context` should be logically separated, do not add to many values in one context provider
 9. You can optimize `context` by separating the `state` and the `dispatch` function
 10. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
 11. Putting your state as close as possible to where it's being used will make your app faster
 12. If you're going to use a package for your forms I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
+13. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS). 
 
 <details>
     <summary>Selected KCD articles about performance</summary>
