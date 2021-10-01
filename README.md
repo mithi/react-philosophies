@@ -770,7 +770,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 **TL;DR**
 
 1. Your tests should always resemble the way your software is used
-2. Make sure that you're not testing implementation details - things which users does not use, see, or even know about
+2. Make sure that you're not testing implementation details - things which users do not use, see, or even know about
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job
 5. You'll know you implemented correct tests when you rarely have to change tests when you refactor code given the same user behavior
 5. For the front-end, you don't need 100% code coverage, about 70% is probably good enough. Tests should make you more productive not slow you down. Maintaining tests can slow you down. You get dimishing returns on your tests at a certain point
