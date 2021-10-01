@@ -20,7 +20,7 @@ While writing, I realized that it was actually difficult for me to separate my t
 </details>
 
 <details>
-    <summary>Thanks to all the PRs 🚜, coffee ☕, recommended readings 📚, and sharing of ideas 💡 (View contributors) </summary>
+    <summary>Thanks for all the PRs 🚜, coffee ☕, recommended readings 📚, and sharing of ideas 💡 (View contributors) </summary>
 
 ---
     
@@ -142,14 +142,14 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI (original)](http://c2.com/xp/YouArentGonnaNeedIt.html), [Jack Diederich: Stop Writing Classes](https://www.youtube.com/watch?v=o9pEzgHorH0)
 
-### 1.3 Detect code smells and do something about them if you need to
+### 1.3 Don't leave broken windows unattended
 
 > A window gets broken at an apartment building, but no one fixes it. It's left broken. Then something else gets broken. Maybe it's an accident, maybe not, but it isn't fixed either. Graffiti starts to appear. More and more damage accumulates. Very quickly you get an exponential ramp. The whole building decays. Tenants move out. Crime moves in. And you've lost the game. It's all over. You don't want to let technical debt get out of hand. You want to stop the small problems before they grow into big problems. - [Don't Live with Broken Windows: A Conversation with Andy Hunt and Dave Thomas, Part I](https://www.artima.com/articles/dont-live-with-broken-windows)
 
-If you recognize that something is wrong, fix it right there and there. But if it's not that easy to fix or you don't have time to fix it at that moment, add a comment `FIXME` or `TODO` and add a short explanation of the problem you've identified. Make sure everybody knows it is broken. It shows other people that you care and that they should also do the same when they encounter those kinds of things.
+**Detect code smells and do something about them if you need to**. If you recognize that something is wrong, fix it right there and there. But if it's not that easy to fix or you don't have time to fix it at that moment, add a comment (`FIXME` or `TODO`) with a short explanation of the problem you've identified. Make sure everybody knows it is broken. It shows other people that you care and that they should also do the same when they encounter those kinds of things.
 
 <details>
- <summary> 🙈 Examples of easy-to-catch code smells</summary>
+ <summary> 🙈 View examples of easy-to-catch code smells </summary>
 
 - ❌ Methods or functions defined with a high number of arguments
 - ❌ Boolean logic that may be hard to understand
@@ -182,21 +182,21 @@ const decrement = useCallback(() => setCount(count => (count - 1)), [])
 **TIP: If your `useMemo` or `useCallback` doesn't have a dependency, you might be using it wrong.**
 
 <details>
-    <summary>🙈 Example</summary>
+    <summary>🙈 View example</summary>
  
  ```tsx
  ❌ Not-so-good
 const MyComponent = () => {
-  const functionToCall = useCallback(x: string => `Hello ${x}! I am actually doing more than this`,[])
-  const iAmAConstant = useMemo(() => { return {x: 5, y: 2} }, [])
-  /* I will use functionToCall and iAmAConstant */
+    const functionToCall = useCallback(x: string => `Hello ${x}! I am actually doing more than this`,[])
+    const iAmAConstant = useMemo(() => { return {x: 5, y: 2} }, [])
+    /* I will use functionToCall and iAmAConstant */
 }
         
 ✅ BETTER 
 const I_AM_A_CONSTANT =  { x: 5, y: 2 }
-  const functionToCall = (x: string => `Hello ${x}! I am actually doing more than this`)
-  const MyComponent = () => {
-   /* I will use functionToCall and I_AM_A_CONSTANT */
+const functionToCall = (x: string => `Hello ${x}! I am actually doing more than this`)
+const MyComponent = () => {
+    /* I will use functionToCall and I_AM_A_CONSTANT */
 }
 
 ````
@@ -241,7 +241,7 @@ You are tasked to display properties of each right triangle from a list
 A list of two numbers `{a: number, b: number}[]` should be fetched from an API. The two numbers represent the two shorter sides of a right triangle.
 
 <details>
- <summary> ❌ Not-so-good Solution </summary>
+ <summary> ❌ View not-so-good Solution </summary>
 
 ```tsx
 const TriangleInfo = () => {
@@ -276,7 +276,7 @@ const TriangleInfo = () => {
 </details>
 
 <details>
-  <summary> ✅ Better Solution </summary>
+  <summary> ✅ View "better" solution </summary>
 
 ```tsx
 const TriangleInfo = () => {
@@ -307,11 +307,11 @@ Suppose you are assigned to design a component which:
 
 1. Fetches a list of unique points from an API
 2. Includes a button to either sort by `x` or `y` (ascending order)
-3. Includes a button to change the `maxDistance` (increase + 10)
+3. Includes a button to change the `maxDistance` (increase +10)
 4. Only displays the points that are NOT farther than the current `maxDistance` from the origin `(0, 0)`
 
 <details>
-  <summary> ❌ Not-so-good Solution </summary>
+  <summary> ❌ View not-so-good Solution </summary>
   
 ```tsx
 type SortBy = 'x' | 'y'
@@ -320,7 +320,7 @@ const Points = () => {
   const [points, setPoints] = useState<{x: number, y: number}[]>([])
   const [filteredPoints, setFilteredPoints] = useState<{x: number, y: number}[]>([])
   const [sortedPoints, setSortedPoints] = useState<{x: number, y: number}[]>([])
-  const [maxDistance, setMaxDistance] = useState<number>(Infinity)
+  const [maxDistance, setMaxDistance] = useState<number>(100)
   const [sortBy, setSortBy] = useState<SortBy>('x')
   
   useEffect(() => {
@@ -340,7 +340,7 @@ const Points = () => {
   return (
     <>
       <button onClick={() => setSortBy(otherSortBy)}>Sort by: {otherSortBy}<button>
-      <button onClick={() => setMaxDistance(maxDistance + 5)}>Increase max distance<button>
+      <button onClick={() => setMaxDistance(maxDistance + 10)}>Increase max distance<button>
       Showing only points that are less than {maxDistance} units away from origin (0, 0)
       Currently sorted by: '{sortBy}' (ascending)
       <ol>{filteredPoints.map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>}
@@ -352,7 +352,7 @@ const Points = () => {
 </details>
 
 <details>
-  <summary> ✅ Better Solution </summary>
+  <summary> ✅ View "better" Solution </summary>
 
 ```tsx
 
@@ -362,7 +362,7 @@ type SortBy = 'x' | 'y'
 const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x'
 const Points = () => {
   const [points, setPoints] = useState<{x: number, y: number}[]>([])
-  const [maxDistance, setMaxDistance] = useState<number>(Infinity)
+  const [maxDistance, setMaxDistance] = useState<number>(100)
   const [sortBy, setSortBy] = useState<SortBy>('x')
 
   useEffect(() => {
@@ -422,7 +422,7 @@ type User = {
 ```
 
 <details>
-  <summary>❌ Not-so-good solution</summary>
+  <summary>❌ View not-so-good solution</summary>
   
 ```tsx
 
@@ -457,7 +457,7 @@ const UserCard = () => {
 
 
 <details>
-  <summary>✅ Better solution</summary>
+  <summary>✅ View "better" solution</summary>
 
 ```tsx
 
@@ -497,8 +497,6 @@ const UserCard = () => {
 
 ### 💖 2.3 Keep your components small and simple
 
-(The paragraphs below is based on my 2015 article: [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665))
-
 **What is the single responsibility principle?**
 
 > A component should have one and **only one** job. It should do the smallest possible useful thing. It only has responsibilities that fulfill its purpose.
@@ -510,6 +508,8 @@ A component with various responsibilities is difficult to reuse. If you want to 
 > Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component fails this test.
 
 Inspect the component's states, the props and hooks it consumes, as well as variables and methods declared inside the component (They shouldn't be too many). Ask yourself: Do these things actually work together to fulfill the component's purpose? If some of them don't, consider moving those somewhere else or breaking down your big component to smaller ones.
+
+(The paragraphs above is based on my 2015 article: [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665))
 
 ##### 🙈 Example
 
@@ -576,7 +576,7 @@ const ShopCategoryTile = ({
 </details>
           
 <details>
-    <summary>✅ Better solution</summary>
+    <summary>✅ View "better" solution</summary>
 
 ```tsx
 // split into two smaller components!
@@ -630,10 +630,10 @@ const ShopCategoryTile = ({
 
 </details>
 
-Note: This is a simplified version of a component that I've actually seen in production
+Note: The example above is a simplified version of a component that I've actually seen in production
 
 <details>
-    <summary>❌ Not-so-good solution</summary>
+    <summary>❌ View not-so-good solution</summary>
 
 ```tsx
 const ShopCategoryTile = ({
@@ -719,7 +719,7 @@ const ShopCategoryTile = ({
 ### 💖 2.4 Duplication is far cheaper than the wrong abstraction
 
 Avoid premature / inappropriate generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
-Sandi Metz's article on this is a must read! [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction).
+I highly recommend reading [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction).
 
 See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: The Expensive Setup Smell](https://wiki.c2.com/?ExpensiveSetUpSmell), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization)
 
@@ -730,22 +730,22 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 
 **TL;DR**
 
-1. **If you think it’s slow, prove it with a benchmark.** "In the face of ambiguity, refuse the temptation to guess."
+1. **If you think it’s slow, prove it with a benchmark.** _"In the face of ambiguity, refuse the temptation to guess."_ The profiler of [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (chrome extension) is your friend!
 2. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
 3. Use `useMemo` mostly just for expensive calculations
-4. For `React.memo`, `useMemo`, `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
-5. Make sure your `React.memo`, `useCallback` and `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
+4. For `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
+5. Make sure your `React.memo`, `useCallback` pr `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
 6. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
 7. Put `Context` as low as possible in your component tree. `Context` does not have to be global to your whole app
 8. `Context` should be logically separated, do not add to many values in one context provider
 9. You can optimize `context` by separating the `state` and the `dispatch` function
 10. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
 11. Putting your state as close as possible to where it's being used will make your app faster
-12. If you're going to use a package for your forms I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
-13. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS). 
+12. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
+13. If you're going to use a package for your forms, I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
 
 <details>
-    <summary>Selected KCD articles about performance</summary>
+    <summary>View selected KCD articles about performance</summary>
 
 - [KCD: State Colocation will make your React app faster](https://kentcdodds.com/blog/state-colocation-will-make-your-react-app-faster)
 - [KCD: When to `useMemo` and `useCallback`](https://kentcdodds.com/blog/usememo-and-usecallback)
@@ -771,7 +771,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 6. I like using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
 
 <details>
-    <summary>Selected KCD articles about testing</summary>
+    <summary>View selected KCD articles about testing</summary>
 
 - [KCD: Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)
 - [KCD: Stop mocking fetch](https://kentcdodds.com/blog/stop-mocking-fetch)
