@@ -590,7 +590,8 @@ const DisabledShopCategoryTile = ({ icon, label }: { icon: ReactNode, label: str
   return (
     <Tooltip title="Not available">
       <StyledButton disabled={true} className="grey">
-        {icon} <StyledLabel>{label}<StyledLabel/>
+        {icon}
+        <StyledLabel>{label}<StyledLabel/>
       </Button>
     </Tooltip>
   )
@@ -626,9 +627,11 @@ const ShopCategoryTile = ({
         {isBooked && <FaCheckCircle/>}
         {hover && <WavingHand />}
       </StyledButton>
-      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-        {componentInsideModal}
-      </Dialog>
+      {openDialog &&
+        <Dialog onClose={() => setOpenDialog(false)}>
+          {componentInsideModal}
+        </Dialog>
+      }}
     </>
   )
 }
