@@ -15,7 +15,7 @@ If `react-philosophies` helped you in some way, consider [buying me a few cups o
 <details>
     <summary>The way this document is organized</summary>
 
-While writing, I realized that it was actually difficult for me to separate my thoughts into the `design`, `performance`, and `testing`. A lot of designs intended for maintainability also make your application faster and easier to test. Apologies if the discussion appears to be cluttered at times.
+It was actually difficult for me to separate my thoughts into the `design`, `performance`, and `testing`. I noticed that lot of designs intended for maintainability also make your application faster and easier to test. Apologies if the discussion appears to be cluttered at times.
 
 </details>
 
@@ -24,18 +24,19 @@ While writing, I realized that it was actually difficult for me to separate my t
 
 ---
     
-**💡 Comments, suggestions, violent reactions? I'd love to hear them!💡**
+**💡 Comments, suggestions, violent reactions? I'd love to hear them!**
 
-If there's something that you think should be part of my reading list, or if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue; I'll check it out. Any contributions to improve `react-philosophies` whether big or small are always welcome and appreciated.
+If there's something that you think should be part of my reading list or/and if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue. Any contributions to improve `react-philosophies` whether big or small are always welcome and appreciated.
 
 ---
     
-Special thanks to the `r/reactjs` community for giving [very valuable suggestions](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) that helped significantly improve the quality of this document.
+Special thanks to the `r/reactjs` community for giving [very valuable suggestions](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) that helped improve the quality of this document.
 
 **☕ Coffee!**
 
-- Myles Banner
-- [@ankitwww](https://github.com/ankitwww)
+- [Myles](https://Ko-fi.com/home/coffeeshop?txid=0fac8f5b-994e-4208-b767-7872a9e2519e&mode=public&img=ogsomeoneboughtme)
+- [Daniel](https://Ko-fi.com/home/coffeeshop?txid=7d71404a-fa0c-419d-9808-46ea520c913f&mode=public&img=ogsomeoneboughtme)
+- [Ankit](https://Ko-fi.com/home/coffeeshop?txid=8c1254ef-0e5a-43a0-8475-e3567e2c8dab&mode=public&img=ogbuymeacoffee)
 
 **🚜 Pull Requests**
 
@@ -45,8 +46,8 @@ Special thanks to the `r/reactjs` community for giving [very valuable suggestion
 
 **📚 Readings recommended to me**
 
-- [Ben Moseley and Peter Marks: Out of the Tar Pit (2006)](http://curtclifton.net/papers/MoseleyMarks06a.pdf), recommended by [icjoseph](https://www.reddit.com/u/icjoseph)
-- [`goldbergyoni/nodebestpractices`](https://github.com/goldbergyoni/nodebestpractices), recommended by [rstacruz](https://github.com/rstacruz)
+- [Ben Moseley and Peter Marks: Out of the Tar Pit (2006)](http://curtclifton.net/papers/MoseleyMarks06a.pdf), recommended by [@icyjoseph](https://github.com/icyjoseph)
+- [`goldbergyoni/nodebestpractices`](https://github.com/goldbergyoni/nodebestpractices), recommended by [@rstacruz](https://github.com/rstacruz)
 - [Dan Abramov: Writing Resilient Components](https://overreacted.io/writing-resilient-components/), recommended by [Mon Quindoza](https://ph.linkedin.com/in/monquindoza)
 
 </details>
@@ -55,7 +56,7 @@ Special thanks to the `r/reactjs` community for giving [very valuable suggestion
 
 `react-philosophies` is:
 
-- things I think about before I write `React` code.
+- things I think about when I write `React` code.
 - at the back of my mind whenever I review someone else's code or my own
 - just guidelines and NOT rigid rules
 - a living document and will evolve over time as my experience grows
@@ -84,18 +85,19 @@ Most notably:
 ### 1.1 Recognize when the computer is smarter than you
 
 1. Statically analyze your code with [`ESLint`](https://eslint.org/). Enable the [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) and `exhaustive-deps` rule to catch `React`-specific errors.
-2. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier.
-3. [`NextJS`](https://nextjs.org/) is an awesome framework.
-4. [Be honest about your dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies). Fix `exhaustive-deps` warnings / errors on your `useMemo`'s, `useCallback`'s and `useEffect`'s. You can try ["The latest ref pattern"](https://epicreact.dev/the-latest-ref-pattern-in-react) to keep your callbacks always up-to-date without unnecessary rerenders.
-5. [Always add keys](https://epicreact.dev/why-react-needs-a-key-prop) whenever you use `map` to display components.
-6. [Only call hooks at the top level](https://reactjs.org/docs/hooks-rules.html). Don’t call Hooks inside loops, conditions, or nested functions.
-7. Understand the warning "Can't perform state update on unmounted component". [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
+2. Enable ["strict"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) mode. It's 2021. 
+3. [Be honest about your dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies). Fix `exhaustive-deps` warnings / errors on your `useMemo`'s, `useCallback`'s and `useEffect`'s. You can try ["The latest ref pattern"](https://epicreact.dev/the-latest-ref-pattern-in-react) to keep your callbacks always up-to-date without unnecessary rerenders.
+4. [Always add keys](https://epicreact.dev/why-react-needs-a-key-prop) whenever you use `map` to display components.
+5. [Only call hooks at the top level](https://reactjs.org/docs/hooks-rules.html). Don’t call Hooks inside loops, conditions, or nested functions.
+6. Understand the warning "Can't perform state update on unmounted component". [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
+7. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to.
 8. There is a reason why errors and warnings are displayed in the console.
-9. [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
-10. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically-detected code smells truly motivates me to reduce the technical debts of the application I'm working on!
-11. [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/) is your friend!
-12. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to.
-13. Enable ["strict"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) mode. It's 2021. 
+9. [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/) is your friend!
+10. [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
+11. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier.
+12. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically-detected code smells truly motivates me to reduce the technical debts of the application I'm working on!
+13. [`NextJS`](https://nextjs.org/) is an awesome framework.
+14. [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)! You don't have to do it dogmatically, but the idea behind it is great. I find that writing the API / how your component will be used before implementing it usually creates a better designed component than when I don't .
 
 ### 1.2 Code is just a necessary evil
 
@@ -146,7 +148,9 @@ See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2
 
 > A window gets broken at an apartment building, but no one fixes it. It's left broken. Then something else gets broken. Maybe it's an accident, maybe not, but it isn't fixed either. Graffiti starts to appear. More and more damage accumulates. Very quickly you get an exponential ramp. The whole building decays. Tenants move out. Crime moves in. And you've lost the game. It's all over. You don't want to let technical debt get out of hand. You want to stop the small problems before they grow into big problems. - [Don't Live with Broken Windows: A Conversation with Andy Hunt and Dave Thomas, Part I](https://www.artima.com/articles/dont-live-with-broken-windows)
 
-**Detect code smells and do something about them if you need to**. If you recognize that something is wrong, fix it right there and there. But if it's not that easy to fix or you don't have time to fix it at that moment, add a comment (`FIXME` or `TODO`) with a short explanation of the problem you've identified. Make sure everybody knows it is broken. It shows other people that you care and that they should also do the same when they encounter those kinds of things.
+**Detect code smells and do something about them if you need to**. 
+
+If you recognize that something is wrong, fix it right then and there. But if it's not that easy to fix or you don't have time to fix it at that moment, atleast add a comment (`FIXME` or `TODO`) with a concise explanation of the identified problem. Make sure everybody knows it is broken. It shows others that you care and that they should also do the same when they encounter those kinds of things.
 
 <details>
  <summary> 🙈 View examples of easy-to-catch code smells </summary>
@@ -162,6 +166,8 @@ See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2
 - ❌ Duplicate code which is not identical but shares the same structure (e.g. variable names may differ)
 
 </details>
+
+Keep in mind that code smells don't necessarily mean that code should be changed. A code smell just tells you that you might be able to think of a better way to restructure that code and achieve the same functionality.
 
 ### 1.4 Just because it works, doesn't mean it is right
 
@@ -221,11 +227,12 @@ const MyComponent = () => {
 9. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo`, and `useEffect`
 10. Do not put too many dependencies in `useCallback`, `useMemo`, and `useEffect`
 11. For simplicity, instead of having many `useState`s, consider using `useReducer` if some values of your state rely on other values of your state and previous state
+12. Put `Context` as low as possible in your component tree. `Context` does not have to be global to your whole app.
 
 ### 💖 2.1 Avoid state management complexity by removing redundant states
 
 When you have redundant states, some states may fall out of sync; you may forget to update them given a complex sequence of interactions.
-Aside from avoiding `synchronization bugs`, you'd notice that it's also easier to reason about and require less code.
+Aside from avoiding synchronization bugs, you'd notice that it's also easier to reason about and require less code.
 See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe](https://epic-react-exercises.vercel.app/react/hooks/1)
 
 Note: For the following two examples, assume that the number of items to be fetched in always less than 100 (meaning you don't need to worry about optimization). 
@@ -245,31 +252,31 @@ A list of two numbers `{a: number, b: number}[]` should be fetched from an API. 
 
 ```tsx
 const TriangleInfo = () => {
- const [triangleInfo, setTriangleInfo] = useTriangles<{a: number, b: number}>([])
- const [hypotenuses, setHypotenuses] = useState<number[]>([])
- const [perimeters, setPerimeters] = useState<number[]>([])
- const [areas, setAreas] = useState<number[]>([])
+  const [triangleInfo, setTriangleInfo] = useTriangles<{a: number, b: number}>([])
+  const [hypotenuses, setHypotenuses] = useState<number[]>([])
+  const [perimeters, setPerimeters] = useState<number[]>([])
+  const [areas, setAreas] = useState<number[]>([])
 
- useEffect(() => {
-   fetchTriangles().then(r => {
-     setTriangleInfo(r)
-     setHypotenuses(r.map(t => computeHypotenuse(t.a, t.b))
-     setArea(r.map(t => computeArea(t.a, t.b))
-   })
- }, [])
+  useEffect(() => {
+    fetchTriangles().then(r => {
+      setTriangleInfo(r)
+      setHypotenuses(r.map(t => computeHypotenuse(t.a, t.b))
+      setArea(r.map(t => computeArea(t.a, t.b))
+    })
+  }, [])
 
- useEffect(() => {
-   setHypotenuses(triangleInfo.map(t => computeHypotenuse(t.a, t.b))
-   setArea(triangleInfo.map(t => computeArea(t.a, t.b))
- }, [triangleInfo])
+  useEffect(() => {
+    setHypotenuses(triangleInfo.map(t => computeHypotenuse(t.a, t.b))
+    setArea(triangleInfo.map(t => computeArea(t.a, t.b))
+  }, [triangleInfo])
 
- useEffect(() => {
-   const p = triangleInfo((t, i) => {
-     return computePerimeter(t.a, t.b, hypotenuse[i])
-   })
- }, [triangleInfo, hypotenuses])
+  useEffect(() => {
+    const p = triangleInfo((t, i) => {
+      return computePerimeter(t.a, t.b, hypotenuse[i])
+    })
+  }, [triangleInfo, hypotenuses])
 
- /*** show info here ****/
+  /*** show info here ****/
 }
 ````
 
@@ -307,7 +314,7 @@ Suppose you are assigned to design a component which:
 
 1. Fetches a list of unique points from an API
 2. Includes a button to either sort by `x` or `y` (ascending order)
-3. Includes a button to change the `maxDistance` (increase +10)
+3. Includes a button to change the `maxDistance` (increase by `10` each time, initial value should be `100`)
 4. Only displays the points that are NOT farther than the current `maxDistance` from the origin `(0, 0)`
 
 <details>
@@ -356,8 +363,7 @@ const Points = () => {
 
 ```tsx
 
-// NOTE:
-// You can also use useReducer instead
+// NOTE: You can also use useReducer instead
 type SortBy = 'x' | 'y'
 const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x'
 const Points = () => {
@@ -404,7 +410,7 @@ When we do this, the components will be loosely coupled. Loose coupling means th
 
 Create a `UserCard` component that displays two components: `Summary` and `SeeMore`. The `SeeMore` component includes presenting the `age` and `bio` of the `user`. Include a button to toggle between showing and hiding the `age` and `bio` of the `user`.
 
-The `Summary` component displays the profile picture of the user and also his `title`, `firstName` and `lastName` (e.g. `Mr. Vincenzo Cassano`). Clicking the user's name should take you to the user's personal site. The `Summary` component may also have other functionalities. (Say for example, randomly changing the font, size of the image, and background color whenever this component is clicked.. for brevity let's call this "the random styling feature")
+The `Summary` component displays the profile picture of the user and also his `title`, `firstName` and `lastName` (e.g. `Mr. Vincenzo Cassano`). Clicking the user's name should take you to the user's personal site. The `Summary` component may also have other functionalities. (Say for example, randomly changing the font, size of the image, and background color whenever this component is clicked... for brevity let's call this "the random styling feature")
 
 The `UserCard` calls the hook `useUser` that returns an object with the type below.
 
@@ -734,15 +740,14 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 2. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
 3. Use `useMemo` mostly just for expensive calculations
 4. For `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
-5. Make sure your `React.memo`, `useCallback` pr `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
+5. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
 6. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
-7. Put `Context` as low as possible in your component tree. `Context` does not have to be global to your whole app
-8. `Context` should be logically separated, do not add to many values in one context provider
-9. You can optimize `context` by separating the `state` and the `dispatch` function
-10. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
-11. Putting your state as close as possible to where it's being used will make your app faster
-12. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
-13. If you're going to use a package for your forms, I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
+7. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
+8. Putting your state as close as possible to where it's being used will make your app faster (state colocation)
+9. `Context` should be logically separated, do not add to many values in one context provider
+10. You can optimize `context` by separating the `state` and the `dispatch` function
+11. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
+12. If you're going to use a package for your forms, I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
 
 <details>
     <summary>View selected KCD articles about performance</summary>
@@ -755,6 +760,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 - [KCD: How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively)
 - [KCD: One React Mistake that is slowing you down](https://epicreact.dev/one-react-mistake-thats-slowing-you-down)
 - [KCD: One simple trick to optimize React re-renders](https://kentcdodds.com/blog/optimize-react-re-renders)
+
 </details>
 
 ## 🧘 4. Testing principles
@@ -764,12 +770,12 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 **TL;DR**
 
 1. Your tests should always resemble the way your software is used
-2. Stop testing implementation details
+2. Make sure that you're not testing implementation details - things which users does not use, see, or even know about
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job
-4. For the front-end, you don't need 100% code coverage, about 70% is okay
-5. You should very rarely have to change tests when you refactor code
+5. You'll know you implemented correct tests when you rarely have to change tests when you refactor code given the same user behavior
+5. For the front-end, you don't need 100% code coverage, about 70% is probably good enough. Tests should make you more productive not slow you down. Maintaining tests can slow you down. You get dimishing returns on your tests at a certain point
 6. I like using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
-
+        
 <details>
     <summary>View selected KCD articles about testing</summary>
 
