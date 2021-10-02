@@ -103,7 +103,6 @@ Most notably:
 11. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier.
 12. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically-detected code smells truly motivates me to reduce the technical debts of the application I'm working on!
 13. [`NextJS`](https://nextjs.org/) is an awesome framework.
-14. [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)! You don't have to do it dogmatically, but the idea behind it is great. I find that when I first write the API / (how your component will be used before implementing it, this usually creates a better designed component than when I don't .
 
 ### 1.2 Code is just a necessary evil
 
@@ -189,9 +188,10 @@ If you recognize that something is wrong, fix it right then and there. But if it
 
 Keep in mind that code smells don't necessarily mean that code should be changed. A code smell just tells you that you might be able to think of a better way to restructure that code and achieve the same functionality.
 
-### 1.4 Just because it works, doesn't mean it is right
+### 1.4 You can do bette
 
-**TIP: Remember that you may not need to put your `state` as a dependency because you can pass a callback function instead.**
+**💁‍♀️ TIP: Remember that you may not need to put your `state` as a dependency because you can pass a callback function instead.**
+
 You don't need to put `setState` (from `useState`) and `dispatch` (from `useReducer`) in your dependency array for hooks like `useEffect` and `useCallback`. ESLint will NOT complain because React guarantees their stability.
 
 🙈 Example
@@ -205,27 +205,73 @@ const decrement = useCallback(() => setCount(count - 1), [count])
 const decrement = useCallback(() => setCount(count => (count - 1)), [])
 ```
 
-**TIP: If your `useMemo` or `useCallback` doesn't have a dependency, you might be using it wrong.**
+**💁‍♀️ TIP: If your `useMemo` or `useCallback` doesn't have a dependency, you might be using it wrong.**
 
 <details>
     <summary>🙈 View example</summary>
  
+ <br />
+ 
  ```tsx
  ❌ Not-so-good
 const MyComponent = () => {
-    const functionToCall = useCallback(x: string => `Hello ${x}! I am actually doing more than this`,[])
+    const functionToCall = useCallback(x: string => `Hello ${x}!`,[])
     const iAmAConstant = useMemo(() => { return {x: 5, y: 2} }, [])
     /* I will use functionToCall and iAmAConstant */
 }
         
 ✅ BETTER 
 const I_AM_A_CONSTANT =  { x: 5, y: 2 }
-const functionToCall = (x: string => `Hello ${x}! I am actually doing more than this`)
+const functionToCall = (x: string => `Hello ${x}!`)
 const MyComponent = () => {
     /* I will use functionToCall and I_AM_A_CONSTANT */
 }
 
 ````
+</details>
+
+**💁‍♀️ TIP: Wrapping your custom context with a hook creates a better-looking API**
+
+Not only does it look better, you only have to import one thing instead of two.
+
+<details>
+    <summary>🙈 View example</summary>
+
+ <br />
+
+❌ Not-so-good
+```tsx
+// you need to import two things every time 
+import { useContext } from "react"
+import { userContext } from "some-context-package"
+
+function App() {
+  const user = useContext(UserContext) // looks okay, but could be better
+  // blah
+}
+```
+
+✅  Better
+```tsx
+  
+// on one file you declare this hoook
+function useUser() {
+  const context = useContext(UserContext)
+  if (context === undefined) {
+    throw new Error('useUser must be used within a UserProvider')
+  }
+  return context
+}
+  
+// you only need to import one thing each time
+import { useUser } from "some-context-package"
+
+function App() {
+  const user = useUser() // this looks better
+  // blah
+}  
+```
+
 </details>
 
 ## 🧘 2. Design for happiness
@@ -238,7 +284,7 @@ const MyComponent = () => {
 
 1. 💖 Avoid state management complexity by removing redundant states
 2. 💖 Pass the banana, not the gorilla holding the banana and the entire jungle (prefer passing primitives as props)
-3. 💖 Keep your components small and simple- the single responsibility principle!
+3. 💖 Keep your components small and simple - the single responsibility principle!
 4. 💖 Duplication is far cheaper than the wrong abstraction (avoid premature / inappropriate generalization)
 5. Avoid prop drilling by using composition ([KCD: Prop Drilling](https://kentcdodds.com/blog/prop-drilling)). `Context` is not the solution for every state sharing problem
 6. Split giant `useEffect`s to smaller independent ones ([KCD: Myths about useEffect](https://epicreact.dev/myths-about-useeffect))
@@ -247,16 +293,13 @@ const MyComponent = () => {
 9. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo`, and `useEffect`
 10. Do not put too many dependencies in `useCallback`, `useMemo`, and `useEffect`
 11. For simplicity, instead of having many `useState`s, consider using `useReducer` if some values of your state rely on other values of your state and previous state
-12. Put `Context` as low as possible in your component tree. `Context` does not have to be global to your whole app.
+12. `Context` does not have to be global to your whole app. Put `Context` as low as possible in your component tree. Do this the same way you put variables, comments, states (and code in general) as close as possible to where it's relevant / being used.
 
 ### 💖 2.1 Avoid state management complexity by removing redundant states
 
 When you have redundant states, some states may fall out of sync; you may forget to update them given a complex sequence of interactions.
 Aside from avoiding synchronization bugs, you'd notice that it's also easier to reason about and require less code.
 See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe](https://epic-react-exercises.vercel.app/react/hooks/1)
-
-Note: For the following two examples, assume that the number of items to be fetched in always less than 100 (meaning you don't need to worry about optimization). 
-If you're working with really large numbers of items, you can memoize the some computations with `useMemo`.
 
 ##### 🙈 Example 1
 
@@ -284,7 +327,7 @@ const TriangleInfo = () => {
       const h = computeHypotenuse(t.a, t.b)
       setHypotenuse(h)
       const a = computeArea(t.a, t.b)
-      setArea(a))
+      setArea(a)
     })
   }, [])
 
@@ -298,18 +341,11 @@ const TriangleInfo = () => {
     setHypotenuse(h)
     const newArea = computeArea(a, b)
     setArea(newArea)
+    const p = computePerimeter(a, b, h)
+    setPerimeter(p)
+
   }, [triangleInfo])
 
-  useEffect(() => {
-    if(!triangleInfo) {
-      return
-    }
-
-    const { a, b } = triangleInfo
-    const p = computePerimeter(a, b, hypotenuse)
-    setPerimeter(p)
-  }, [triangleInfo, hypotenuse])
-  
   if (!triangleInfo) {
     return null
   }
@@ -339,7 +375,7 @@ const TriangleInfo = () => {
   }
 
   const { a, b } = triangeInfo
-  const area = computeArea(a, b))
+  const area = computeArea(a, b)
   const hypotenuse = computeHypotenuse(a, b))
   const perimeter = computePerimeters(a, b, hypotenuse)
  
@@ -357,6 +393,7 @@ Suppose you are assigned to design a component which:
 2. Includes a button to either sort by `x` or `y` (ascending order)
 3. Includes a button to change the `maxDistance` (increase by `10` each time, initial value should be `100`)
 4. Only displays the points that are NOT farther than the current `maxDistance` from the origin `(0, 0)`
+5. Assume that the list only has 100 items (meaning you don't need to worry about optimization). If you're working with really large numbers of items, you can memoize some computations with `useMemo`.
 
 <details>
   <summary> ❌ View a not-so-good Solution </summary>
@@ -387,6 +424,9 @@ const Points = () => {
   }, [sortedPoints, maxDistance])
 
   const otherSortBy = toggle(sortBy)
+  const pointToDisplay = filteredPoints.map(
+    p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>
+  )
 
   return (
     <>
@@ -398,9 +438,7 @@ const Points = () => {
       <button>
       Showing only points that are less than {maxDistance} units away from origin (0, 0)
       Currently sorted by: '{sortBy}' (ascending)
-      <ol>
-        {filteredPoints.map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>)}
-      </ol>
+      <ol>{pointToDisplay}</ol>
     </>
   )
 }
@@ -429,7 +467,7 @@ const Points = () => {
 
   const otherSortBy = toggle(sortBy)
   const filtedPoints = points.filter(p => getDistance(p.x, p.y) < maxDistance)
-  const sortedFilteredPoints = sortPoints(filteredPoints, sortBy).map(
+  const pointToDisplay = sortPoints(filteredPoints, sortBy).map(
     p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>
   )
 
@@ -442,7 +480,7 @@ const Points = () => {
       <button>
       Showing only points that are less than {maxDistance} units away from origin (0, 0)
       Currently sorted by: '{sortBy}' (ascending)
-      <ol>{sortedFilteredPoints}</ol>
+      <ol>{pointToDisplay}</ol>
     </>
   )
 }
@@ -479,14 +517,14 @@ type Member = {
 }
 ```
 
-The `SeeMore` component includes presenting the `age` and `bio` of the `member`.
+The `SeeMore` component should display the `age` and `bio` of the `member`.
 Include a button to toggle between showing and hiding the `age` and `bio` of the `member`.
 
 The `Summary` component displays the picture of the `member`. 
 It also displays his `title`, `firstName` and `lastName` (e.g. `Mr. Vincenzo Cassano`). 
 Clicking the `member`'s name should take you to the `member`'s personal site.
 The `Summary` component may also have other functionalities. 
-(Say for example, whenever this component is clicked...
+(Example, whenever this component is clicked...
 the font, size of the image, and background color is randomly changed...
 for brevity let's call this "the random styling feature")
 
@@ -511,7 +549,9 @@ const SeeMore = ({ member }: { member: Member }) => {
   const [seeMore, setSeeMore] = useState<boolean>(false)
   return (
     <>
-      <button onClick={() => setSeeMore(!seeMore)}>See more</button>
+      <button onClick={() => setSeeMore(!seeMore)}>
+        See {seeMore ? "less" : "more"}
+      </button>
       {seeMore && <>AGE: {member.age} | BIO: {member.bio}</>}
     </>
   )
@@ -532,7 +572,7 @@ const MemberCard = ({ id }: { id: string })) => {
 
 ```tsx
 
-const Summary = ({ imgUrl, webUrl, name }: { imgUrl: string, webUrl: string, header: string }) => {
+const Summary = ({ imgUrl, webUrl, header }: { imgUrl: string, webUrl: string, header: string }) => {
   /*** include "the random styling feature" ***/
   return (
     <>
@@ -546,7 +586,9 @@ const SeeMore = ({ componentToShow }: { componentToShow: ReactNode }) => {
   const [seeMore, setSeeMore] = useState<boolean>(false)
   return (
     <>
-      <button onClick={() => setSeeMore(!seeMore)}>See more</button>
+      <button onClick={() => setSeeMore(!seeMore)}>
+        See {seeMore ? "less" : "more"}
+      </button>
       {seeMore && <>{componentToShow}</>}
     </>
   )
@@ -567,7 +609,7 @@ const MemberCard = ({ id }: { id: string }) => {
 
 </details>
     
-Notice that in the `"✅  "better" solution"`, `SeeMore` and `Summary` are components that can be used not necessarily by `Member`. It can be used perhaps by other objects such as `CurrentUser`, `Pet`.. anything that needs those specific functionality.
+Notice that in the `"✅  "better" solution"`, `SeeMore` and `Summary` are components that can be used not just by `Member`. It can be used perhaps by other objects such as `CurrentUser`, `Pet`, `Post`... anything that needs those specific functionality.
 
 ### 💖 2.3 Keep your components small and simple
 
@@ -575,7 +617,7 @@ Notice that in the `"✅  "better" solution"`, `SeeMore` and `Summary` are compo
 
 > A component should have one and **only one** job. It should do the smallest possible useful thing. It only has responsibilities that fulfill its purpose.
 
-A component with various responsibilities is difficult to reuse. If you want to reuse some but not all of a its behavior, it's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
+A component with various responsibilities is difficult to reuse. If you want to reuse some but not all of its behavior, it's almost always impossible to just get what you need. It is also likely to be entangled with other code. Components that do one thing which isolate that thing from the rest of your application allows change without consequence and reuse without duplication.
 
 **How to know if your component has a single responsibility?**
 
@@ -794,6 +836,10 @@ const ShopCategoryTile = ({
 
 </details>
 
+**💁‍♀️ TIP: [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)!**
+
+You don't have to do it dogmatically, but the idea behind it is great. I find that when I first write the API / (how your component will be used before implementing it, this usually creates a better designed component than when I don't.
+
 ### 💖 2.4 Duplication is far cheaper than the wrong abstraction
 
 Avoid premature / inappropriate generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
@@ -815,10 +861,10 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 5. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
 6. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
 7. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
-8. Putting your state as close as possible to where it's being used will make your app faster (state colocation)
-9. `Context` should be logically separated, do not add to many values in one context provider
+8. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but It would also make your app faster (state colocation)
+9. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components doesn't use the value that was actually changed.
 10. You can optimize `context` by separating the `state` and the `dispatch` function
-11. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
+11. A smaller bundle size usually also means a faster app. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
 12. If you're going to use a package for your forms, I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
 
 <details>
@@ -846,7 +892,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 2. Make sure that you're not testing implementation details - things which users do not use, see, or even know about
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job
 5. You'll know you implemented correct tests when you rarely have to change tests when you refactor code given the same user behavior
-5. For the front-end, you don't need 100% code coverage, about 70% is probably good enough. Tests should make you more productive not slow you down. Maintaining tests can slow you down. You get dimishing returns on your tests at a certain point
+5. For the front-end, you don't need 100% code coverage, about 70% is probably good enough. Tests should make you more productive not slow you down. Maintaining tests can slow you down. You get dimishing returns on adding more tests after a certain point
 6. I like using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
         
 <details>
