@@ -264,7 +264,7 @@ function useUser() {
 }
   
 // you only need to import one thing each time
-import { useContext } from "some-context-package"
+import { useSomething } from "some-context-package"
 
 function App() {
   const something = useSomething() // this looks better
