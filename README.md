@@ -11,7 +11,7 @@ If `react-philosophies` helped you in some way, consider [buying me a few cups o
 2. [Design for happiness](#-2-design-for-happiness)
 3. [Performance tips](#-3-performance-tips)
 4. [Testing principles](#-4-testing-principles)
-5. [Insights shared by contributors](#-5-insights-shared-by-contributors)
+5. [Insights shared by others](#-5-insights-shared-by-others)
 
 <details>
     <summary>The way this document is organized</summary>
@@ -29,7 +29,7 @@ It was actually difficult for me to separate my thoughts into the `design`, `per
     
 **💡 Comments, suggestions, violent reactions? I'd love to hear them!**
 
-If there's something that you think should be part of my reading list or/and if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue. Particularly, I've included the section [`Insights shared by contributors`](#-5-insights-shared-by-contributors), should you wish to add your own ideas 🙂. Broken links, grammar, formatting, and typographical error corrections are also welcome. Any contributions to improve `react-philosophies` whether big or small are always appreciated.
+If there's something that you think should be part of my reading list or/and if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue. Particularly, I've included the section [`Insights shared by others`](#-5-insights-shared-by-others), should you wish to add your own ideas 🙂. Broken links, grammar, formatting, and typographical error corrections are also welcome. Any contributions to improve `react-philosophies` whether big or small are always appreciated.
 
 ---
     
@@ -103,7 +103,7 @@ Most notably:
 11. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier.
 12. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically-detected code smells truly motivates me to reduce the technical debts of the application I'm working on!
 13. [`NextJS`](https://nextjs.org/) is an awesome framework.
-14. [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)! You don't have to do it dogmatically, but the idea behind it is great. I find that when I first write the API / how your component will be used before implementing it, this usually creates a better designed component than when I don't .
+14. [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)! You don't have to do it dogmatically, but the idea behind it is great. I find that when I first write the API / (how your component will be used before implementing it, this usually creates a better designed component than when I don't .
 
 ### 1.2 Code is just a necessary evil
 
@@ -867,10 +867,10 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 
 </details>
 
-## 🧘 5. Insights shared by contributors
+## 🧘 5. Insights shared by others
 
 If you'd like to share some of the things you think about when you write React code that I didn't touch upon, you can submit a PR and add them to this section. 
-Thank you all taking the time your ideas! 
+Thank you all for taking the time to share your ideas! 
         
 ### [Josh W Comeau](https://www.joshwcomeau.com/) 
 
