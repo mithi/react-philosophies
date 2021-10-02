@@ -609,7 +609,7 @@ const MemberCard = ({ id }: { id: string }) => {
 
 </details>
     
-Notice that in the `"✅  "better" solution"`, `SeeMore` and `Summary` are components that can be used not just by `Member`. It can be used perhaps by other objects such as `CurrentUser`, `Pet`, `Post`... anything that needs those specific functionality.
+Notice that in the `✅  "better" solution"`, `SeeMore` and `Summary` are components that can be used not just by `Member`. It can be used perhaps by other objects such as `CurrentUser`, `Pet`, `Post`... anything that needs those specific functionality.
 
 ### 💖 2.3 Keep your components small and simple
 
@@ -697,6 +697,7 @@ const ShopCategoryTile = ({
 
 ```tsx
 // split into two smaller components!
+
 const DisabledShopCategoryTile = ({ icon, label }: { icon: ReactNode, label: string }) => {
   return (
     <Tooltip title="Not available">
@@ -709,9 +710,9 @@ const DisabledShopCategoryTile = ({ icon, label }: { icon: ReactNode, label: str
 }
 
 type ShopCategoryTileProps = {
-  isBooked: boolean
   icon: ReactNode
   label: string
+  isBooked: boolean
   componentInsideModal: ReactNode
 }
 
@@ -838,7 +839,9 @@ const ShopCategoryTile = ({
 
 **💁‍♀️ TIP: [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)!**
 
-You don't have to do it dogmatically, but the idea behind it is great. I find that when I first write the API / (how your component will be used before implementing it, this usually creates a better designed component than when I don't.
+You don't have to follow RDD religiously, but the idea behind it is great. I find that when I first write the API (how the component will be used) before implementing it, this usually creates a better designed component than when I don't.
+
+> If your software solves the wrong problem or nobody can figure out how to use it, there’s something very bad going on. Until you’ve written about your software, you have no idea what you’ll be coding. -Tom Preston-Werner
 
 ### 💖 2.4 Duplication is far cheaper than the wrong abstraction
 
