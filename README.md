@@ -179,14 +179,14 @@ If you recognize that something is wrong, fix it right then and there. But if it
 - ❌ Excessive lines of code within a single file
 - ❌ Duplicate code which is syntactically identical (but may be formatted differently)
 - ❌ Functions or methods that may be hard to understand
-- ❌ Classes defined with a high number of functions or methods
+- ❌ Classes / Components defined with a high number of functions or methods
 - ❌ Excessive lines of code within a single function or method
 - ❌ Functions or methods with a high number of return statements
 - ❌ Duplicate code which is not identical but shares the same structure (e.g. variable names may differ)
 
 </details>
 
-Keep in mind that code smells don't necessarily mean that code should be changed. A code smell just tells you that you might be able to think of a better way to restructure that code and achieve the same functionality.
+Keep in mind that code smells don't necessarily mean that code should be changed. A code smell just informs you that you might be able to think of a better way to implement the same functionality.
 
 ### 1.4 You can do better
 
@@ -232,7 +232,7 @@ const MyComponent = () => {
 
 **💁‍♀️ TIP: Wrapping your custom context with a hook creates a better-looking API**
 
-Not only does it look better, you only have to import one thing instead of two.
+Not only does it look better, but you also only have to import one thing instead of two.
 
 <details>
     <summary>🙈 View example</summary>
@@ -243,10 +243,10 @@ Not only does it look better, you only have to import one thing instead of two.
 ```tsx
 // you need to import two things every time 
 import { useContext } from "react"
-import { userContext } from "some-context-package"
+import { SomethingContext } from "some-context-package"
 
 function App() {
-  const user = useContext(UserContext) // looks okay, but could be better
+  const user = useContext(SomethingContext) // looks okay, but could look better
   // blah
 }
 ```
@@ -254,9 +254,9 @@ function App() {
 ✅  Better
 ```tsx
   
-// on one file you declare this hoook
+// on one file you declare this hook
 function useUser() {
-  const context = useContext(UserContext)
+  const context = useContext(SomethingContext)
   if (context === undefined) {
     throw new Error('useUser must be used within a UserProvider')
   }
@@ -264,10 +264,10 @@ function useUser() {
 }
   
 // you only need to import one thing each time
-import { useUser } from "some-context-package"
+import { useContext } from "some-context-package"
 
 function App() {
-  const user = useUser() // this looks better
+  const something = useSomething() // this looks better
   // blah
 }  
 ```
@@ -293,7 +293,7 @@ function App() {
 9. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo`, and `useEffect`
 10. Do not put too many dependencies in `useCallback`, `useMemo`, and `useEffect`
 11. For simplicity, instead of having many `useState`s, consider using `useReducer` if some values of your state rely on other values of your state and previous state
-12. `Context` does not have to be global to your whole app. Put `Context` as low as possible in your component tree. Do this the same way you put variables, comments, states (and code in general) as close as possible to where it's relevant / being used.
+12. `Context` does not have to be global to your whole app. Put `Context` as low as possible in your component tree. Do this the same way you put variables, comments, states (and code in general) as close as possible to where they're relevant / being used.
 
 ### 💖 2.1 Avoid state management complexity by removing redundant states
 
@@ -322,7 +322,7 @@ const TriangleInfo = () => {
   const [areas, setArea] = useState<number | null>(null)
 
   useEffect(() => {
-    fetchTriangles().then(t => {
+    fetchTriangle().then(t => {
       setTriangleInfo(t)
       const h = computeHypotenuse(t.a, t.b)
       setHypotenuse(h)
@@ -367,7 +367,7 @@ const TriangleInfo = () => {
   } | null>(null)
 
   useEffect(() => {
-    fetchTriangles().then((r) => setTriangleInfo(r))
+    fetchTriangle().then((r) => setTriangleInfo(r))
   }, []);
 
   if (!triangleInfo) {
@@ -377,7 +377,7 @@ const TriangleInfo = () => {
   const { a, b } = triangeInfo
   const area = computeArea(a, b)
   const hypotenuse = computeHypotenuse(a, b))
-  const perimeter = computePerimeters(a, b, hypotenuse)
+  const perimeter = computePerimeter(a, b, hypotenuse)
  
   /*** show info here ****/
 };
