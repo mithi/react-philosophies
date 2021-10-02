@@ -11,26 +11,32 @@ If `react-philosophies` helped you in some way, consider [buying me a few cups o
 2. [Design for happiness](#-2-design-for-happiness)
 3. [Performance tips](#-3-performance-tips)
 4. [Testing principles](#-4-testing-principles)
+5. [Insights shared by contributors](#-5-insights-shared-by-contributors)
 
 <details>
     <summary>The way this document is organized</summary>
 
+<br/>
 It was actually difficult for me to separate my thoughts into the `design`, `performance`, and `testing`. I noticed that lot of designs intended for maintainability also make your application faster and easier to test. Apologies if the discussion appears to be cluttered at times.
+<br/>
 
 </details>
 
 <details>
-    <summary>Thanks for all the PRs 🚜, coffee ☕, recommended readings 📚, and sharing of ideas 💡 (View contributors) </summary>
+    <summary><strong>Thanks for all the PRs 🚜, coffee ☕, recommended readings 📚, and sharing of ideas 💡 (View contributors)</strong></summary>
 
 ---
     
 **💡 Comments, suggestions, violent reactions? I'd love to hear them!**
 
-If there's something that you think should be part of my reading list or/and if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue. Any contributions to improve `react-philosophies` whether big or small are always welcome and appreciated.
+If there's something that you think should be part of my reading list or/and if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue. Particularly, I've included the section [`Insights shared by contributors`](#-5-insights-shared-by-contributors), should you wish to add your own ideas 🙂. Broken links, grammar, formatting, and typographical error corrections are also welcome. Any contributions to improve `react-philosophies` whether big or small are always appreciated.
 
 ---
     
-Special thanks to the `r/reactjs` community for giving [very valuable suggestions](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) that helped improve the quality of this document.
+
+**💡 Special thanks to those who took the time to share their thoughts!**
+- The [`r/reactjs`](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) community
+- [Josh W Comeau](https://www.joshwcomeau.com/) (Check out his amazing course on [CSS](https://css-for-js.dev/))
 
 **☕ Coffee!**
 
@@ -92,12 +98,12 @@ Most notably:
 6. Understand the warning "Can't perform state update on unmounted component". [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
 7. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to.
 8. There is a reason why errors and warnings are displayed in the console.
-9. [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/) is your friend!
+9. Remember [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/)!
 10. [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
 11. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier.
 12. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically-detected code smells truly motivates me to reduce the technical debts of the application I'm working on!
 13. [`NextJS`](https://nextjs.org/) is an awesome framework.
-14. [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)! You don't have to do it dogmatically, but the idea behind it is great. I find that writing the API / how your component will be used before implementing it usually creates a better designed component than when I don't .
+14. [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)! You don't have to do it dogmatically, but the idea behind it is great. I find that when I first write the API / how your component will be used before implementing it, this usually creates a better designed component than when I don't .
 
 ### 1.2 Code is just a necessary evil
 
@@ -121,13 +127,27 @@ See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/wr
 
 Needless to say, the more you add dependencies, the more code you ship to the browser. Ask yourself, are you actually using the features which make a particular library great?
 
+<details>
+    <summary><strong><em>🙈  Do you really need it?</strong> View examples of dependencies / code you might not need</em></summary>
+
+<br/>
+
 1. Do you really need [`Redux`](https://redux.js.org/)? It's possible. But keep in mind that React is already a [state management library](https://kentcdodds.com/blog/application-state-management-with-react).
+
 2. Do you really need [`Apollo client`](https://www.apollographql.com/docs/react/) ? Apollo client has many awesome features, like manual normalization. However, it will significantly increase your bundle size. If your application only makes use of features that are not unique to Apollo client , consider using a smaller library such as [`react-query`](https://react-query.tanstack.com/comparison) or [`SWR`](https://github.com/vercel/swr) (or none at all).
+
 3. [`Axios`](https://github.com/axios/axios)? Axios is a great library with features that are not easily replicable with native `fetch`. But if the only reason for using Axios is that it has a better looking API, then consider just using a wrapper on top of fetch (such as [`redaxios`](https://github.com/developit/redaxios) or your own). Determine whether or not your application is actually using Axios's best features.
+
 4. [`Lodash`](https://lodash.com/)/[`underscoreJS`](https://underscorejs.org/)? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
+
 5. [`MomentJS`](https://momentjs.com/)? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
+
 6. You might not need `Context` for theming (`light`/`dark` mode), consider using [`css variables`](https://epicreact.dev/css-variables) instead.
+
 7. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
+<br/>
+
+</details>
 
 #### 1.2.2 Eliminate code with techniques not unique to `React`
 
@@ -153,7 +173,7 @@ See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2
 If you recognize that something is wrong, fix it right then and there. But if it's not that easy to fix or you don't have time to fix it at that moment, atleast add a comment (`FIXME` or `TODO`) with a concise explanation of the identified problem. Make sure everybody knows it is broken. It shows others that you care and that they should also do the same when they encounter those kinds of things.
 
 <details>
- <summary> 🙈 View examples of easy-to-catch code smells </summary>
+    <summary><strong>🙈 View examples of easy-to-catch code smells</strong></summary>
 
 - ❌ Methods or functions defined with a high number of arguments
 - ❌ Boolean logic that may be hard to understand
@@ -240,41 +260,59 @@ If you're working with really large numbers of items, you can memoize the some c
 
 ##### 🙈 Example 1
 
-You are tasked to display properties of each right triangle from a list
+You are tasked to display properties of a right triangle
 - the lengths of each of the three sides
 - the perimeter
 - the area
 
-A list of two numbers `{a: number, b: number}[]` should be fetched from an API. The two numbers represent the two shorter sides of a right triangle.
+The triangle is an object with two numbers `{a: number, b: number}` that should be fetched from an API. 
+The two numbers represent the two shorter sides of a right triangle.
 
 <details>
  <summary> ❌ View not-so-good Solution </summary>
 
 ```tsx
 const TriangleInfo = () => {
-  const [triangleInfo, setTriangleInfo] = useTriangles<{a: number, b: number}>([])
-  const [hypotenuses, setHypotenuses] = useState<number[]>([])
-  const [perimeters, setPerimeters] = useState<number[]>([])
-  const [areas, setAreas] = useState<number[]>([])
+  const [triangleInfo, setTriangleInfo] = use<{a: number, b: number} | null>(null)
+  const [hypotenuse, setHypotenuse] = useState<number | null>(null)
+  const [perimeter, setPerimeter] = useState<number | null>(null)
+  const [areas, setArea] = useState<number | null>(null)
 
   useEffect(() => {
-    fetchTriangles().then(r => {
-      setTriangleInfo(r)
-      setHypotenuses(r.map(t => computeHypotenuse(t.a, t.b))
-      setArea(r.map(t => computeArea(t.a, t.b))
+    fetchTriangles().then(t => {
+      setTriangleInfo(t)
+      const h = computeHypotenuse(t.a, t.b)
+      setHypotenuse(h)
+      const a = computeArea(t.a, t.b)
+      setArea(a))
     })
   }, [])
 
   useEffect(() => {
-    setHypotenuses(triangleInfo.map(t => computeHypotenuse(t.a, t.b))
-    setArea(triangleInfo.map(t => computeArea(t.a, t.b))
+    if(!triangleInfo) {
+      return
+    }
+    
+    const { a, b } = triangleInfo
+    const h = computeHypotenuse(a, b)
+    setHypotenuse(h)
+    const newArea = computeArea(a, b)
+    setArea(newArea)
   }, [triangleInfo])
 
   useEffect(() => {
-    const p = triangleInfo((t, i) => {
-      return computePerimeter(t.a, t.b, hypotenuse[i])
-    })
-  }, [triangleInfo, hypotenuses])
+    if(!triangleInfo) {
+      return
+    }
+
+    const { a, b } = triangleInfo
+    const p = computePerimeter(a, b, hypotenuse)
+    setPerimeter(p)
+  }, [triangleInfo, hypotenuse])
+  
+  if (!triangleInfo) {
+    return null
+  }
 
   /*** show info here ****/
 }
@@ -287,21 +325,24 @@ const TriangleInfo = () => {
 
 ```tsx
 const TriangleInfo = () => {
-  const [triangleInfo, setTriangleInfo] = useTriangles<{
+  const [triangleInfo, setTriangleInfo] = useState<{
     a: number;
     b: number;
-  }>([]);
+  } | null>(null)
 
   useEffect(() => {
-    fetchTriangles().then((r) => setTriangleInfo(r));
+    fetchTriangles().then((r) => setTriangleInfo(r))
   }, []);
 
-  const areas = triangleInfo.map((t) => computeArea(t.a, t.b));
-  const hypotenuses = triangleInfo.map((t) => computeHypotenuse(t.a, t.b));
-  const perimeters = triangleInfo.map((t, i) =>
-    computePerimeters(t.a, t.b, hypotenuses[i])
-  );
+  if (!triangleInfo) {
+    return null
+  }
 
+  const { a, b } = triangeInfo
+  const area = computeArea(a, b))
+  const hypotenuse = computeHypotenuse(a, b))
+  const perimeter = computePerimeters(a, b, hypotenuse)
+ 
   /*** show info here ****/
 };
 ```
@@ -318,11 +359,12 @@ Suppose you are assigned to design a component which:
 4. Only displays the points that are NOT farther than the current `maxDistance` from the origin `(0, 0)`
 
 <details>
-  <summary> ❌ View not-so-good Solution </summary>
+  <summary> ❌ View a not-so-good Solution </summary>
   
 ```tsx
 type SortBy = 'x' | 'y'
-const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x' 
+const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x'
+
 const Points = () => {
   const [points, setPoints] = useState<{x: number, y: number}[]>([])
   const [filteredPoints, setFilteredPoints] = useState<{x: number, y: number}[]>([])
@@ -335,22 +377,30 @@ const Points = () => {
   }, [])
   
   useEffect(() => {
-    setSortedPoints(sortPoints(points, sortBy))
+    const sorted = sortPoints(points, sortBy)
+    setSortedPoints(sorted)
   }, [sortBy, points])
 
   useEffect(() => {
-    setFilteredPoints(sortedPoints.filter(p => getDistance(p.x, p.y) < maxDistance))
+    const filtered = sortedPoints.filter(p => getDistance(p.x, p.y) < maxDistance)
+    setFilteredPoints(filtered)
   }, [sortedPoints, maxDistance])
 
   const otherSortBy = toggle(sortBy)
 
   return (
     <>
-      <button onClick={() => setSortBy(otherSortBy)}>Sort by: {otherSortBy}<button>
-      <button onClick={() => setMaxDistance(maxDistance + 10)}>Increase max distance<button>
+      <button onClick={() => setSortBy(otherSortBy)}>
+        Sort by: {otherSortBy}
+      <button>
+      <button onClick={() => setMaxDistance(maxDistance + 10)}>
+        Increase max distance
+      <button>
       Showing only points that are less than {maxDistance} units away from origin (0, 0)
       Currently sorted by: '{sortBy}' (ascending)
-      <ol>{filteredPoints.map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>}
+      <ol>
+        {filteredPoints.map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>)}
+      </ol>
     </>
   )
 }
@@ -359,13 +409,14 @@ const Points = () => {
 </details>
 
 <details>
-  <summary> ✅ View "better" Solution </summary>
+  <summary> ✅ View a "better" Solution </summary>
 
 ```tsx
 
 // NOTE: You can also use useReducer instead
 type SortBy = 'x' | 'y'
 const toggle = (current: SortBy): SortBy => current === 'x' ? : 'y' : 'x'
+
 const Points = () => {
   const [points, setPoints] = useState<{x: number, y: number}[]>([])
   const [maxDistance, setMaxDistance] = useState<number>(100)
@@ -377,18 +428,21 @@ const Points = () => {
   
 
   const otherSortBy = toggle(sortBy)
+  const filtedPoints = points.filter(p => getDistance(p.x, p.y) < maxDistance)
+  const sortedFilteredPoints = sortPoints(filteredPoints, sortBy).map(
+    p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>
+  )
+
   return (
     <>
-      <button onClick={() => setSortBy(otherSortBy)}>Sort by: {otherSortBy} <button>
-      <button onClick={() => setMaxDistance(maxDistance + 10)}>Increase max distance<button>
+      <button onClick={() => setSortBy(otherSortBy)}>
+        Sort by: {otherSortBy} <button>
+      <button onClick={() => setMaxDistance(maxDistance + 10)}>
+        Increase max distance
+      <button>
       Showing only points that are less than {maxDistance} units away from origin (0, 0)
       Currently sorted by: '{sortBy}' (ascending)
-      <ol>{
-        sortPoints(
-          points.filter(p => getDistance(p.x, p.y) < maxDistance),
-          sortBy
-        ).map(p => <li key={`${p.x}|{p.y}`}>({p.x}, {p.y})</li>
-      }
+      <ol>{sortedFilteredPoints}</ol>
     </>
   )
 }
@@ -408,53 +462,64 @@ When we do this, the components will be loosely coupled. Loose coupling means th
 
 ##### 🙈 Example
 
-Create a `UserCard` component that displays two components: `Summary` and `SeeMore`. The `SeeMore` component includes presenting the `age` and `bio` of the `user`. Include a button to toggle between showing and hiding the `age` and `bio` of the `user`.
-
-The `Summary` component displays the profile picture of the user and also his `title`, `firstName` and `lastName` (e.g. `Mr. Vincenzo Cassano`). Clicking the user's name should take you to the user's personal site. The `Summary` component may also have other functionalities. (Say for example, randomly changing the font, size of the image, and background color whenever this component is clicked... for brevity let's call this "the random styling feature")
-
-The `UserCard` calls the hook `useUser` that returns an object with the type below.
+Create a `MemberCard` component that displays two components: `Summary` and `SeeMore`.
+The `MemberCard` takes in the prop `id` . The `MemberCard` consumes the hook `useMember` which takes in an `id` and returns the corresponding `Member` information.
 
 ```ts
-type User = {
-  firstName: string;
-  lastName: string;
-  title: string;
-  imgUrl: string;
-  webUrl: string;
-  age: number;
-  bio: string;
-  /****** 100 or more fields ******/
-};
+type Member = {
+  id: string
+  firstName: string
+  lastName: string
+  title: string
+  imgUrl: string
+  webUrl: string
+  age: number
+  bio: string
+  /****** 100 more fields ******/
+}
 ```
 
+The `SeeMore` component includes presenting the `age` and `bio` of the `member`.
+Include a button to toggle between showing and hiding the `age` and `bio` of the `member`.
+
+The `Summary` component displays the picture of the `member`. 
+It also displays his `title`, `firstName` and `lastName` (e.g. `Mr. Vincenzo Cassano`). 
+Clicking the `member`'s name should take you to the `member`'s personal site.
+The `Summary` component may also have other functionalities. 
+(Say for example, whenever this component is clicked...
+the font, size of the image, and background color is randomly changed...
+for brevity let's call this "the random styling feature")
+
 <details>
-  <summary>❌ View not-so-good solution</summary>
+  <summary>❌ View a not-so-good solution</summary>
   
 ```tsx
 
-const Summary = ({ user } : { user: User }) => {
+const Summary = ({ member } : { member: Member }) => {
   /*** include "the random styling feature" ***/
   return (
     <>
-      <img src={user.imgUrl} />
-      <a href={user.webUrl}>{user.title}. {user.firstName} {user.lastName}</a>
+      <img src={member.imgUrl} />
+      <a href={member.webUrl} >
+        {member.title}. {member.firstName} {member.lastName}
+      </a>
     </>
   )
 }
 
-const SeeMore = ({ user }: { user: User }) => {
+const SeeMore = ({ member }: { member: Member }) => {
   const [seeMore, setSeeMore] = useState<boolean>(false)
   return (
     <>
       <button onClick={() => setSeeMore(!seeMore)}>See more</button>
-      {seeMore && <>AGE: {user.age} | BIO: {user.bio}</>}
+      {seeMore && <>AGE: {member.age} | BIO: {member.bio}</>}
     </>
   )
 }
 
-const UserCard = () => {
-  const user = useUser()
-  return <><Summary user={user} /><SeeMore user={user} /></>
+const MemberCard = ({ id }: { id: string })) => {
+  const member = useMember(id)
+  return <><Summary member={member} /><SeeMore member={member} /></>
 }
 
 ````
@@ -463,21 +528,21 @@ const UserCard = () => {
 
 
 <details>
-  <summary>✅ View "better" solution</summary>
+  <summary>✅ View a "better" solution</summary>
 
 ```tsx
 
-const Summary = ({ imgUrl, webUrl, displayName }: { imgUrl: string, webUrl: string, displayName: string }) => {
+const Summary = ({ imgUrl, webUrl, name }: { imgUrl: string, webUrl: string, header: string }) => {
   /*** include "the random styling feature" ***/
   return (
     <>
       <img src={imgUrl} />
-      <a href={webUrl}>{displayName}</a>
+      <a href={webUrl}>{header}</a>
     </>
   )
 }
 
-const SeeMore = ({ componentToShow }: {componentToShow: ReactNode }) => {
+const SeeMore = ({ componentToShow }: { componentToShow: ReactNode }) => {
   const [seeMore, setSeeMore] = useState<boolean>(false)
   return (
     <>
@@ -488,11 +553,12 @@ const SeeMore = ({ componentToShow }: {componentToShow: ReactNode }) => {
 }
 
 
-const UserCard = () => {
-  const { title, firstName, lastName, webUrl, imgUrl, age, bio } = useUser()
+const MemberCard = ({ id }: { id: string }) => {
+  const { title, firstName, lastName, webUrl, imgUrl, age, bio } = useMember(id)
+  const header = `${title}. ${firstName} ${lastName}`
   return (
     <>
-      <Summary displayName={`${title}. ${firstName} ${lastName}`} {...{imgUrl, webUrl}} />
+      <Summary {...{ imgUrl, webUrl, header }} />
       <SeeMore componentToShow={<>AGE: {age} | BIO: {bio}</>} />
     </>
   )
@@ -500,6 +566,8 @@ const UserCard = () => {
 ````
 
 </details>
+    
+Notice that in the `"✅  "better" solution"`, `SeeMore` and `Summary` are components that can be used not necessarily by `Member`. It can be used perhaps by other objects such as `CurrentUser`, `Pet`.. anything that needs those specific functionality.
 
 ### 💖 2.3 Keep your components small and simple
 
@@ -532,8 +600,9 @@ The requirement is to display special kinds of buttons you can click to shop for
 - If the category is booked, the button's background should be `green`
 - If the category has available items and is not booked, the button's background should be `red`
 - For each category, it's corresponding button has a unique label and icon
+
 <details>
-    <summary>❌ Not-so-good solution</summary>
+    <summary>❌ View a not-so-good solution</summary>
 
 ```tsx
 type ShopCategoryTileProps = {
@@ -582,7 +651,7 @@ const ShopCategoryTile = ({
 </details>
           
 <details>
-    <summary>✅ View "better" solution</summary>
+    <summary>✅ View a "better" solution</summary>
 
 ```tsx
 // split into two smaller components!
@@ -642,7 +711,7 @@ const ShopCategoryTile = ({
 Note: The example above is a simplified version of a component that I've actually seen in production
 
 <details>
-    <summary>❌ View not-so-good solution</summary>
+    <summary>❌ View a not-so-good solution</summary>
 
 ```tsx
 const ShopCategoryTile = ({
@@ -655,23 +724,23 @@ const ShopCategoryTile = ({
   const dispatch = useDispatch();
   const location = useLocation();
   const history = useHistory();
-  const { items } = useContext(OrderingFormContext);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [hover, setHover] = useState(false);
+  const { items } = useContext(OrderingFormContext)
+  const [openDialog, setOpenDialog] = useState(false)
+  const [hover, setHover] = useState(false)
   const isBooked =
-    !item.disabled && !!items?.some((a: Item) => a.itemGroup === item.group);
-  const isDisabled = item.disabled || !offers;
-  const RenderComponent = item.component;
+    !item.disabled && !!items?.some((a: Item) => a.itemGroup === item.group)
+  const isDisabled = item.disabled || !offers
+  const RenderComponent = item.component
 
   useEffect(() => {
     if (openDialog && !location.pathname.includes("item")) {
-      setOpenDialog(false);
+      setOpenDialog(false)
     }
   }, [location.pathname]);
   const handleClose = useCallback(() => {
-    setOpenDialog(false);
-    history.goBack();
-  }, []);
+    setOpenDialog(false)
+    history.goBack()
+  }, [])
 
   return (
     <GridStyled
@@ -719,8 +788,8 @@ const ShopCategoryTile = ({
         )}
       </Dialog>
     </GridStyled>
-  );
-};
+  )
+}
 ```
 
 </details>
@@ -753,7 +822,8 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 12. If you're going to use a package for your forms, I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
 
 <details>
-    <summary>View selected KCD articles about performance</summary>
+    <summary><strong>View selected KCD articles about performance</strong></summary>
+
 
 - [KCD: State Colocation will make your React app faster](https://kentcdodds.com/blog/state-colocation-will-make-your-react-app-faster)
 - [KCD: When to `useMemo` and `useCallback`](https://kentcdodds.com/blog/usememo-and-usecallback)
@@ -780,7 +850,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 6. I like using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
         
 <details>
-    <summary>View selected KCD articles about testing</summary>
+    <summary><strong>View selected KCD articles about testing</strong></summary>
 
 - [KCD: Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)
 - [KCD: Stop mocking fetch](https://kentcdodds.com/blog/stop-mocking-fetch)
@@ -796,3 +866,16 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 - [KCD: Effective Snapshot Testing](https://kentcdodds.com/blog/effective-snapshot-testing)
 
 </details>
+
+## 🧘 5. Insights shared by contributors
+
+If you'd like to share some of the things you think about when you write React code that I didn't touch upon, you can submit a PR and add them to this section. 
+Thank you all taking the time your ideas! 
+        
+### [Josh W Comeau](https://www.joshwcomeau.com/) 
+
+> A similar principle I feel much more strongly about is not to pass _setters_ that have too much power. For example, I might pass an `updateEmail` function instead of a `setUser` function. I don't want random components to be able to _change_ things they don't have any business changing.
+
+> Not only should a component have a single responsibility, it should also have a clear spot on the spectrum of abstraction. On one end, we have generic building blocks like `<Button>`, `<Heading>`, `<Modal>`. On the other end, we have one-off templates like `<Homepage>` and `<ContactForm>`. Every component should have a clear spot on this spectrum. A `<Button>` component shoudn't have a _user_ prop, since users are a higher-abstract concept and `Button` is a low-abstract component.
+
+(Note, the above is taken from his response to my email... really appreciate that he took the time to share his ideas 🙂)
