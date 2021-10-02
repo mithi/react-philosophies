@@ -188,7 +188,7 @@ If you recognize that something is wrong, fix it right then and there. But if it
 
 Keep in mind that code smells don't necessarily mean that code should be changed. A code smell just tells you that you might be able to think of a better way to restructure that code and achieve the same functionality.
 
-### 1.4 You can do bette
+### 1.4 You can do better
 
 **💁‍♀️ TIP: Remember that you may not need to put your `state` as a dependency because you can pass a callback function instead.**
 
