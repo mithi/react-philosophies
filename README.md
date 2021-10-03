@@ -114,7 +114,7 @@ Most notably:
 
 > "If I had more time, I would have written a shorter letter" - Blaise Pascal, Mark Twain, among others..
 
-See also: [Write Less Code - Richard Hariss (Svelte)](https://svelte.dev/blog/write-less-code), [Washing Code: Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
+See also: [Write Less Code - Richard Harris (Svelte)](https://svelte.dev/blog/write-less-code), [Washing Code: Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
 
 **TL;DR**
 
