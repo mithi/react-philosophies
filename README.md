@@ -246,7 +246,7 @@ import { useContext } from "react"
 import { SomethingContext } from "some-context-package"
 
 function App() {
-  const user = useContext(SomethingContext) // looks okay, but could look better
+  const something = useContext(SomethingContext) // looks okay, but could look better
   // blah
 }
 ```
@@ -255,10 +255,10 @@ function App() {
 ```tsx
   
 // on one file you declare this hook
-function useUser() {
+function useSomething() {
   const context = useContext(SomethingContext)
   if (context === undefined) {
-    throw new Error('useUser must be used within a UserProvider')
+    throw new Error('useSomething must be used within a SomethingProvider')
   }
   return context
 }
@@ -267,7 +267,7 @@ function useUser() {
 import { useSomething } from "some-context-package"
 
 function App() {
-  const something = useSomething() // this looks better
+  const something = useSomething() // looks better
   // blah
 }  
 ```
