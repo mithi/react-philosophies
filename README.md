@@ -49,6 +49,7 @@ If there's something that you think should be part of my reading list or/and if 
 - [@fengzilong](https://github.com/fengzilong)
 - [@ankitwww](https://github.com/ankitwww)
 - [@dzakki](https://github.com/dzakki)
+- [@metonym](https://github.com/metonym)
 
 **📚 Readings recommended to me**
 
@@ -274,6 +275,12 @@ function App() {
 
 </details>
 
+**💁‍♀️ TIP: [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)!**
+
+You don't have to follow RDD religiously, but the idea behind it is great. I find that when I first write the API (how the component will be used) before implementing it, this usually creates a better designed component than when I don't.
+
+> If your software solves the wrong problem or nobody can figure out how to use it, there’s something very bad going on. Until you’ve written about your software, you have no idea what you’ll be coding. -Tom Preston-Werner
+
 ## 🧘 2. Design for happiness
 
 > "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler
@@ -286,7 +293,7 @@ function App() {
 2. 💖 Pass the banana, not the gorilla holding the banana and the entire jungle (prefer passing primitives as props)
 3. 💖 Keep your components small and simple - the single responsibility principle!
 4. 💖 Duplication is far cheaper than the wrong abstraction (avoid premature / inappropriate generalization)
-5. Avoid prop drilling by using composition ([KCD: Prop Drilling](https://kentcdodds.com/blog/prop-drilling)). `Context` is not the solution for every state sharing problem
+5. Avoid prop drilling by using composition ([Michael Jackson](https://www.youtube.com/watch?v=3XaXKiXtNjw)). `Context` is not the solution for every state sharing problem
 6. Split giant `useEffect`s to smaller independent ones ([KCD: Myths about useEffect](https://epicreact.dev/myths-about-useeffect))
 7. Extract logic to hooks and helper functions
 8. To break a large component, it might be a good idea to have `logical` and `presentational` components (but not necessarily, use your best judgement)
@@ -836,12 +843,6 @@ const ShopCategoryTile = ({
 ```
 
 </details>
-
-**💁‍♀️ TIP: [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)!**
-
-You don't have to follow RDD religiously, but the idea behind it is great. I find that when I first write the API (how the component will be used) before implementing it, this usually creates a better designed component than when I don't.
-
-> If your software solves the wrong problem or nobody can figure out how to use it, there’s something very bad going on. Until you’ve written about your software, you have no idea what you’ll be coding. -Tom Preston-Werner
 
 ### 💖 2.4 Duplication is far cheaper than the wrong abstraction
 
