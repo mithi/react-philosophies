@@ -82,10 +82,10 @@ Most notably:
 - [Martin Fowler](https://martinfowler.com)
 - [Dan Abramov](https://overreacted.io/)
 - [Bob Martin](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) (Not saying I agree with his political views)
-- [wiki.c2.com](https://wiki.c2.com/)
-- [sapegin/washingcode-book](https://github.com/sapegin/washingcode-book/)
 - [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode)
 - [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code)
+- [wiki.c2.com](https://wiki.c2.com/)
+- [sapegin/washingcode-book](https://github.com/sapegin/washingcode-book/)
 
 ## 🧘 1. The Bare Minimum
 
@@ -166,7 +166,7 @@ See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2
 
 ### 1.3 Don't leave broken windows unattended
 
-> A window gets broken at an apartment building, but no one fixes it. It's left broken. Then something else gets broken. Maybe it's an accident, maybe not, but it isn't fixed either. Graffiti starts to appear. More and more damage accumulates. Very quickly you get an exponential ramp. The whole building decays. Tenants move out. Crime moves in. And you've lost the game. It's all over. You don't want to let technical debt get out of hand. You want to stop the small problems before they grow into big problems. - [Don't Live with Broken Windows: A Conversation with Andy Hunt and Dave Thomas, Part I](https://www.artima.com/articles/dont-live-with-broken-windows)
+> A window gets broken at an apartment building, but no one fixes it. Then something else gets broken. Maybe it's an accident, maybe not, but it isn't fixed either. Graffiti starts to appear. More and more damage accumulates. Tenants move out. Crime moves in. And you've lost the game. It's all over. You don't want to let technical debt get out of hand. You want to stop the small problems before they grow into big problems. - [Don't Live with Broken Windows: A Conversation with Andy Hunt and Dave Thomas, Part I](https://www.artima.com/articles/dont-live-with-broken-windows)
 
 **Detect code smells and do something about them if you need to**. 
 
@@ -329,13 +329,7 @@ const TriangleInfo = () => {
   const [areas, setArea] = useState<number | null>(null)
 
   useEffect(() => {
-    fetchTriangle().then(t => {
-      setTriangleInfo(t)
-      const h = computeHypotenuse(t.a, t.b)
-      setHypotenuse(h)
-      const a = computeArea(t.a, t.b)
-      setArea(a)
-    })
+    fetchTriangle().then(t => setTriangleInfo(t))
   }, [])
 
   useEffect(() => {
@@ -378,7 +372,7 @@ const TriangleInfo = () => {
   }, []);
 
   if (!triangleInfo) {
-    return null
+    return
   }
 
   const { a, b } = triangeInfo
@@ -859,16 +853,16 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 **TL;DR**
 
 1. **If you think it’s slow, prove it with a benchmark.** _"In the face of ambiguity, refuse the temptation to guess."_ The profiler of [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (chrome extension) is your friend!
-2. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
-3. Use `useMemo` mostly just for expensive calculations
-4. For `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
-5. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
-6. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
-7. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
-8. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but It would also make your app faster (state colocation)
-9. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
-10. You can optimize `context` by separating the `state` and the `dispatch` function
-11. A smaller bundle size usually also means a faster app. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
+2. Use `useMemo` mostly just for expensive calculations
+3. For `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
+4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
+5. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
+6. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but It would also make your app faster (state colocation)
+7. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
+8. You can optimize `context` by separating the `state` and the `dispatch` function
+9. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
+10. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)11. A smaller bundle size usually also means a faster app. 
+11. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
 12. If you're going to use a package for your forms, I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
 
 <details>
