@@ -526,7 +526,7 @@ It also displays his `title`, `firstName` and `lastName` (e.g. `Mr. Vincenzo Cas
 Clicking the `member`'s name should take you to the `member`'s personal site.
 The `Summary` component may also have other functionalities. 
 (Example, whenever this component is clicked...
-the font, size of the image, and background color is randomly changed...
+the font, size of the image, and background color are randomly changed...
 for brevity let's call this "the random styling feature")
 
 <details>
@@ -861,8 +861,8 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 7. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
 8. You can optimize `context` by separating the `state` and the `dispatch` function
 9. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
-10. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)11. A smaller bundle size usually also means a faster app. 
-11. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
+10. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
+11. A smaller bundle size usually also means a faster app. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
 12. If you're going to use a package for your forms, I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
 
 <details>
