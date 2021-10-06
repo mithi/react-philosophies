@@ -170,19 +170,19 @@ See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2
 
 **Detect code smells and do something about them if you need to**. 
 
-If you recognize that something is wrong, fix it right then and there. But if it's not that easy to fix or you don't have time to fix it at that moment, atleast add a comment (`FIXME` or `TODO`) with a concise explanation of the identified problem. Make sure everybody knows it is broken. It shows others that you care and that they should also do the same when they encounter those kinds of things.
+If you recognize that something is wrong, fix it right then and there. But if it's not that easy to fix or you don't have time to fix it at that moment, at least add a comment (`FIXME` or `TODO`) with a concise explanation of the identified problem. Make sure everybody knows it is broken. It shows others that you care and that they should also do the same when they encounter those kinds of things.
 
 <details>
     <summary><strong>🙈 View examples of easy-to-catch code smells</strong></summary>
 
-- ❌ Methods or functions defined with a high number of arguments
+- ❌ Methods or functions defined with a large number of arguments
 - ❌ Boolean logic that may be hard to understand
 - ❌ Excessive lines of code within a single file
 - ❌ Duplicate code which is syntactically identical (but may be formatted differently)
 - ❌ Functions or methods that may be hard to understand
-- ❌ Classes / Components defined with a high number of functions or methods
+- ❌ Classes / Components defined with a large number of functions or methods
 - ❌ Excessive lines of code within a single function or method
-- ❌ Functions or methods with a high number of return statements
+- ❌ Functions or methods with a large number of return statements
 - ❌ Duplicate code which is not identical but shares the same structure (e.g. variable names may differ)
 
 </details>
@@ -624,9 +624,9 @@ A component with various responsibilities is difficult to reuse. If you want to 
 
 > Try to describe that component in one sentence. If it is only responsible for one thing then it should be simple to describe. If it uses the word ‘and’ or ‘or’ then it is likely that your component fails this test.
 
-Inspect the component's states, the props and hooks it consumes, as well as variables and methods declared inside the component (They shouldn't be too many). Ask yourself: Do these things actually work together to fulfill the component's purpose? If some of them don't, consider moving those somewhere else or breaking down your big component to smaller ones.
+Inspect the component's state, the props and hooks it consumes, as well as variables and methods declared inside the component (there shouldn't be too many). Ask yourself: Do these things actually work together to fulfill the component's purpose? If some of them don't, consider moving those somewhere else or breaking down your big component into smaller ones.
 
-(The paragraphs above is based on my 2015 article: [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665))
+(The paragraphs above are based on my 2015 article: [Three things I learned from Sandi Metz’s book as a non-Ruby programmer](https://medium.com/@mithi/review-sandi-metz-s-poodr-ch-1-4-wip-d4daac417665))
 
 ##### 🙈 Example
 
@@ -852,11 +852,11 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 
 **TL;DR**
 
-1. **If you think it’s slow, prove it with a benchmark.** _"In the face of ambiguity, refuse the temptation to guess."_ The profiler of [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (chrome extension) is your friend!
+1. **If you think it’s slow, prove it with a benchmark.** _"In the face of ambiguity, refuse the temptation to guess."_ The profiler of [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (Chrome extension) is your friend!
 2. Use `useMemo` mostly just for expensive calculations
-3. For `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
-4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
-5. Stop punching yourself everytime you blink (fix slow renders before fixing rerenders)
+3. Use `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
+4. Make sure your `React.memo`, `useCallback` or `useMemo` are doing what you think they're doing (is it really preventing rerendering?)
+5. Stop punching yourself every time you blink (fix slow renders before fixing rerenders)
 6. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but It would also make your app faster (state colocation)
 7. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
 8. You can optimize `context` by separating the `state` and the `dispatch` function
