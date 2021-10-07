@@ -37,6 +37,7 @@ If there's something that you think should be part of my reading list or/and if 
 **💡 Special thanks to those who took the time to share their thoughts!**
 - The [`r/reactjs`](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) community
 - [Josh W Comeau](https://www.joshwcomeau.com/) (Check out his amazing course on [CSS](https://css-for-js.dev/))
+- [@unpunnyfuns](https://github.com/unpunnyfuns)
 
 **☕ Coffee!**
 
@@ -50,12 +51,14 @@ If there's something that you think should be part of my reading list or/and if 
 - [@ankitwww](https://github.com/ankitwww)
 - [@dzakki](https://github.com/dzakki)
 - [@metonym](https://github.com/metonym)
+- [@sapegin](https://github.com/sapegin)
 
 **📚 Readings recommended to me**
 
 - [Ben Moseley and Peter Marks: Out of the Tar Pit (2006)](http://curtclifton.net/papers/MoseleyMarks06a.pdf), recommended by [@icyjoseph](https://github.com/icyjoseph)
 - [`goldbergyoni/nodebestpractices`](https://github.com/goldbergyoni/nodebestpractices), recommended by [@rstacruz](https://github.com/rstacruz)
 - [Dan Abramov: Writing Resilient Components](https://overreacted.io/writing-resilient-components/), recommended by [Mon Quindoza](https://ph.linkedin.com/in/monquindoza)
+- [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript), [3rs-of-software-architecture](https://github.com/ryanmcdermott/3rs-of-software-architecture), [ryanmcdermott/code-review-tips](https://github.com/ryanmcdermott/code-review-tips)
 
 </details>
 
@@ -164,9 +167,7 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI (original)](http://c2.com/xp/YouArentGonnaNeedIt.html), [Jack Diederich: Stop Writing Classes](https://www.youtube.com/watch?v=o9pEzgHorH0)
 
-### 1.3 Don't leave broken windows unattended
-
-> A window gets broken at an apartment building, but no one fixes it. Then something else gets broken. Maybe it's an accident, maybe not, but it isn't fixed either. Graffiti starts to appear. More and more damage accumulates. Tenants move out. Crime moves in. And you've lost the game. It's all over. You don't want to let technical debt get out of hand. You want to stop the small problems before they grow into big problems. - [Don't Live with Broken Windows: A Conversation with Andy Hunt and Dave Thomas, Part I](https://www.artima.com/articles/dont-live-with-broken-windows)
+### 1.3 Leave it better than you found it
 
 **Detect code smells and do something about them if you need to**. 
 
@@ -855,7 +856,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 1. **If you think it’s slow, prove it with a benchmark.** _"In the face of ambiguity, refuse the temptation to guess."_ The profiler of [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (Chrome extension) is your friend!
 2. Use `useMemo` mostly just for expensive calculations
 3. Use `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
-4. Make sure your `React.memo`, `useCallback` or `useMemo` are doing what you think they're doing (is it really preventing rerendering?)
+4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
 5. Stop punching yourself every time you blink (fix slow renders before fixing rerenders)
 6. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but It would also make your app faster (state colocation)
 7. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
