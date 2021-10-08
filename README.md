@@ -38,6 +38,7 @@ If there's something that you think should be part of my reading list or/and if 
 - The [`r/reactjs`](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) community
 - [Josh W Comeau](https://www.joshwcomeau.com/) (Check out his amazing course on [CSS](https://css-for-js.dev/))
 - [@unpunnyfuns](https://github.com/unpunnyfuns)
+- [@cassidoo](https://github.com/cassidoo)
 
 **☕ Coffee!**
 
@@ -55,10 +56,10 @@ If there's something that you think should be part of my reading list or/and if 
 
 **📚 Readings recommended to me**
 
+- [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript), [3rs-of-software-architecture](https://github.com/ryanmcdermott/3rs-of-software-architecture), [ryanmcdermott/code-review-tips](https://github.com/ryanmcdermott/code-review-tips)
 - [Ben Moseley and Peter Marks: Out of the Tar Pit (2006)](http://curtclifton.net/papers/MoseleyMarks06a.pdf), recommended by [@icyjoseph](https://github.com/icyjoseph)
 - [`goldbergyoni/nodebestpractices`](https://github.com/goldbergyoni/nodebestpractices), recommended by [@rstacruz](https://github.com/rstacruz)
 - [Dan Abramov: Writing Resilient Components](https://overreacted.io/writing-resilient-components/), recommended by [Mon Quindoza](https://ph.linkedin.com/in/monquindoza)
-- [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript), [3rs-of-software-architecture](https://github.com/ryanmcdermott/3rs-of-software-architecture), [ryanmcdermott/code-review-tips](https://github.com/ryanmcdermott/code-review-tips)
 - [Matthieu Kern: Stop checking if your component is mounted](https://medium.com/doctolib/react-stop-checking-if-your-component-is-mounted-3bb2568a4934), recommended by [@Pierre-CLIND](https://github.com/Pierre-CLIND)
     
 </details>
@@ -77,19 +78,15 @@ A lot of these things may feel like very basic and common-sense. But surprisingl
 
 `react-philosophies` is inspired by various places I've stumbled upon at different points of my coding journey.
 
-Most notably:
+Here are a few of them:
 
 - [Tim Peters: Zen of Python (Pep 20)](https://www.python.org/dev/peps/pep-0020/)
 - [Dev Cheney: Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
 - [Sandi Metz](https://sandimetz.com/)
 - [Kent C Dodds](https://kentcdodds.com)
-- [Martin Fowler](https://martinfowler.com)
-- [Dan Abramov](https://overreacted.io/)
-- [Bob Martin](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882) (Not saying I agree with his political views)
-- [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode)
-- [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code)
-- [wiki.c2.com](https://wiki.c2.com/)
-- [sapegin/washingcode-book](https://github.com/sapegin/washingcode-book/)
+- [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode), [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code), [sapegin/washingcode-book](https://github.com/sapegin/washingcode-book/), [wiki.c2.com](https://wiki.c2.com/)
+
+> As a seasoned developer I have certain quirks, opinions, and common patterns that I fall back on. Having to explain to another person why I am approaching a problem in a particular way is really good for helping me break bad habits and challenge my assumptions, or for providing validation for good problem solving skills. - [Coraline Ada Ehmke](https://where.coraline.codes)
 
 ## 🧘 1. The Bare Minimum
 
@@ -101,7 +98,7 @@ Most notably:
 4. [Always add keys](https://epicreact.dev/why-react-needs-a-key-prop) whenever you use `map` to display components.
 5. [Only call hooks at the top level](https://reactjs.org/docs/hooks-rules.html). Don’t call Hooks inside loops, conditions, or nested functions.
 6. Understand the warning "Can't perform state update on unmounted component". [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
-7. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to.
+7. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to. ([Accounting for Failures In React](https://brandondail.com/posts/fault-tolerance-react))
 8. There is a reason why errors and warnings are displayed in the console.
 9. Remember [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/)!
 10. [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
@@ -287,7 +284,7 @@ You don't have to follow RDD religiously, but the idea behind it is great. I fin
 
 > "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler
 
-> "The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read." ― Robert C. Martin
+> "The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read." ― Robert C. Martin [(Not saying I agree with his political views)](https://techexplained.substack.com/p/tech-bullshit-explained-uncle-bob)
 
 **TL;DR**
 
@@ -916,7 +913,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 ## 🧘 5. Insights shared by others
 
 If you'd like to share some of the things you think about when you write React code that I didn't touch upon, you can submit a PR and add them to this section. 
-Thank you all for taking the time to share your ideas! 
+Thanks for taking the time to share your ideas! 
         
 ### [Josh W Comeau](https://www.joshwcomeau.com/) 
 
@@ -924,4 +921,4 @@ Thank you all for taking the time to share your ideas!
 
 > Not only should a component have a single responsibility, it should also have a clear spot on the spectrum of abstraction. On one end, we have generic building blocks like `<Button>`, `<Heading>`, `<Modal>`. On the other end, we have one-off templates like `<Homepage>` and `<ContactForm>`. Every component should have a clear spot on this spectrum. A `<Button>` component shoudn't have a _user_ prop, since users are a higher-abstract concept and `Button` is a low-abstract component.
 
-(Note, the above is taken from his response to my email... really appreciate that he took the time to share his ideas 🙂)
+(Note, the above is taken from his response to my email... I really appreciate that he took the time to share his ideas 🙂)
