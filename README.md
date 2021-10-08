@@ -74,8 +74,6 @@ If there's something that you think should be part of my reading list or/and if 
 - a living document and will evolve over time as my experience grows
 - mostly techniques which are variations of basic [refactoring](https://en.wikipedia.org/wiki/Code_refactoring) methods, [SOLID](https://en.wikipedia.org/wiki/SOLID) principles, and [extreme programming](https://en.wikipedia.org/wiki/Extreme_programming) ideas... just applied to `React` specifically 🙂
 
-A lot of these things may feel like very basic and common-sense. But surprisingly, I've worked with large complex applications where these things are not taken into consideration. The examples I present here are based on code I have actually seen in production.
-
 `react-philosophies` is inspired by various places I've stumbled upon at different points of my coding journey.
 
 Here are a few of them:
