@@ -4,6 +4,9 @@
 
 If `react-philosophies` helped you in some way, consider [buying me a few cups of coffee ☕☕☕](https://ko-fi.com/minimithi). This motivates me to create more `React` "stuff"! 🙂
 
+> You have to think about what is the right way, even when you have the right idea of what the building blocks should be, there is huge flexibility in how you decide to put the whole system together. It is a craft... and it has a lot to do with valuing simplicity over complexity. Many people do have a tendency to make things more complicated than they need to be... The more stuff you throw into a system, the more complicated it gets and the more likely it is not going to work properly. - Barbara Liskov
+
+
 ## Table of Contents
 
 0. [Introduction](#-0-introduction)
@@ -36,15 +39,15 @@ If there's something that you think should be part of my reading list or/and if 
 
 **💡 Special thanks to those who took the time to share their thoughts!**
 - The [`r/reactjs`](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) community
-- [Josh W Comeau](https://www.joshwcomeau.com/) (Check out his amazing course on [CSS](https://css-for-js.dev/))
+- [Josh W Comeau](https://www.joshwcomeau.com/)
 - [@unpunnyfuns](https://github.com/unpunnyfuns)
 - [@cassidoo](https://github.com/cassidoo)
 
 **☕ Coffee!**
 
-- [Myles](https://Ko-fi.com/home/coffeeshop?txid=0fac8f5b-994e-4208-b767-7872a9e2519e&mode=public&img=ogsomeoneboughtme)
+- [Myles](https://github.com/myles-banner)
 - [Daniel](https://Ko-fi.com/home/coffeeshop?txid=7d71404a-fa0c-419d-9808-46ea520c913f&mode=public&img=ogsomeoneboughtme)
-- [Ankit](https://Ko-fi.com/home/coffeeshop?txid=8c1254ef-0e5a-43a0-8475-e3567e2c8dab&mode=public&img=ogbuymeacoffee)
+- [Ankit](https://github.com/ankitwww)
 
 **🚜 Pull Requests**
 
@@ -78,10 +81,9 @@ If there's something that you think should be part of my reading list or/and if 
 
 Here are a few of them:
 
-- [Tim Peters: Zen of Python (Pep 20)](https://www.python.org/dev/peps/pep-0020/)
-- [Dev Cheney: Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
 - [Sandi Metz](https://sandimetz.com/)
 - [Kent C Dodds](https://kentcdodds.com)
+- [Zen of Python (PEP 20)](https://www.python.org/dev/peps/pep-0020/), [Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
 - [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode), [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code), [sapegin/washingcode-book](https://github.com/sapegin/washingcode-book/), [wiki.c2.com](https://wiki.c2.com/)
 
 > As a seasoned developer I have certain quirks, opinions, and common patterns that I fall back on. Having to explain to another person why I am approaching a problem in a particular way is really good for helping me break bad habits and challenge my assumptions, or for providing validation for good problem solving skills. - [Coraline Ada Ehmke](https://where.coraline.codes)
@@ -95,7 +97,7 @@ Here are a few of them:
 3. [Be honest about your dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies). Fix `exhaustive-deps` warnings / errors on your `useMemo`'s, `useCallback`'s and `useEffect`'s. You can try ["The latest ref pattern"](https://epicreact.dev/the-latest-ref-pattern-in-react) to keep your callbacks always up-to-date without unnecessary rerenders.
 4. [Always add keys](https://epicreact.dev/why-react-needs-a-key-prop) whenever you use `map` to display components.
 5. [Only call hooks at the top level](https://reactjs.org/docs/hooks-rules.html). Don’t call Hooks inside loops, conditions, or nested functions.
-6. Understand the warning "Can't perform state update on unmounted component". [See PR: facebook/react/pull/22114](https://github.com/facebook/react/pull/22114), [Reddit/u/free_username17](https://www.reddit.com/r/reactjs/comments/pvwb6m/comment/heevt8g)
+6. Understand the warning "Can't perform state update on unmounted component". [facebook/react/pull/22114](https://github.com/facebook/react/pull/22114)
 7. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to. ([Accounting for Failures In React](https://brandondail.com/posts/fault-tolerance-react))
 8. There is a reason why errors and warnings are displayed in the console.
 9. Remember [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/)!
@@ -110,11 +112,7 @@ Here are a few of them:
 
 > "One of my most productive days was throwing away 1000 lines of code." - Eric S. Raymond
 
-> "I hate code and I want as little of it as possible in our product" - Jack Diederich
-
-> "If I had more time, I would have written a shorter letter" - Blaise Pascal, Mark Twain, among others..
-
-See also: [Write Less Code - Richard Harris (Svelte)](https://svelte.dev/blog/write-less-code), [Washing Code: Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
+See also: [Write Less Code - Richard Harris](https://svelte.dev/blog/write-less-code), [Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
 
 **TL;DR**
 
@@ -150,8 +148,6 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 #### 1.2.2 Eliminate code with techniques not unique to `React`
 
-`React` is just `Javascript` and `Javascript` is just code
-
 1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can.
 2. If there is no discernable performance difference, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
 
@@ -161,7 +157,7 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 **Y**ou **A**ren't **G**onna **N**eed **I**t! Always implement things when you actually need them, never when you just foresee that you may need them.
 
-See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt), [C2: YAGNI (original)](http://c2.com/xp/YouArentGonnaNeedIt.html), [Jack Diederich: Stop Writing Classes](https://www.youtube.com/watch?v=o9pEzgHorH0)
+See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt)
 
 ### 1.3 Leave it better than you found it
 
@@ -220,7 +216,7 @@ const MyComponent = () => {
         
 ✅ BETTER 
 const I_AM_A_CONSTANT =  { x: 5, y: 2 }
-const functionToCall = (x: string => `Hello ${x}!`)
+const functionToCall = (x: string) => `Hello ${x}!`
 const MyComponent = () => {
     /* I will use functionToCall and I_AM_A_CONSTANT */
 }
@@ -272,11 +268,9 @@ function App() {
 
 </details>
 
-**💁‍♀️ TIP: [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is a [cool concept](https://rathes.me/blog/en/readme-driven-development/)!**
+**💁‍♀️ TIP: Think about how your component will be used before coding it**
 
-You don't have to follow RDD religiously, but the idea behind it is great. I find that when I first write the API (how the component will be used) before implementing it, this usually creates a better designed component than when I don't.
-
-> If your software solves the wrong problem or nobody can figure out how to use it, there’s something very bad going on. Until you’ve written about your software, you have no idea what you’ll be coding. -Tom Preston-Werner
+[Writing APIs is hard](http://sweng.the-davies.net/Home/rustys-api-design-manifesto). [`README Driven Development`](https://tom.preston-werner.com/2010/08/23/readme-driven-development.html) is one useful technique to help design better APIs.  I'm not saying we should [RDD](https://rathes.me/blog/en/readme-driven-development/) religiously, just saying that the idea behind it is great. I find that when I first write the API (how the component will be used) before implementing it, this usually creates a better designed component than when I don't.
 
 ## 🧘 2. Design for happiness
 
@@ -374,7 +368,7 @@ const TriangleInfo = () => {
 
   const { a, b } = triangeInfo
   const area = computeArea(a, b)
-  const hypotenuse = computeHypotenuse(a, b))
+  const hypotenuse = computeHypotenuse(a, b)
   const perimeter = computePerimeter(a, b, hypotenuse)
  
   /*** show info here ****/
@@ -488,13 +482,13 @@ const Points = () => {
 
 ### 💖 2.2 Pass the banana, not the gorilla holding the banana and the entire jungle
 
-> You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong, creator of Erlang
+> You wanted a banana but what you got was a gorilla holding the banana and the entire jungle. - Joe Armstrong
 
 To avoid falling into this trap, it's a good idea to pass mostly primitives (`boolean`, `string`, `number`, etc) types as props. (Passing primitives is also a good idea if you want to use `React.memo` for optimization)
 
 > A component should just know enough to do its job and nothing more. As much as possible, components should be able to collaborate with others without knowing what they are and what they do.
 
-When we do this, the components will be loosely coupled. Loose coupling means that the degree of dependency between two components is low. Loose coupling makes it easier to change, replace, or remove components without affecting other components. See also: [stackoverflow:2832017](https://stackoverflow.com/questions/2832017/what-is-the-difference-between-loose-coupling-and-tight-coupling-in-the-object-o)
+When we do this, the components will be more loosely coupled, the degree of dependency between two components will be lower. Loose coupling makes it easier to change, replace, or remove components without affecting other components. [stackoverflow:2832017](https://stackoverflow.com/questions/2832017/what-is-the-difference-between-loose-coupling-and-tight-coupling-in-the-object-o)
 
 ##### 🙈 Example
 
@@ -840,12 +834,12 @@ const ShopCategoryTile = ({
 Avoid premature / inappropriate generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
 I highly recommend reading [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction).
 
-See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces), [C2 Wiki: The Expensive Setup Smell](https://wiki.c2.com/?ExpensiveSetUpSmell), [C2 Wiki: Premature Generalization](https://wiki.c2.com/?PrematureGeneralization)
-
+See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces)/[The Expensive Setup Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)/[Premature Generalization](https://wiki.c2.com/?PrematureGeneralization)
         
 ## 🧘 3. Performance tips
-
-> Premature optimization is the root of all evil - Tony Hoare (popularized by Donald Knuth)
+> Premature optimization is the root of all evil - Tony Hoare
+        
+> One accurate measurement is worth a thousand expert opinions. - Grace Hopper
 
 **TL;DR**
 
@@ -879,7 +873,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 
 ## 🧘 4. Testing principles
 
-> Write tests. Not too many. Mostly integration. - Guillermo Rauch, creator of Socket.io (and other awesome things)
+> Write tests. Not too many. Mostly integration. - Guillermo Rauch
 
 **TL;DR**
 
