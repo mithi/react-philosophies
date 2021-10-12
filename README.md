@@ -314,7 +314,7 @@ The two numbers represent the two shorter sides of a right triangle.
 
 ```tsx
 const TriangleInfo = () => {
-  const [triangleInfo, setTriangleInfo] = use<{a: number, b: number} | null>(null)
+  const [triangleInfo, setTriangleInfo] = useState<{a: number, b: number} | null>(null)
   const [hypotenuse, setHypotenuse] = useState<number | null>(null)
   const [perimeter, setPerimeter] = useState<number | null>(null)
   const [areas, setArea] = useState<number | null>(null)
