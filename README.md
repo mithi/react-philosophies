@@ -112,7 +112,7 @@ Here are a few of them:
 
 > "One of my most productive days was throwing away 1000 lines of code." - Eric S. Raymond
 
-See also: [Write Less Code - Richard Harris](https://svelte.dev/blog/write-less-code), [Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
+See also: [Write Less Code - Rich Harris](https://svelte.dev/blog/write-less-code), [Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
 
 **TL;DR**
 
@@ -135,13 +135,15 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 3. [`Axios`](https://github.com/axios/axios)? Axios is a great library with features that are not easily replicable with native `fetch`. But if the only reason for using Axios is that it has a better looking API, then consider just using a wrapper on top of fetch (such as [`redaxios`](https://github.com/developit/redaxios) or your own). Determine whether or not your application is actually using Axios's best features.
 
-4. [`Lodash`](https://lodash.com/)/[`underscoreJS`](https://underscorejs.org/)? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
+4. [`Decimal.js`](https://github.com/MikeMcl/decimal.js/)? Maybe [Big.js](https://github.com/MikeMcl/big.js/) or [other smaller libraries](https://www.npmtrends.com/big.js-vs-bignumber.js-vs-decimal.js-vs-mathjs) are sufficient.
 
-5. [`MomentJS`](https://momentjs.com/)? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
+5. [`Lodash`](https://lodash.com/)/[`underscoreJS`](https://underscorejs.org/)? [you-dont-need/You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
 
-6. You might not need `Context` for theming (`light`/`dark` mode), consider using [`css variables`](https://epicreact.dev/css-variables) instead.
+6. [`MomentJS`](https://momentjs.com/)? [you-dont-need/You-Dont-Need-Momentjs](https://github.com/you-dont-need/You-Dont-Need-Momentjs)
 
-7. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
+7. You might not need `Context` for theming (`light`/`dark` mode), consider using [`css variables`](https://epicreact.dev/css-variables) instead.
+
+8. You might not even need `Javascript`. CSS is powerful. [you-dont-need/You-Dont-Need-JavaScript](https://github.com/you-dont-need/You-Dont-Need-JavaScript)
 <br/>
 
 </details>
@@ -168,6 +170,8 @@ If you recognize that something is wrong, fix it right then and there. But if it
 <details>
     <summary><strong>🙈 View examples of easy-to-catch code smells</strong></summary>
 
+<br/>
+
 - ❌ Methods or functions defined with a large number of arguments
 - ❌ Boolean logic that may be hard to understand
 - ❌ Excessive lines of code within a single file
@@ -188,7 +192,8 @@ Keep in mind that code smells don't necessarily mean that code should be changed
 
 You don't need to put `setState` (from `useState`) and `dispatch` (from `useReducer`) in your dependency array for hooks like `useEffect` and `useCallback`. ESLint will NOT complain because React guarantees their stability.
 
-🙈 Example
+<details>
+    <summary>🙈 View example</summary>
 
 ```tsx
 ❌ Not-so-good
@@ -198,6 +203,8 @@ const decrement = useCallback(() => setCount(count - 1), [count])
 ✅ BETTER
 const decrement = useCallback(() => setCount(count => (count - 1)), [])
 ```
+
+</details>
 
 **💁‍♀️ TIP: If your `useMemo` or `useCallback` doesn't have a dependency, you might be using it wrong.**
 
@@ -301,6 +308,12 @@ See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-s
 
 ##### 🙈 Example 1
 
+<details>
+    <summary><strong> 📝🖊️ View the business requirement / problem statement </strong></summary>
+
+
+---
+
 You are tasked to display properties of a right triangle
 - the lengths of each of the three sides
 - the perimeter
@@ -308,6 +321,10 @@ You are tasked to display properties of a right triangle
 
 The triangle is an object with two numbers `{a: number, b: number}` that should be fetched from an API. 
 The two numbers represent the two shorter sides of a right triangle.
+
+---
+
+</details>
 
 <details>
  <summary> ❌ View not-so-good Solution </summary>
@@ -379,6 +396,12 @@ const TriangleInfo = () => {
   
 ##### 🙈 Example 2
 
+<details>
+    <summary><strong> 📝🖊️ View the business requirement / problem statement </strong></summary>
+
+
+---
+
 Suppose you are assigned to design a component which:
 
 1. Fetches a list of unique points from an API
@@ -386,6 +409,10 @@ Suppose you are assigned to design a component which:
 3. Includes a button to change the `maxDistance` (increase by `10` each time, initial value should be `100`)
 4. Only displays the points that are NOT farther than the current `maxDistance` from the origin `(0, 0)`
 5. Assume that the list only has 100 items (meaning you don't need to worry about optimization). If you're working with really large numbers of items, you can memoize some computations with `useMemo`.
+
+---
+
+</details>
 
 <details>
   <summary> ❌ View a not-so-good Solution </summary>
@@ -492,6 +519,12 @@ When we do this, the components will be more loosely coupled, the degree of depe
 
 ##### 🙈 Example
 
+<details>
+    <summary><strong> 📝🖊️ View the business requirement / problem statement </strong></summary>
+
+
+---
+
 Create a `MemberCard` component that displays two components: `Summary` and `SeeMore`.
 The `MemberCard` takes in the prop `id` . The `MemberCard` consumes the hook `useMember` which takes in an `id` and returns the corresponding `Member` information.
 
@@ -519,6 +552,10 @@ The `Summary` component may also have other functionalities.
 (Example, whenever this component is clicked...
 the font, size of the image, and background color are randomly changed...
 for brevity let's call this "the random styling feature")
+
+---
+
+</details>
 
 <details>
   <summary>❌ View a not-so-good solution</summary>
@@ -621,6 +658,12 @@ Inspect the component's state, the props and hooks it consumes, as well as varia
 
 ##### 🙈 Example
 
+<details>
+    <summary><strong> 📝🖊️ View the business requirement / problem statement </strong></summary>
+
+
+---
+
 The requirement is to display special kinds of buttons you can click to shop for items of a specific category. For example, the user can select bags, chairs, and food.
 
 - Each button opens a modal you can use to select and "save" items
@@ -635,6 +678,10 @@ The requirement is to display special kinds of buttons you can click to shop for
 - If the category has available items and is not booked, the button's background should be `red`
 - For each category, it's corresponding button has a unique label and icon
 
+---
+
+</details>
+   
 <details>
     <summary>❌ View a not-so-good solution</summary>
 
