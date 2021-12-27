@@ -283,7 +283,7 @@ function App() {
 
 > "Any fool can write code that a computer can understand. Good programmers write code that humans can understand." - Martin Fowler
 
-> "The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read." ― Robert C. Martin [(Not saying I agree with his political views)](https://techexplained.substack.com/p/tech-bullshit-explained-uncle-bob)
+> "The ratio of time spent reading versus writing is well over 10 to 1. We are constantly reading old code as part of the effort to write new code. So if you want to go fast, if you want to get done quickly, if you want your code to be easy to write, make it easy to read." ― Robert C. Martin [(Not saying I agree with his political views)](https://www.getrevue.co/profile/tech-bullshit/issues/tech-bullshit-explained-uncle-bob-830918)
 
 **TL;DR**
 
