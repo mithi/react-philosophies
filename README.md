@@ -93,7 +93,7 @@ Here are a few of them:
 ### 1.1 Recognize when the computer is smarter than you
 
 1. Statically analyze your code with [`ESLint`](https://eslint.org/). Enable the [`rule-of-hooks`](https://www.npmjs.com/package/eslint-plugin-react-hooks) and `exhaustive-deps` rule to catch `React`-specific errors.
-2. Enable ["strict"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) mode. It's 2021. 
+2. Enable ["strict"](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode) mode. It's 2022. 
 3. [Be honest about your dependencies](https://overreacted.io/a-complete-guide-to-useeffect/#two-ways-to-be-honest-about-dependencies). Fix `exhaustive-deps` warnings / errors on your `useMemo`'s, `useCallback`'s and `useEffect`'s. You can try ["The latest ref pattern"](https://epicreact.dev/the-latest-ref-pattern-in-react) to keep your callbacks always up-to-date without unnecessary rerenders.
 4. [Always add keys](https://epicreact.dev/why-react-needs-a-key-prop) whenever you use `map` to display components.
 5. [Only call hooks at the top level](https://reactjs.org/docs/hooks-rules.html). Don’t call Hooks inside loops, conditions, or nested functions.
