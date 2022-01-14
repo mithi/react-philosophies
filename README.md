@@ -114,11 +114,6 @@ Here are a few of them:
 
 See also: [Write Less Code - Rich Harris](https://svelte.dev/blog/write-less-code), [Code is evil - Artem Sapegin](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Code_is_evil.md)
 
-**TL;DR**
-
-1. Think first before adding another dependency
-2. YAGNI!
-
 #### 1.2.1 Think first before adding another dependency
 
 Needless to say, the more you add dependencies, the more code you ship to the browser. Ask yourself, are you actually using the features which make a particular library great?
@@ -184,9 +179,48 @@ Keep in mind that code smells don't necessarily mean that code should be changed
 
 > Is the CL more complex than it should be? Check this at every level of the CL—are individual lines too complex? Are functions too complex? Are classes too complex? “Too complex” usually means “can’t be understood quickly by code readers.” It can also mean “developers are likely to introduce bugs when they try to call or modify this code.”- [Google Engineering Practices: What to look for in a code review](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
 
-💁‍ Some tips:
-    1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can.
-    2. If there is no discernable performance difference and if possible, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
+
+**💁‍♀️ TIP: Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can.**
+
+<details>
+    <summary>🙈 Example of early returns </summary>
+
+```tsx
+# ❌ Not-so-good
+
+if (loading) {
+  return <LoadingScreen />
+} else if (error) {
+  return <ErrorScreen />
+} else if (data) {
+  return <DataScreen />
+} else {
+  throw new Error('This should be impossible')
+}
+
+# ✅ BETTER
+
+
+if (loading) {
+  return <LoadingScreen />
+} 
+
+if (error) {
+  return <ErrorScreen />
+}
+
+if (data) {
+  return <DataScreen />
+}
+
+throw new Error('This should be impossible')
+```
+
+</details>
+
+**💁‍♀️ TIP: Prefer chained higher-order functions over loops**
+
+If there is no discernable performance difference and if possible, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc) [Stackoverflow: What is the advantage of using a function over loops?](https://stackoverflow.com/questions/34402198/what-is-the-advantage-of-using-a-function-over-loops)
 
 
 ### 1.4 You can do better
