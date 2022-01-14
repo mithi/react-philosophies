@@ -84,7 +84,7 @@ Here are a few of them:
 - [Sandi Metz](https://sandimetz.com/)
 - [Kent C Dodds](https://kentcdodds.com)
 - [Zen of Python (PEP 20)](https://www.python.org/dev/peps/pep-0020/), [Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
-- [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode), [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code), [sapegin/washingcode-book](https://github.com/sapegin/washingcode-book/), [wiki.c2.com](https://wiki.c2.com/)
+- [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode), [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code), [sapegin/washingcode-book](https://github.com/sapegin/washingcode-book/)
 
 > As a seasoned developer I have certain quirks, opinions, and common patterns that I fall back on. Having to explain to another person why I am approaching a problem in a particular way is really good for helping me break bad habits and challenge my assumptions, or for providing validation for good problem solving skills. - [Coraline Ada Ehmke](https://where.coraline.codes)
 
@@ -117,8 +117,7 @@ See also: [Write Less Code - Rich Harris](https://svelte.dev/blog/write-less-cod
 **TL;DR**
 
 1. Think first before adding another dependency
-2. Eliminate code with techniques not unique to `React`
-3. Don't be clever. YAGNI!
+2. YAGNI!
 
 #### 1.2.1 Think first before adding another dependency
 
@@ -148,22 +147,17 @@ Needless to say, the more you add dependencies, the more code you ship to the br
 
 </details>
 
-#### 1.2.2 Eliminate code with techniques not unique to `React`
-
-1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can.
-2. If there is no discernable performance difference, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
-
-#### 1.2.3 Don't be clever. YAGNI!
+#### 1.2.2 Don't be clever. YAGNI!
 
 > "What could happen with my software in the future? Oh yeah, maybe this and that. Let’s implement all these things since we are working on this part anyway. That way it’s future-proof."
 
-**Y**ou **A**ren't **G**onna **N**eed **I**t! Always implement things when you actually need them, never when you just foresee that you may need them.
+**Y**ou **A**ren't **G**onna **N**eed **I**t! Always implement things when you actually need them, never when you just foresee that you may need them. The less code the better! ([Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt))
 
-See also: [Martin Fowler: YAGNI](https://martinfowler.com/bliki/Yagni.html), [C2 Wiki: You Arent Gonna Need It!](https://wiki.c2.com/?YouArentGonnaNeedIt)
+Related section: [2.4 Duplication is far cheaper than the wrong abstraction](#-24-duplication-is-far-cheaper-than-the-wrong-abstraction)
 
 ### 1.3 Leave it better than you found it
 
-**Detect code smells and do something about them if you need to**. 
+**1.3.1 Detect code smells and do something about them if you need to**. 
 
 If you recognize that something is wrong, fix it right then and there. But if it's not that easy to fix or you don't have time to fix it at that moment, at least add a comment (`FIXME` or `TODO`) with a concise explanation of the identified problem. Make sure everybody knows it is broken. It shows others that you care and that they should also do the same when they encounter those kinds of things.
 
@@ -185,6 +179,15 @@ If you recognize that something is wrong, fix it right then and there. But if it
 </details>
 
 Keep in mind that code smells don't necessarily mean that code should be changed. A code smell just informs you that you might be able to think of a better way to implement the same functionality.
+
+**1.3.2 Merciless Refactoring. Simple is better than complex.**
+
+> Is the CL more complex than it should be? Check this at every level of the CL—are individual lines too complex? Are functions too complex? Are classes too complex? “Too complex” usually means “can’t be understood quickly by code readers.” It can also mean “developers are likely to introduce bugs when they try to call or modify this code.”- [Google Engineering Practices: What to look for in a code review](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
+
+💁‍ Some tips:
+    1. Simplify [complex conditionals](https://github.com/sapegin/washingcode-book/blob/master/manuscript/Avoid_conditions.md) and exit early if you can.
+    2. If there is no discernable performance difference and if possible, replace traditional loops with chained higher-order functions (`map`, `filter`, `find`, `findIndex`, `some`, etc)
+
 
 ### 1.4 You can do better
 
@@ -881,6 +884,8 @@ const ShopCategoryTile = ({
 Avoid premature / inappropriate generalization. If your implementation for a simple feature requires a huge overhead, consider other options.
 I highly recommend reading [Sandi Metz: The Wrong Abstraction](https://sandimetz.com/blog/2016/1/20/the-wrong-abstraction).
 
+> A particular type of complexity is over-engineering, where developers have made the code more generic than it needs to be, or added functionality that isn’t presently needed by the system. Encourage developers to solve the problem they know needs to be solved now, not the problem that the developer speculates might need to be solved in the future. The future problem should be solved once it arrives and you can see its actual shape and requirements in the physical universe. - [Google Engineering Practices: What to look for in a code review](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
+
 See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces)/[The Expensive Setup Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)/[Premature Generalization](https://wiki.c2.com/?PrematureGeneralization)
         
 ## 🧘 3. Performance tips
@@ -892,8 +897,8 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 
 1. **If you think it’s slow, prove it with a benchmark.** _"In the face of ambiguity, refuse the temptation to guess."_ The profiler of [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (Chrome extension) is your friend!
 2. Use `useMemo` mostly just for expensive calculations
-3. Use `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types
-4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering?)
+3. If you're going to use `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types.
+4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering? Can you demonstrate empirically that using them on your case has significant performance gains?)
 5. Stop punching yourself every time you blink (fix slow renders before fixing rerenders)
 6. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but It would also make your app faster (state colocation)
 7. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
