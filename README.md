@@ -30,14 +30,19 @@ It was actually difficult for me to separate my thoughts into the `design`, `per
 
 ---
     
-**💡 Comments, suggestions, violent reactions? I'd love to hear them!**
+#### ❤️ Comments, suggestions, violent reactions? I'd love to hear them!
 
-If there's something that you think should be part of my reading list or/and if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue. Particularly, I've included the section [`Insights shared by others`](#-5-insights-shared-by-others), should you wish to add your own ideas 🙂. Broken links, grammar, formatting, and typographical error corrections are also welcome. Any contributions to improve `react-philosophies` whether big or small are always appreciated.
+If there's something that you think should be part of my reading list or/and if you have great ideas that you think I should include here, don't hesitate to submit a PR or an issue. Particularly, I've included the section [`Insights shared by others`](#-5-insights-shared-by-others), should you wish to add your own ideas 🙂. Broken links, grammar, formatting, and typographical error corrections are also welcome. Any contribution to improve `react-philosophies` whether big or small is always appreciated.
 
 ---
     
 
-**💡 Special thanks to those who took the time to share their thoughts!**
+#### ❤️ Special thanks to those who took the time contribute!
+    
+_Note, the following is not an exhaustive list, if you've contributed to this project and you don't see your name included, feel free to submit an PR that adds your name here. Thanks!_  
+    
+**💡 Comments and suggestions**
+
 - The [`r/reactjs`](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) community
 - [Josh W Comeau](https://www.joshwcomeau.com/)
 - [@unpunnyfuns](https://github.com/unpunnyfuns)
@@ -57,7 +62,7 @@ If there's something that you think should be part of my reading list or/and if 
 - [@metonym](https://github.com/metonym)
 - [@sapegin](https://github.com/sapegin)
 
-**📚 Readings recommended to me**
+**📚 Suggested Readings**
 
 - [ryanmcdermott/clean-code-javascript](https://github.com/ryanmcdermott/clean-code-javascript), [3rs-of-software-architecture](https://github.com/ryanmcdermott/3rs-of-software-architecture), [ryanmcdermott/code-review-tips](https://github.com/ryanmcdermott/code-review-tips)
 - [Ben Moseley and Peter Marks: Out of the Tar Pit (2006)](http://curtclifton.net/papers/MoseleyMarks06a.pdf), recommended by [@icyjoseph](https://github.com/icyjoseph)
@@ -102,9 +107,8 @@ Here are a few of them:
 8. There is a reason why errors and warnings are displayed in the console.
 9. Remember [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/)!
 10. [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
-11. [`Typescript`](https://www.typescriptlang.org/) will make your life so much easier.
+11. [`Typescript`](https://www.typescriptlang.org/) and frameworks such as [`NextJS`](https://nextjs.org/) make your life so much easier.
 12. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically-detected code smells truly motivates me to reduce the technical debts of the application I'm working on!
-13. [`NextJS`](https://nextjs.org/) is an awesome framework.
 
 ### 1.2 Code is just a necessary evil
 
@@ -331,11 +335,10 @@ function App() {
 5. Avoid prop drilling by using composition ([Michael Jackson](https://www.youtube.com/watch?v=3XaXKiXtNjw)). `Context` is not the solution for every state sharing problem
 6. Split giant `useEffect`s to smaller independent ones ([KCD: Myths about useEffect](https://epicreact.dev/myths-about-useeffect))
 7. Extract logic to hooks and helper functions
-8. To break a large component, it might be a good idea to have `logical` and `presentational` components (but not necessarily, use your best judgement)
-9. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo`, and `useEffect`
-10. Do not put too many dependencies in `useCallback`, `useMemo`, and `useEffect`
-11. For simplicity, instead of having many `useState`s, consider using `useReducer` if some values of your state rely on other values of your state and previous state
-12. `Context` does not have to be global to your whole app. Put `Context` as low as possible in your component tree. Do this the same way you put variables, comments, states (and code in general) as close as possible to where they're relevant / being used.
+8. Prefer having mostly primitives as dependencies to `useCallback`, `useMemo`, and `useEffect`
+9. Do not put too many dependencies in `useCallback`, `useMemo`, and `useEffect`
+10. For simplicity, instead of having many `useState`s, consider using `useReducer` if some values of your state rely on other values of your state and previous state
+11. `Context` does not have to be global to your whole app. Put `Context` as low as possible in your component tree. Do this the same way you put variables, comments, states (and code in general) as close as possible to where they're relevant / being used.
 
 ### 💖 2.1 Avoid state management complexity by removing redundant states
 
@@ -932,8 +935,8 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 1. **If you think it’s slow, prove it with a benchmark.** _"In the face of ambiguity, refuse the temptation to guess."_ The profiler of [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (Chrome extension) is your friend!
 2. Use `useMemo` mostly just for expensive calculations
 3. If you're going to use `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types.
-4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering? Can you demonstrate empirically that using them on your case has significant performance gains?)
-5. Stop punching yourself every time you blink (fix slow renders before fixing rerenders)
+4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering? Can you demonstrate empirically that using them on your case has significant performance gains? [Memoization can sometimes make your app worse](https://kentcdodds.com/blog/usememo-and-usecallback), so keep an eye on that!)
+5. Stop punching yourself every time you blink ([fix slow renders before fixing rerenders](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render))
 6. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but It would also make your app faster (state colocation)
 7. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
 8. You can optimize `context` by separating the `state` and the `dispatch` function
