@@ -6,6 +6,9 @@ If `react-philosophies` helped you in some way, consider [buying me a few cups o
 
 > You have to think about what is the right way, even when you have the right idea of what the building blocks should be, there is huge flexibility in how you decide to put the whole system together. It is a craft... and it has a lot to do with valuing simplicity over complexity. Many people do have a tendency to make things more complicated than they need to be... The more stuff you throw into a system, the more complicated it gets and the more likely it is not going to work properly. - Barbara Liskov
 
+## Translations to other languages
+
+- [Chinese](https://github.com/Leecason/react-philosophies-cn) by [@Leecason](https://github.com/Leecason)
 
 ## Table of Contents
 
