@@ -719,7 +719,7 @@ The requirement is to display special kinds of buttons you can click to shop for
 - If the category has no items available, the button's background should be `grey`
 - If the category is booked, the button's background should be `green`
 - If the category has available items and is not booked, the button's background should be `red`
-- For each category, it's corresponding button has a unique label and icon
+- For each category, its corresponding button has a unique label and icon
 
 ---
 
@@ -940,8 +940,8 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 3. If you're going to use `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types.
 4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering? Can you demonstrate empirically that using them on your case has significant performance gains? [Memoization can sometimes make your app worse](https://kentcdodds.com/blog/usememo-and-usecallback), so keep an eye on that!)
 5. Stop punching yourself every time you blink ([fix slow renders before fixing rerenders](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render))
-6. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but It would also make your app faster (state colocation)
-7. `Context` should be logically separated, do not add to many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
+6. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but it would also make your app faster (state colocation)
+7. `Context` should be logically separated, do not add too many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
 8. You can optimize `context` by separating the `state` and the `dispatch` function
 9. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
 10. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
@@ -973,7 +973,7 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 2. Make sure that you're not testing implementation details - things which users do not use, see, or even know about
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job
 5. You'll know you implemented correct tests when you rarely have to change tests when you refactor code given the same user behavior
-5. For the front-end, you don't need 100% code coverage, about 70% is probably good enough. Tests should make you more productive not slow you down. Maintaining tests can slow you down. You get dimishing returns on adding more tests after a certain point
+5. For the front-end, you don't need 100% code coverage, about 70% is probably good enough. Tests should make you more productive not slow you down. Maintaining tests can slow you down. You get diminishing returns on adding more tests after a certain point
 6. I like using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
         
 <details>
