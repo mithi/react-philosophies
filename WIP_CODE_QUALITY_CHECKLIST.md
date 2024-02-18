@@ -1,4 +1,6 @@
-# CODE QUALITY Checklist 
+🚧 🚧 🚧 This article is a WORK IN PROGRESS (DRAFT) 🚧 🚧 🚧 
+
+# REACT CODE QUALITY CHECK LIST (WIP / DRAFT)
 
 I noticed that I keep writing the same review comments over  and over again for the last 3 months so I'm writing down this check list. 
 
