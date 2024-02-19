@@ -8,7 +8,7 @@ Ideally, your PR should not include too many changes. Split a huge PR to several
 
 - ✅ I have kept the following in mind as I was writing my code
   - ✅ Single Responsibility Principle to avoid god components and methods
-  - ✅ Loose Coupling, Sependency Injection, Complex logic simplification 
+  - ✅ Loose Coupling, Dependency Injection, Complex logic simplification 
   - ✅ Component Composition model for crafting reusable code
   - ✅ The PR Checklist (https://gist.github.com/mithi/2ed103e3068fd7460485ecd418d78bd0)
 
