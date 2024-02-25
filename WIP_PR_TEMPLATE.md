@@ -4,20 +4,20 @@
 
 # Pledge of Code Quality 
 
-- [ ] To the best of my ability, I have made sure that the code I have written is as simple and as straight forward as possible.
+- [ ] To the best of my ability, I have made sure that the code I have written is as simple and as straightforward as possible.
 
 - [ ] I have kept the following in mind as I was writing my code:
-  - [ ] [Single responsibility principle](https://github.com/mithi/react-philosophies/tree/main?tab=readme-ov-file#-23-keep-your-components-small-and-simple) to avoid god components and methods
+  - [ ] The [single responsibility principle](https://github.com/mithi/react-philosophies/tree/main?tab=readme-ov-file#-23-keep-your-components-small-and-simple) to avoid god components and methods
   - [ ] Dependency Injection techniques like [render props](https://legacy.reactjs.org/docs/render-props.html) for loose coupling
-  - [ ] The [component composition model](https://legacy.reactjs.org/docs/composition-vs-inheritance.html) for crafting reusable code
+  - [ ] [Component composition](https://legacy.reactjs.org/docs/composition-vs-inheritance.html) for crafting reusable code
   - [ ] [Simplifying complex logic and conditionals](https://refactoring.guru/replace-nested-conditional-with-guard-clauses) so that my code is easy to read and understand
-  - [ ] Common [concrete examples of code smells](https://github.com/mithi/react-philosophies/blob/main/WIP_CODE_QUALITY_CHECKLIST.md#concrete-examples) that I need to avoid introducing
+  - [ ] Common [concrete examples of code smells](https://github.com/mithi/react-philosophies/blob/main/WIP_CODE_QUALITY_CHECKLIST.md#concrete-examples) to be wary of
 
 - [ ] I have tested for cross-browser compatibility (Firefox, Safari, Chrome)
 
 - [ ] When applicable, I have made sure to add necessary comments that explains the "why" of introduced code.
 
-- [ ] I have taken at least 10 minutes to review the file diffs of this PR on Github and made sure the build is passing before asking someone for review. 
+- [ ] I have taken at least 10 minutes to review the file diffs of this PR on Github's UI and made sure the build is passing before asking someone for review. 
 
 # `PR_TEMPLATE` based on PR type
 
@@ -52,11 +52,11 @@ Any PR type should include the following in the description:
 
 ## `PR_TEMPLATE` for New Features / Components
 
-1. Add a short screen recording showcasing the new feature. 
+1. If applicable, add a short screen recording showcasing the new feature. 
 
-2. Are any existing old components are affected by this change? How? Ideally, old components should not have too many changes to avoid regressions / tight coupling and to ensure maintainability of our apps. You may be asked to put those changes in a separate PR ("Refactor for Maintainability") and merge that one before this PR can be reviewed. 
+2. Are any existing components affected by this change? How? Ideally, old components should not have too many changes to avoid regressions and tight coupling that might make it painful to modify in the future. You may be asked to put those changes in a separate PR ("Refactor for Maintainability") and merge that one before this PR can be reviewed. 
 
-3. Add screenshots for the following states
+3. If applicable, add screenshots for the following states
  
 | - | Mobile Screen | Laptop Screen | Wide Monitor Screen |
 |--------|--------|--------|--------|
