@@ -32,13 +32,13 @@ Type:
 
 ## Common Sections for all PR types
 
-Ideally, your PR should not include too many changes. Split a huge PR to several independent loosely-coupled ones so that it's easier to quickly find any regressions might be introduced by your code.  
+Ideally, your PR should not include too many changes. Split a huge PR to several independent loosely-coupled ones so that it's easier to quickly find any regressions that might have been introduced by your code.  
 
 Any PR type should include the following in the description:  
 
-1. Briefly describe the change in this PR in five bullet points or less.
+1. Briefly describe the change in this PR in five sentences or less.
 
-2. Write down anything else the reviewer needs to know such as particular design decisions that are not that simple or straight-forward 
+2. Write down anything else the reviewer needs to know such as particular design decisions that are not that simple or straightforward 
 
 3. Paste the `Pledge of Code Quality` checklist below, and tick the boxes. 
 
@@ -74,7 +74,7 @@ Any PR type should include the following in the description:
 
 1. Add detailed step-by-step-instructions to help the PR reviewer replicate the issue you've solved
 
-2. Provide 2 short screen recordings (or screenshot) showcasing before and after of your change. 
+2. Provide 2 short screen recordings (or screenshot) showcasing before and after of your change
 
 
 ## `PR_TEMPLATE` for Other
