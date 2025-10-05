@@ -8,9 +8,10 @@
 
 - [ ] I have kept the following in mind as I was writing my code:
   - [ ] The [single responsibility principle](https://github.com/mithi/react-philosophies/tree/main?tab=readme-ov-file#-23-keep-your-components-small-and-simple) to avoid god components and methods
-  - [ ] Dependency Injection techniques like [render props](https://legacy.reactjs.org/docs/render-props.html) for loose coupling
   - [ ] [Component composition](https://legacy.reactjs.org/docs/composition-vs-inheritance.html) for crafting reusable code
   - [ ] [Simplifying complex logic and conditionals](https://refactoring.guru/replace-nested-conditional-with-guard-clauses) so that my code is easy to read and understand
+  - [ ] Dependency Injection where appropriate to keep code modular and testable
+
   - [ ] Common [concrete examples of code smells](https://github.com/mithi/react-philosophies/blob/main/WIP_CODE_QUALITY_CHECKLIST.md#concrete-examples) to be wary of
 
 - [ ] I have tested for cross-browser compatibility (Firefox, Safari, Chrome)
@@ -72,10 +73,11 @@ Any PR type should include the following in the description:
 
 ## `PR_TEMPLATE` for Bug Fixes and UX / Performance Enhancement
 
-1. Add detailed step-by-step-instructions to help the PR reviewer replicate the issue you've solved
+1. Add step-by-step-instructions to help the PR reviewer replicate the issue you've solved
 
 2. Provide 2 short screen recordings (or screenshot) showcasing before and after of your change
 
+3. Provide 1 - 3 sentences explaining concisely what was the cause of the issue and what's the fix
 
 ## `PR_TEMPLATE` for Other
 
