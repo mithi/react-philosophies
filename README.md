@@ -51,7 +51,6 @@ _Note, the following is not an exhaustive list, if you've contributed to this pr
 - The [`r/reactjs`](https://www.reddit.com/r/reactjs/comments/pvwb6m/what_i_think_about_when_i_write_code_in_react) community
 - [Josh W Comeau](https://www.joshwcomeau.com/)
 - [@unpunnyfuns](https://github.com/unpunnyfuns)
-- [@cassidoo](https://github.com/cassidoo)
 
 **☕ Coffee!**
 
@@ -92,7 +91,6 @@ _Note, the following is not an exhaustive list, if you've contributed to this pr
 Here are a few of them:
 
 - [Sandi Metz](https://sandimetz.com/)
-- [Kent C Dodds](https://kentcdodds.com)
 - [Zen of Python (PEP 20)](https://www.python.org/dev/peps/pep-0020/), [Zen of Go](https://dave.cheney.net/2020/02/23/the-zen-of-go)
 - [trekhleb/state-of-the-art-shitcode](https://github.com/trekhleb/state-of-the-art-shitcode), [droogans/unmaintainable-code](https://github.com/Droogans/unmaintainable-code), [sapegin/washingcode-book](https://github.com/sapegin/washingcode-book/)
 
@@ -108,12 +106,8 @@ Here are a few of them:
 4. [Always add keys](https://epicreact.dev/why-react-needs-a-key-prop) whenever you use `map` to display components.
 5. [Only call hooks at the top level](https://reactjs.org/docs/hooks-rules.html). Don’t call Hooks inside loops, conditions, or nested functions.
 6. Understand the warning "Can't perform state update on unmounted component". [facebook/react/pull/22114](https://github.com/facebook/react/pull/22114)
-7. Prevent the ["white screen of death"](https://kentcdodds.com/blog/use-react-error-boundary-to-handle-errors-in-react) by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to. ([Accounting for Failures In React](https://brandondail.com/posts/fault-tolerance-react))
-8. There is a reason why errors and warnings are displayed in the console.
-9. Remember [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/)!
-10. [Prettier](https://prettier.io/) (or an alternative) formats your code for you, giving you consistent formatting every time. You no longer need to think about it!
-11. [`Typescript`](https://www.typescriptlang.org/) and frameworks such as [`NextJS`](https://nextjs.org/) make your life so much easier.
-12. I highly recommend [Code Climate](https://codeclimate.com/quality/) (or similar) for open-source repositories or if you can afford it. I find that automatically-detected code smells truly motivates me to reduce the technical debts of the application I'm working on!
+7. Prevent the "white screen of death" by adding several [error boundaries](https://reactjs.org/docs/error-boundaries.html) at different levels of your application. You can also use them to send alerts to an error monitoring service such as [Sentry](https://sentry.io) if you want to. ([Accounting for Failures In React](https://brandondail.com/posts/fault-tolerance-react))
+8. [`tree-shaking`](https://webpack.js.org/guides/tree-shaking/). [Prettier](https://prettier.io/). [`Typescript`](https://www.typescriptlang.org/).
 
 ### 1.2 Code is just a necessary evil
 
@@ -349,13 +343,11 @@ function App() {
 
 When you have redundant states, some states may fall out of sync; you may forget to update them given a complex sequence of interactions.
 Aside from avoiding synchronization bugs, you'd notice that it's also easier to reason about and require less code.
-See also: [KCD: Don't Sync State. Derive It!](https://kentcdodds.com/blog/dont-sync-state-derive-it), [Tic-Tac-Toe](https://epic-react-exercises.vercel.app/react/hooks/1)
 
 ##### 🙈 Example 1
 
 <details>
     <summary><strong> 📝🖊️ View the business requirement / problem statement </strong></summary>
-
 
 ---
 
@@ -928,7 +920,7 @@ I highly recommend reading [Sandi Metz: The Wrong Abstraction](https://sandimetz
 
 > A particular type of complexity is over-engineering, where developers have made the code more generic than it needs to be, or added functionality that isn’t presently needed by the system. Encourage developers to solve the problem they know needs to be solved now, not the problem that the developer speculates might need to be solved in the future. The future problem should be solved once it arrives and you can see its actual shape and requirements in the physical universe. - [Google Engineering Practices: What to look for in a code review](https://google.github.io/eng-practices/review/reviewer/looking-for.html)
 
-See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces)/[The Expensive Setup Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)/[Premature Generalization](https://wiki.c2.com/?PrematureGeneralization)
+See also: [C2 Wiki: Contrived Interfaces](https://wiki.c2.com/?ContrivedInterfaces)/[The Expensive Setup Smell](https://wiki.c2.com/?ExpensiveSetUpSmell)/[Premature Generalization](https://wiki.c2.com/?PrematureGeneralization)
         
 ## 🧘 3. Performance tips
 > Premature optimization is the root of all evil - Tony Hoare
@@ -938,32 +930,13 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 **TL;DR**
 
 1. **If you think it’s slow, prove it with a benchmark.** _"In the face of ambiguity, refuse the temptation to guess."_ The profiler of [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (Chrome extension) is your friend!
-2. Use `useMemo` mostly just for expensive calculations
-3. If you're going to use `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types.
-4. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering? Can you demonstrate empirically that using them on your case has significant performance gains? [Memoization can sometimes make your app worse](https://kentcdodds.com/blog/usememo-and-usecallback), so keep an eye on that!)
-5. Stop punching yourself every time you blink ([fix slow renders before fixing rerenders](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render))
-6. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but it would also make your app faster (state colocation)
-7. `Context` should be logically separated, do not add too many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed.
-8. You can optimize `context` by separating the `state` and the `dispatch` function
-9. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
-10. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
-11. A smaller bundle size usually also means a faster app. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/) or [`@next/bundle-analyzer`](https://www.npmjs.com/package/@next/bundle-analyzer) (for NextJS).
-12. If you're going to use a package for your forms, I recommend [`react-hook-forms`](https://react-hook-form.com/). I think it is a great balance of good performance and good developer experience.
-
-<details>
-    <summary><strong>View selected KCD articles about performance</strong></summary>
-
-
-- [KCD: State Colocation will make your React app faster](https://kentcdodds.com/blog/state-colocation-will-make-your-react-app-faster)
-- [KCD: When to `useMemo` and `useCallback`](https://kentcdodds.com/blog/usememo-and-usecallback)
-- [KCD: Fix the slow render before you fix the re-render](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render)
-- [KCD: Profile a React App for Performance](https://kentcdodds.com/blog/profile-a-react-app-for-performance)
-- [KCD: How to optimize your context value](https://kentcdodds.com/blog/how-to-optimize-your-context-value)
-- [KCD: How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively)
-- [KCD: One React Mistake that is slowing you down](https://epicreact.dev/one-react-mistake-thats-slowing-you-down)
-- [KCD: One simple trick to optimize React re-renders](https://kentcdodds.com/blog/optimize-react-re-renders)
-
-</details>
+2. Use `useMemo` mostly just for expensive calculations. If you're going to use `React.memo`, `useMemo`, and `useCallback` for reducing re-renders, they shouldn't have many dependencies and the dependencies should be mostly primitive types. Make sure your `React.memo`, `useCallback` or `useMemo` is doing what you think it's doing (is it really preventing rerendering? Can you demonstrate empirically that using them on your case has significant performance gains? [Memoization can sometimes make your app worse](https://kentcdodds.com/blog/usememo-and-usecallback), so keep an eye on that!)
+3. Stop punching yourself every time you blink ([fix slow renders before fixing rerenders](https://kentcdodds.com/blog/fix-the-slow-render-before-you-fix-the-re-render))
+4. State Colocation. Putting your state as close as possible to where it's being used will not only make your code so much easier to read but it would also make your app faster
+5. Context. `Context` should be logically separated, do not add too many values in one context provider. If any of the values of your context changes, all components consuming that context also rerenders even if those components don't use the specific value that was actually changed. You can optimize `context` by separating the `state` and the `dispatch` function
+6. Know the terms [`lazy loading`](https://nextjs.org/docs/advanced-features/dynamic-import) and [`bundle/code splitting`](https://reactjs.org/docs/code-splitting.html)
+7. Window large lists (with [`tannerlinsley/react-virtual`](https://github.com/tannerlinsley/react-virtual) or similar)
+8. A smaller bundle size usually also means a faster app. You can visualize the code bundles you've generated with tools such as [`source-map-explorer`](https://create-react-app.dev/docs/analyzing-the-bundle-size/).
 
 ## 🧘 4. Testing principles
 
@@ -976,25 +949,6 @@ See also: [KCD: AHA Programming](https://kentcdodds.com/blog/aha-programming), [
 3. If your tests don't make you confident that you didn't break anything, then they didn't do their (one and only) job
 5. You'll know you implemented correct tests when you rarely have to change tests when you refactor code given the same user behavior
 5. For the front-end, you don't need 100% code coverage, about 70% is probably good enough. Tests should make you more productive not slow you down. Maintaining tests can slow you down. You get diminishing returns on adding more tests after a certain point
-6. I like using [Jest](https://jestjs.io/), [React testing library](https://testing-library.com/docs/react-testing-library/intro/), [Cypress](https://www.cypress.io/), and [Mock service worker](https://github.com/mswjs/msw)
-        
-<details>
-    <summary><strong>View selected KCD articles about testing</strong></summary>
-
-- [KCD: Testing Implementation Details](https://kentcdodds.com/blog/testing-implementation-details)
-- [KCD: Stop mocking fetch](https://kentcdodds.com/blog/stop-mocking-fetch)
-- [KCD: Common mistakes with React Testing Library](https://kentcdodds.com/blog/common-mistakes-with-react-testing-library)
-- [KCD: Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change)
-- [KCD: Write fewer, longer tests](https://kentcdodds.com/blog/write-fewer-longer-tests)
-- [KCD: Write tests. Not too many. Mostly integration.](https://kentcdodds.com/blog/write-tests)
-- [KCD: How to know what to test](https://kentcdodds.com/blog/how-to-know-what-to-test)
-- [KCD: Common Testing Mistakes](https://kentcdodds.com/blog/common-testing-mistakes)
-- [KCD: Why you've been bad about testing](https://kentcdodds.com/blog/why-youve-been-bad-about-testing)
-- [KCD: Demystifying Testing](https://kentcdodds.com/blog/demystifying-testing)
-- [KCD: UI Testing Myths](https://kentcdodds.com/blog/ui-testing-myths)
-- [KCD: Effective Snapshot Testing](https://kentcdodds.com/blog/effective-snapshot-testing)
-
-</details>
 
 ## 🧘 5. Insights shared by others
 
